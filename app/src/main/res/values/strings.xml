@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">E-Commerce</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ora">Ora</string>
+    <string name="cle">cle</string>
+    <string name="register">REGISTER</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="username_hint">Username</string>
+    <string name="email_hint">Email</string>
+    <string name="Enter_password">Enter Password</string>
+    <string name="reenter_password">Re-enter Password</string>
+    <string name="log_in">Log in</string>
+    <string name="already_have_an_account">Already have an account</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="don_t_have_an_account">Don\'t have an account</string>
+    <string name="register_here">Register here</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="next">NEXT</string>
+    <string name="finish">Finish</string>
+</resources>

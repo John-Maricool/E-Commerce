@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_50">50sp</dimen>
+    <dimen name="text_size_70">70sp</dimen>
+    <dimen name="margin_50">50dp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
+    <dimen name="text_size_15">15sp</dimen>
+    <dimen name="size_20">20sp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="progress_bar_width">15dp</dimen>
+    <dimen name="progress_bar_height">15dp</dimen>
+</resources>

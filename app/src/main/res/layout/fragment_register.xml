@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".user_authentication_ui.RegisterFragment">
+
+  <TextView
+      android:id="@+id/create_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="32dp"
+      android:text="@string/create_new_account"
+      android:textColor="@color/black"
+      android:textSize="@dimen/size_20"
+      android:textStyle="normal|bold"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.497"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <View
+      android:id="@+id/view"
+      android:layout_width="wrap_content"
+      android:layout_height="50dp"
+      android:background="@drawable/blue"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
+
+  <androidx.appcompat.widget.AppCompatImageView
+      android:id="@+id/user_image"
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:layout_marginTop="40dp"
+      android:src="@drawable/ic_account"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/create_text" />
+
+  <androidx.appcompat.widget.AppCompatImageView
+      android:layout_width="30dp"
+      android:id="@+id/camera"
+      android:layout_height="30dp"
+      android:src="@drawable/ic_photo_camera"
+      app:layout_constraintBottom_toBottomOf="@+id/user_image"
+      app:layout_constraintEnd_toEndOf="@+id/user_image" />
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/username_field"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/user_image">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_20"
+        android:hint="@string/username_hint"
+        android:inputType="text" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/email_field"
+      android:visibility="gone"
+      tools:visibility="gone"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="@dimen/margin_50"
+      android:layout_marginEnd="16dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/create_text">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_20"
+        android:hint="@string/email_hint"
+        android:inputType="textEmailAddress"
+        android:padding="@dimen/margin_20" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/password_field"
+      android:visibility="gone"
+      tools:visibility="gone"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/email_field"
+      app:passwordToggleEnabled="true"
+      app:passwordToggleTint="@color/black">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_20"
+        android:hint="@string/Enter_password"
+        android:inputType="textPassword"
+        android:padding="@dimen/margin_20"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/black" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/reenter_password_field"
+      android:layout_width="0dp"
+      android:visibility="gone"
+      tools:visibility="gone"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/password_field"
+      app:passwordToggleEnabled="true"
+      app:passwordToggleTint="@color/black">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/reenter_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_20"
+        android:hint="@string/reenter_password"
+        android:inputType="textPassword"
+        android:padding="@dimen/margin_20" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <androidx.appcompat.widget.AppCompatImageView
+      android:id="@+id/next"
+      android:layout_width="84dp"
+      android:visibility="gone"
+      tools:visibility="gone"
+      android:layout_height="57dp"
+      android:layout_marginTop="16dp"
+      android:contentDescription="@string/next"
+      android:src="@drawable/ic_next"
+      app:layout_constraintEnd_toEndOf="@+id/reenter_password_field"
+      app:layout_constraintTop_toBottomOf="@+id/reenter_password_field" />
+
+  <Button
+      android:id="@+id/finish"
+      android:layout_width="84dp"
+      android:layout_height="57dp"
+      android:layout_marginTop="156dp"
+      android:layout_marginEnd="32dp"
+      android:background="@drawable/pink"
+      android:text="@string/finish"
+      android:textColor="@color/white"
+      android:textSize="@dimen/text_size_20"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/username_field" />
+
+  <com.github.ybq.android.spinkit.SpinKitView
+  android:id="@+id/progress_bar"
+  style="@style/SpinKitView.Large.Circle"
+  android:layout_width="@dimen/margin_20"
+  android:layout_height="@dimen/margin_20"
+  android:layout_marginTop="16dp"
+  android:visibility="gone"
+  app:SpinKit_Color="@color/pink2"
+  app:layout_constraintEnd_toEndOf="parent"
+  app:layout_constraintHorizontal_bias="0.53"
+  app:layout_constraintStart_toStartOf="parent"
+  app:layout_constraintTop_toBottomOf="@+id/finish" />
+
+  <TextView
+      android:id="@+id/already_have_an_account"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="64dp"
+      android:text="@string/already_have_an_account"
+      android:textColor="@color/white"
+      android:textSize="@dimen/text_size_15"
+      app:layout_constraintBottom_toBottomOf="@+id/view"
+      app:layout_constraintStart_toStartOf="@id/view"
+      app:layout_constraintTop_toTopOf="@+id/view" />
+
+  <TextView
+      android:id="@+id/log_in"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="@string/log_in"
+      android:textColor="@color/white"
+      android:textSize="@dimen/text_size_15"
+      android:textStyle="bold"
+      app:layout_constraintBottom_toBottomOf="@+id/already_have_an_account"
+      app:layout_constraintStart_toEndOf="@+id/already_have_an_account" />
+</androidx.constraintlayout.widget.ConstraintLayout>

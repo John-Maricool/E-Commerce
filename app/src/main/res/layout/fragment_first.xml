@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".user_authentication_ui.FirstFragment">
+
+    <include layout="@layout/oracle" />
+
+    <Button
+        android:id="@+id/sign_in"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/text_size_70"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/pink"
+        android:text="@string/sign_in"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_20"
+        app:layout_constraintBottom_toTopOf="@+id/register"
+        app:layout_constraintEnd_toEndOf="@+id/register"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/register" />
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/text_size_70"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="124dp"
+        android:background="@drawable/border"
+        android:text="@string/register"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_20"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="@+id/view" />
+
+    <include
+        layout="@layout/blue_view"
+        android:id="@+id/view"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
