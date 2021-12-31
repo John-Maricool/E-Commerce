@@ -19,4 +19,18 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/ecommerce_nav_graph" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        app:itemRippleColor="@color/pink"
+        android:layout_width="match_parent"
+        app:itemIconTint="@drawable/bottom_nav"
+        style="@style/Widget.App.BottomNavigationView"
+        android:layout_height="60dp"
+        app:labelVisibilityMode="selected"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

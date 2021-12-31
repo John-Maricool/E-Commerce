@@ -8,7 +8,7 @@
 
     <include layout="@layout/oracle" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/sign_in"
         android:layout_width="0dp"
         android:layout_height="@dimen/text_size_70"
@@ -22,7 +22,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/register" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/register"
         android:layout_width="0dp"
         android:layout_height="@dimen/text_size_70"

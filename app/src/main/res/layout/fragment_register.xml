@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".user_authentication_ui.RegisterFragment">
 
-  <TextView
+  <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/create_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -52,6 +52,10 @@
   <com.google.android.material.textfield.TextInputLayout
       android:id="@+id/username_field"
       android:layout_width="0dp"
+      app:errorTextColor="@color/pink2"
+      app:boxStrokeWidth="2dp"
+      app:boxBackgroundColor="@color/white"
+      app:boxBackgroundMode="filled"
       android:layout_height="wrap_content"
       android:layout_marginStart="16dp"
       android:layout_marginEnd="16dp"
@@ -71,6 +75,10 @@
   <com.google.android.material.textfield.TextInputLayout
       android:id="@+id/email_field"
       android:visibility="gone"
+      app:errorTextColor="@color/pink2"
+      app:boxStrokeWidth="2dp"
+      app:boxBackgroundColor="@color/white"
+      app:boxBackgroundMode="filled"
       tools:visibility="gone"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
@@ -87,8 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_20"
         android:hint="@string/email_hint"
-        android:inputType="textEmailAddress"
-        android:padding="@dimen/margin_20" />
+        android:inputType="textEmailAddress" />
   </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -96,6 +103,10 @@
       android:id="@+id/password_field"
       android:visibility="gone"
       tools:visibility="gone"
+      app:errorTextColor="@color/pink2"
+      app:boxStrokeWidth="2dp"
+      app:boxBackgroundColor="@color/white"
+      app:boxBackgroundMode="filled"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="16dp"
@@ -113,7 +124,6 @@
         android:layout_margin="@dimen/margin_20"
         android:hint="@string/Enter_password"
         android:inputType="textPassword"
-        android:padding="@dimen/margin_20"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/black" />
   </com.google.android.material.textfield.TextInputLayout>
@@ -122,6 +132,10 @@
   <com.google.android.material.textfield.TextInputLayout
       android:id="@+id/reenter_password_field"
       android:layout_width="0dp"
+      app:errorTextColor="@color/pink2"
+      app:boxStrokeWidth="2dp"
+      app:boxBackgroundColor="@color/white"
+      app:boxBackgroundMode="filled"
       android:visibility="gone"
       tools:visibility="gone"
       android:layout_height="wrap_content"
@@ -139,8 +153,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_20"
         android:hint="@string/reenter_password"
-        android:inputType="textPassword"
-        android:padding="@dimen/margin_20" />
+        android:inputType="textPassword" />
   </com.google.android.material.textfield.TextInputLayout>
 
   <androidx.appcompat.widget.AppCompatImageView
@@ -155,7 +168,7 @@
       app:layout_constraintEnd_toEndOf="@+id/reenter_password_field"
       app:layout_constraintTop_toBottomOf="@+id/reenter_password_field" />
 
-  <Button
+  <androidx.appcompat.widget.AppCompatButton
       android:id="@+id/finish"
       android:layout_width="84dp"
       android:layout_height="57dp"
@@ -181,7 +194,7 @@
   app:layout_constraintStart_toStartOf="parent"
   app:layout_constraintTop_toBottomOf="@+id/finish" />
 
-  <TextView
+  <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/already_have_an_account"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -193,7 +206,7 @@
       app:layout_constraintStart_toStartOf="@id/view"
       app:layout_constraintTop_toTopOf="@+id/view" />
 
-  <TextView
+  <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/log_in"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"

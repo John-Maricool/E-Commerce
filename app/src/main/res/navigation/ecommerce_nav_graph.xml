@@ -9,4 +9,19 @@
         android:name="com.maricoolsapps.e_commerce.product_ui.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/sellFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.SellFragment"
+        android:label="fragment_sell"
+        tools:layout="@layout/fragment_sell" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>

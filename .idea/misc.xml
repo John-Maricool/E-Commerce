@@ -6,19 +6,25 @@
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/blue.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/blue_button.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/border.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/bottom_nav.xml" value="0.1" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_account.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_next.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_photo_camera.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/pink.xml" value="0.9785714285714285" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/yellow.xml" value="0.24010416666666667" />
-        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/activity_ecommerce.xml" value="0.1526268115942029" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/activity_ecommerce.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/blue_view.xml" value="0.22395833333333334" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_favorite.xml" value="0.22282608695652173" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_first.xml" value="0.17370892018779344" />
-        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_login.xml" value="0.1" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_main.xml" value="0.22395833333333334" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_profile.xml" value="0.22282608695652173" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_register.xml" value="0.15" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_sell.xml" value="0.22282608695652173" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/oracle.xml" value="0.22395833333333334" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/smaller_blue_view.xml" value="0.22395833333333334" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/menu/bottom_nav.xml" value="0.1" />
       </map>
     </option>
   </component>
