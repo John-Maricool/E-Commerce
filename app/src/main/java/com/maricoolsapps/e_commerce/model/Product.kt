@@ -1,22 +1,27 @@
 package com.maricoolsapps.e_commerce.model
 
+import android.os.Parcelable
 import com.google.firebase.Timestamp
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Product(
-    val time: Timestamp?,
     val type: String,
-    val model: String,
     val description: String,
+    val ownerId: String,
+    val location: String,
+    val specifications: String,
     val price: String,
-    val rating: Double,
-    val photos: List<String>
-) {
+    val rating: String,
+    val photos: List<String>?
+): Parcelable {
     constructor(): this(
-        null,
         "",
         "",
         "",
         "",
-        0.0,
+        "",
+        "",
+        "",
         listOf())
 }

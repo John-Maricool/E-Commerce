@@ -22,4 +22,9 @@
     <string name="favorite">Favorite</string>
     <string name="sell">Sell</string>
     <string name="profile">profile</string>
+    <string name="best_cars">Best Cars</string>
+    <string name="perfect_choice">Perfect choice!</string>
+    <string name="buy">Buy</string>
+    <string name="check_your_internet_connection">Check your internet connection</string>
+    <string name="retry">Retry</string>
 </resources>
