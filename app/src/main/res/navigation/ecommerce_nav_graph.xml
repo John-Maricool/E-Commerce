@@ -8,7 +8,11 @@
         android:id="@+id/mainFragment"
         android:name="com.maricoolsapps.e_commerce.product_ui.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.maricoolsapps.e_commerce.product_ui.ProfileFragment"
@@ -24,4 +28,13 @@
         android:name="com.maricoolsapps.e_commerce.product_ui.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" >
+        <argument
+            android:name="product"
+            app:argType="com.maricoolsapps.e_commerce.model.Product" />
+    </fragment>
 </navigation>

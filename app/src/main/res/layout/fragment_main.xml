@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3EFEF"
+    android:background="#CBE6E4E4"
     tools:context=".product_ui.MainFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -15,7 +15,7 @@
         android:layout_margin="@dimen/margin_20"
         android:text="@string/best_cars"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_size_40"
+        android:textSize="@dimen/text_size_30"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:text="@string/perfect_choice"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_size_20"
+        android:textSize="@dimen/text_size_15"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/best_cars"
         app:layout_constraintTop_toBottomOf="@+id/best_cars" />
@@ -34,7 +34,7 @@
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="38dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="@dimen/margin_70"
@@ -48,8 +48,8 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/filter"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/border_white"
         android:src="@drawable/ic_filter"
@@ -60,30 +60,33 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
-        app:tabPaddingStart="@dimen/margin_20"
-        app:tabIndicatorAnimationMode="linear"
         style="@style/Widget.MaterialComponents.TabLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_50"
+        android:layout_height="@dimen/margin_40"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:background="#F3EFEF"
+        android:layout_marginEnd="8dp"
+        android:background="#CBE6E4E4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView"
+        app:tabIndicator="@drawable/tab"
+        app:tabIndicatorAnimationMode="linear"
+        app:tabIndicatorFullWidth="true"
+        app:tabIndicatorGravity="center"
+        app:tabIndicatorHeight="@dimen/margin_40"
         app:tabMinWidth="@dimen/margin_50"
         app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/white"
-        app:tabIndicatorHeight="@dimen/margin_50"
-        app:tabIndicator="@drawable/tab"
-        app:tabIndicatorFullWidth="true"
+        app:tabPaddingStart="@dimen/margin_20"
         app:tabRippleColor="@color/white"
-        app:tabTextColor="@color/black"/>
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/black" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/recycler_view"
         tools:listitem="@layout/recycler_single_item"
         android:layout_marginTop="8dp"
@@ -118,8 +121,8 @@
         app:layout_constraintTop_toBottomOf="@+id/check_internet" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:visibility="gone"
         android:src="@drawable/no_result"
         android:id="@+id/no_result"

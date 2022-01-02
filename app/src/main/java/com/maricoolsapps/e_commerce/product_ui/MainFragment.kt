@@ -6,18 +6,23 @@ import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.adapters.ProductListAdapter
 import com.maricoolsapps.e_commerce.databinding.FragmentMainBinding
+import com.maricoolsapps.e_commerce.interfaces.onItemClickListener
+import com.maricoolsapps.e_commerce.model.Product
 import com.maricoolsapps.e_commerce.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedListener {
+class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedListener,
+    onItemClickListener<Product> {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
@@ -26,36 +31,39 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
     @Inject
      lateinit var adapter: ProductListAdapter
 
-    var isTabReady = false
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMainBinding.bind(view)
+        val nav = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
+        nav?.visibility = View.VISIBLE
         getAllCarBrands()
-
     }
+
     override fun onStart() {
         super.onStart()
-        if (!isTabReady){
             binding.recyclerView.layoutManager = LinearLayoutManager(activity)
             binding.recyclerView.setHasFixedSize(true)
             binding.recyclerView.adapter = adapter
             binding.tabLayout.addOnTabSelectedListener(this)
-        }
+        adapter.setOnItemClickListener(this)
     }
 
    private fun getAllCarBrands(){
-        model.getAllCarBrands().observe(viewLifecycleOwner, {
+       binding.progressBar.visibility = View.VISIBLE
+       model.getAllCarBrands().observe(viewLifecycleOwner, {
             when(it.status){
                 Status.SUCCESS -> {
-                    isTabReady = true
+                    binding.recyclerView.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
                     it.data?.forEach {
                         val oneTab = binding.tabLayout.newTab()
                         oneTab.text= it
                         binding.tabLayout.addTab(oneTab)
                     }
                 }
+
                 Status.ERROR -> {
+                    binding.progressBar.visibility = View.GONE
                     Snackbar.make(binding.tabLayout, it.message.toString(), Snackbar.LENGTH_LONG)
                         .setBackgroundTint(resources.getColor(R.color.pink2, null))
                         .show()
@@ -105,5 +113,14 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
 
     override fun onTabReselected(tab: TabLayout.Tab?) {
         getCarsFromBrand(tab?.text.toString())
+    }
+
+    override fun onItemClick(t: Product) {
+        val action = MainFragmentDirections.actionMainFragmentToProductDetailFragment(t)
+        findNavController().navigate(action)
+    }
+
+    override fun onButtonClick(t: Product) {
+
     }
 }

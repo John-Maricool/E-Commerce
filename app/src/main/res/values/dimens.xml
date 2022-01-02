@@ -18,4 +18,10 @@
     <dimen name="margin_12">12dp</dimen>
     <dimen name="margin_30">30dp</dimen>
     <dimen name="margin_55">55dp</dimen>
+    <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_40">40dp</dimen>
+    <dimen name="text_size_10">10sp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_13">13sp</dimen>
+    <dimen name="text_size_24">24sp</dimen>
 </resources>
