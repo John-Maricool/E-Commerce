@@ -2,9 +2,11 @@ package com.maricoolsapps.e_commerce.product_ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.maricoolsapps.e_commerce.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +23,6 @@ class EcommerceActivity : AppCompatActivity() {
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
         NavigationUI.setupWithNavController(bottomNav, navController)
-
 
     }
 }

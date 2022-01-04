@@ -36,5 +36,18 @@
         <argument
             android:name="product"
             app:argType="com.maricoolsapps.e_commerce.model.Product" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_sellerFragment"
+            app:destination="@id/sellerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellerFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.SellerFragment"
+        android:label="fragment_seller"
+        tools:layout="@layout/fragment_seller" >
+        <argument
+            android:name="ownerId"
+            app:argType="string"
+            android:defaultValue="Admin" />
     </fragment>
 </navigation>

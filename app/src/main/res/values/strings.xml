@@ -27,4 +27,21 @@
     <string name="buy">Buy</string>
     <string name="check_your_internet_connection">Check your internet connection</string>
     <string name="retry">Retry</string>
+    <string name="buy_now">Buy Now</string>
+    <string name="description">Description</string>
+    <string name="specifications">Specifications</string>
+    <string name="type">Type</string>
+    <string name="state">State</string>
+    <string name="condition">Condition</string>
+    <string name="color">Color</string>
+    <string name="town">State</string>
+    <string name="yrOfManufacturing">Year of Manufacturing</string>
+    <string name="location">Location</string>
+    <string name="by">by</string>
+    <string name="brand">Brand</string>
+    <string name="price">Price</string>
+    <string name="message_seller">MESSAGE SELLER</string>
+    <string name="call_Seller">CALL</string>
+    <string name="report_abuse">Report Abuse</string>
+    <string name="view_similar_ads">Similar Cars</string>
 </resources>

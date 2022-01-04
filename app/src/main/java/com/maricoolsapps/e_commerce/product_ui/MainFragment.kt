@@ -2,10 +2,8 @@ package com.maricoolsapps.e_commerce.product_ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -14,7 +12,7 @@ import com.google.android.material.tabs.TabLayout
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.adapters.ProductListAdapter
 import com.maricoolsapps.e_commerce.databinding.FragmentMainBinding
-import com.maricoolsapps.e_commerce.interfaces.onItemClickListener
+import com.maricoolsapps.e_commerce.interfaces.OnItemClickListener
 import com.maricoolsapps.e_commerce.model.Product
 import com.maricoolsapps.e_commerce.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +20,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedListener,
-    onItemClickListener<Product> {
+    OnItemClickListener<Product> {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
@@ -118,9 +116,5 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
     override fun onItemClick(t: Product) {
         val action = MainFragmentDirections.actionMainFragmentToProductDetailFragment(t)
         findNavController().navigate(action)
-    }
-
-    override fun onButtonClick(t: Product) {
-
     }
 }

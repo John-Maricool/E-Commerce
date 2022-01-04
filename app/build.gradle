@@ -83,7 +83,7 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
     //dependency for image slider
-    implementation("com.github.smarteist:autoimageslider:1.3.9")
+    implementation("com.github.smarteist:autoimageslider:1.4.0-appcompat")
 
 }
 kapt {

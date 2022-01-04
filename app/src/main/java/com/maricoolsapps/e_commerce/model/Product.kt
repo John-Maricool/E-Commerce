@@ -11,10 +11,14 @@ data class Product(
     val state: String,
     val ownerId: String,
     val location: String,
-    val specifications: String,
-    val price: String,
+    val yearOfManufacturing: String?,
+    val town: String,
+    val condition: String,
+    val brand: String,
+    val color: String,
+    val price: Long,
     val rating: String,
-    val photos: List<String>?
+    val photos: List<String>
 ): Parcelable {
     constructor(): this(
         "",
@@ -24,6 +28,10 @@ data class Product(
         "",
         "",
         "",
+        "",
+        "",
+        "",
+        0,
         "",
         listOf())
 }
