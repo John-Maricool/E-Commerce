@@ -31,14 +31,15 @@
             style="@style/Widget.App.BottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            app:itemIconTint="@drawable/bottom_nav"
             app:itemRippleColor="@color/pink"
+            app:itemIconTint="@drawable/bottom_nav"
             app:labelVisibilityMode="selected"
-            app:layout_behavior=".utils.BottomNavigationBehavior"
+            app:layout_behavior=".utils.BottomNavigationBehaviour"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom_nav" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

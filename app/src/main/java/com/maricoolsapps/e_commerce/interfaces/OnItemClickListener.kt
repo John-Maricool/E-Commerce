@@ -4,4 +4,4 @@ import com.maricoolsapps.e_commerce.model.Product
 
 interface OnItemClickListener<T> {
     fun onItemClick(t: T)
-   }
+}

@@ -1,36 +1,21 @@
 package com.maricoolsapps.e_commerce.firebase
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.maricoolsapps.e_commerce.model.Product
 import com.maricoolsapps.e_commerce.model.CarBuyerOrSeller
+import com.maricoolsapps.e_commerce.model.Follow
 import com.maricoolsapps.e_commerce.utils.Constants
 import com.maricoolsapps.e_commerce.utils.Resource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.lang.Exception
 import javax.inject.Inject
 
 class CloudQueries
-@Inject constructor(val cloud: FirebaseFirestore) {
-
-    fun getAllCarBrands(): LiveData<Resource<List<String>>> {
-        /*
-        This function is responsible for getting all the
-        brands of cars in the database, It places tbe names in the
-        Tab layout for selection
-         */
-        val carBrands = MutableLiveData<Resource<List<String>>>()
-
-        cloud.collection(Constants.car).get().addOnSuccessListener {
-            val brands = mutableListOf<String>()
-            it.documents.forEach {
-                brands.add(it.reference.id)
-            }
-            carBrands.value = Resource.success(brands)
-        }.addOnFailureListener {
-            Resource.error(it.message!!, null)
-        }
-        return carBrands
-    }
+@Inject constructor(private val cloud: FirebaseFirestore) {
 
     fun getCarsFromBrand(name: String): LiveData<Resource<List<Product>>> {
         /*
@@ -55,37 +40,127 @@ class CloudQueries
         /*
         * This function is used to get all the cars from a particular seller
         * */
-        val carsFromDb = MutableLiveData<Resource<List<Product>>>()
+        val sellerCars = mutableListOf<Product>()
+        val done = MutableLiveData<Resource<List<Product>>>()
 
-        cloud.collection(Constants.sellerorbuyer).document(name).collection(brand).get()
-            .addOnSuccessListener {query ->
-                val sellerCars = mutableListOf<Product>()
-                query.documents.forEach {snapshot ->
-                    val ref = snapshot.reference.id
-                    cloud.collection(Constants.car).document(brand).collection(Constants.models)
-                        .document(ref).get().addOnSuccessListener {docSnapshot ->
-                            val product = docSnapshot.toObject(Product::class.java)
-                            sellerCars.add(product!!)
-                        }
+        cloud.collection(Constants.sellerorbuyer).document(name)
+            .collection(brand).get()
+            .addOnSuccessListener {
+                if(it.documents.isNotEmpty()) {
+                    it.documents.forEach { snap ->
+                        val ref = snap.reference.id
+                        cloud.collection(Constants.car).document(brand)
+                            .collection(Constants.models)
+                            .document(ref).get().addOnSuccessListener { snapshot ->
+                                val product = snapshot.toObject(Product::class.java)
+                                sellerCars.add(product!!)
+                                done.value = Resource.success(sellerCars)
+                            }.addOnFailureListener {
+                                done.value = Resource.error(it.message.toString(), null)
+                            }
+                    }
+
+                    done.value = Resource.success(sellerCars)
                 }
-                carsFromDb.value = Resource.success(sellerCars)
             }.addOnFailureListener {
-                Resource.error(it.message!!, null)
+                done.value = Resource.error(it.message.toString(), null)
             }
-        return carsFromDb
+        return done
     }
 
-    fun getSeller(name: String): LiveData<Resource<CarBuyerOrSeller>>{
-        val sellerId = MutableLiveData<Resource<CarBuyerOrSeller>>()
+    fun getSeller(name: String): LiveData<Resource<CarBuyerOrSeller>> {
         /*
         * This function makes it possible to get the seller of the product.
         * */
-        cloud.collection(Constants.sellerorbuyer).document(name).get().addOnSuccessListener {
-            val seller = it.toObject(CarBuyerOrSeller::class.java)
-            sellerId.value = Resource.success(seller)
-        }.addOnFailureListener{
-            Resource.error(it.message!!, null)
-        }
-        return sellerId
+        val seller = MutableLiveData<Resource<CarBuyerOrSeller>>()
+        cloud.collection(Constants.sellerorbuyer)
+            .document(name).get()
+            .addOnSuccessListener {
+                seller.value = Resource.success(it.toObject(CarBuyerOrSeller::class.java))
+            }.addOnFailureListener {
+                seller.value = Resource.error(it.message.toString(), null)
+            }
+        return seller
     }
+
+    fun getNumberOfFollowers(userIdOrName: String): LiveData<Resource<Int>> {
+
+        val done = MutableLiveData<Resource<Int>>()
+      cloud.collection(Constants.sellerorbuyer).document(userIdOrName)
+            .collection(Constants.followers)
+            .get().addOnSuccessListener {
+                done.value = Resource.success(it.documents.size)
+            }.addOnFailureListener {
+                done.value = Resource.error(it.message.toString(), 0)
+            }
+        return done
+    }
+
+     fun getNumberOfFollowing(userIdOrName: String): LiveData<Resource<Int>> {
+
+         val done = MutableLiveData<Resource<Int>>()
+         cloud.collection(Constants.sellerorbuyer).document(userIdOrName)
+                    .collection(Constants.following)
+                    .get().addOnSuccessListener {
+                        done.value = Resource.success(it.documents.size)
+             }.addOnFailureListener {
+                 done.value = Resource.error(it.message.toString(), 0)
+             }
+         return done
+    }
+
+    suspend fun followUser(userIdOrName: String, userToFollow: String): Resource<String> {
+
+        val fol = Follow(userToFollow)
+        val foll = Follow(userIdOrName)
+        return try {
+            withContext(Dispatchers.Main) {
+                cloud.collection(Constants.sellerorbuyer).document(userIdOrName)
+                    .collection(Constants.following)
+                    .document(userToFollow).set(fol)
+                cloud.collection(Constants.sellerorbuyer).document(userToFollow)
+                    .collection(Constants.followers)
+                    .document(userIdOrName).set(foll)
+            }
+            Resource.success("Followed user...")
+        } catch (e: Exception) {
+            Resource.error("Error following user", null)
+        }
+    }
+
+    suspend fun unfollowUser(userIdOrName: String, userToUnfollow: String): Resource<String> {
+
+        return try {
+            withContext(Dispatchers.IO) {
+                cloud.collection(Constants.sellerorbuyer).document(userIdOrName)
+                    .collection(Constants.following)
+                    .document(userToUnfollow).delete()
+                cloud.collection(Constants.sellerorbuyer).document(userToUnfollow)
+                    .collection(Constants.followers)
+                    .document(userIdOrName)
+                    .delete()
+            }
+            Resource.success("Followed user")
+        } catch (e: Exception) {
+            Resource.error("Error following user", null)
+        }
+    }
+
+    fun isUserFollowed(userId: String, userToFollow: String): LiveData<Resource<Boolean>> {
+        val isFollowed = MutableLiveData<Resource<Boolean>>()
+        cloud.collection(Constants.sellerorbuyer).document(userId)
+            .collection(Constants.following)
+            .document(userToFollow).get()
+            .addOnSuccessListener {
+                if (it.exists()) {
+                    isFollowed.value = Resource.success(true)
+                } else {
+                    isFollowed.value = Resource.error("You are not following this user", false)
+                }
+            }.addOnFailureListener {
+                isFollowed.value = Resource.error("You are not following this user", false)
+            }
+        return isFollowed
+    }
+
 }

@@ -44,4 +44,9 @@
     <string name="call_Seller">CALL</string>
     <string name="report_abuse">Report Abuse</string>
     <string name="view_similar_ads">Similar Cars</string>
+    <string name="follow">Follow</string>
+    <string name="call">Call</string>
+    <string name="following">Following</string>
+    <string name="followers">Followers</string>
+    <string name="user_image">user_image</string>
 </resources>

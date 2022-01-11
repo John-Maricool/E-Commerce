@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="brands">
+        <item>Lexus</item>
+        <item>Acura</item>
+        <item>Toyota</item>
+        <item>Honda</item>
+        <item>Ford</item>
+        <item>Mercedes-Benz</item>
+        <item>BMW</item>
+       <!-- <item>Volkswagen</item>
+        <item>Nissan</item>
+        <item>Hyundai</item>
+        <item>Kia</item>
+        <item>Audi</item>
+        <item>Porsche</item>
+        <item>Chevrolet</item>
+        <item>Mazda</item>
+        <item>Tasla</item>
+        <item>Dodge</item>
+        <item>Renault</item>
+        <item>Ferrari</item>
+        <item>Jeep</item>
+        <item>Jaguar</item>
+        <item>Cadilac</item>-->
+    </string-array>
+
+    <string-array name="Toyota">
+        <item>Camry</item>
+        <item>Corolla</item>
+        <item>Highlander</item>
+        <item>Sienna</item>
+        <item>RAV4</item>
+        <item>4-Runner</item>
+        <item>Allex</item>
+        <item>Avalon</item>
+        <item>Century</item>
+        <item>Allion</item>
+        <item>Crown</item>
+        <item>Levin GT</item>
+        <item>Etios</item>
+        <item>Marai</item>
+        <item>Prius</item>
+        <item>Vios</item>
+        <item>Aqua</item>
+        <item>Glanza</item>
+        <item>Land Cruiser</item>
+        <item>Venza</item>
+        <item>RAV4</item>
+        <item>Sienna</item>
+    </string-array>
+
+    <string-array name="Lexus">
+        <item>CT</item>
+        <item>ES</item>
+        <item>GS</item>
+        <item>GX</item>
+        <item>HS</item>
+        <item>IS</item>
+        <item>LC</item>
+        <item>LS</item>
+        <item>LX</item>
+        <item>NX</item>
+        <item>RC</item>
+        <item>RX</item>
+        <item>RX 200</item>
+        <item>SC</item>
+        <item>UX</item>
+    </string-array>
+
+    <string-array name="Acura">
+        <item>CL</item>
+        <item>CSX</item>
+        <item>ILX</item>
+        <item>MDX</item>
+        <item>RDX</item>
+        <item>RL</item>
+        <item>RSX</item>
+        <item>TL</item>
+        <item>TLX</item>
+        <item>TSX</item>
+        <item>ZDX</item>
+    </string-array>
+
+    <string-array name="Honda">
+        <item>Accord</item>
+        <item>CR-V</item>
+        <item>Pilot</item>
+        <item>Civic</item>
+        <item>Accord Crosstour</item>
+        <item>Acty</item>
+        <item>Airwave</item>
+        <item>Avancier</item>
+        <item>Vezel</item>
+        <item>Vamos</item>
+        <item>Vigor</item>
+        <item>Torneo</item>
+        <item>Legend</item>
+        <item>City</item>
+        <item>Capa</item>
+        <item>Element</item>
+        <item>Concerto</item>
+        <item>Fit</item>
+    </string-array>
+
+    <string-array name="Ford">
+        <item>Edge</item>
+        <item>Explorer</item>
+        <item>Escape</item>
+        <item>F-150</item>
+        <item>Focus</item>
+        <item>Equator</item>
+        <item>Territory</item>
+        <item>Ranger</item>
+        <item>Maverick</item>
+        <item>Galaxy</item>
+        <item>S-MAx</item>
+        <item>E-Series</item>
+        <item>Tourneo Connect</item>
+        <item>Transit Custom</item>
+        <item>Tramsit</item>
+        <item>F-Max</item>
+        <item>F-Series</item>
+        <item>Super Duty</item>
+    </string-array>
+
+    <string-array name="MercedesBenz">
+        <item>A-Class</item>
+        <item>B-Class</item>
+        <item>C-Class</item>
+        <item>CLA-Class</item>
+        <item>CLS-Class</item>
+        <item>E-Class</item>
+        <item>EQE</item>
+        <item>S-Class</item>
+        <item>EQS</item>
+        <item>GLA-Class</item>
+        <item>GLB-Class</item>
+        <item>GLC-Class</item>
+        <item>GLE-Class</item>
+        <item>GLS-Class</item>
+        <item>G-Class</item>
+        <item>EQA</item>
+        <item>EQB</item>
+        <item>EQC</item>
+        <item>SL-Class</item>
+        <item>AMG GT</item>
+        <item>AMG GT</item>
+        <item>AMG One</item>
+    </string-array>
+
+    <string-array name="BMW">
+        <item>X5</item>
+        <item>X3</item>
+        <item>X7</item>
+        <item>X1</item>
+        <item>5 Series</item>
+        <item>X4</item>
+        <item>X6</item>
+        <item>3 Series</item>
+        <item>7 Series</item>
+        <item>Z4</item>
+        <item>M5</item>
+        <item>2 Series Gran Coupe</item>
+        <item>8 Series</item>
+        <item>X2</item>
+        <item>M3</item>
+        <item>1 Series</item>
+        <item>6 Series</item>
+        <item>M2</item>
+        <item>2 Series</item>
+        <item>X3 M</item>
+        <item>4 Series</item>
+        <item>i3</item>
+        <item>3 Series Sedan</item>
+        <item>4 Series Coupe</item>
+    </string-array>
+</resources>

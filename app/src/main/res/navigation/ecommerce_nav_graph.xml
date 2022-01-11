@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_productDetailFragment_to_sellerFragment"
             app:destination="@id/sellerFragment" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_reportFragment"
+            app:destination="@id/reportFragment" />
     </fragment>
     <fragment
         android:id="@+id/sellerFragment"
@@ -49,5 +52,17 @@
             android:name="ownerId"
             app:argType="string"
             android:defaultValue="Admin" />
+        <action
+            android:id="@+id/action_sellerFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.ReportFragment"
+        android:label="fragment_report"
+        tools:layout="@layout/fragment_report" >
+        <argument
+            android:name="product"
+            app:argType="com.maricoolsapps.e_commerce.model.Product" />
     </fragment>
 </navigation>

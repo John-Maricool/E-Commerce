@@ -2,9 +2,11 @@ package com.maricoolsapps.e_commerce.product_ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -35,40 +37,27 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
         val nav = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
         nav?.visibility = View.VISIBLE
         getAllCarBrands()
+        binding.tabLayout.addOnTabSelectedListener(this)
+        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.adapter = adapter
+
     }
 
     override fun onStart() {
         super.onStart()
-            binding.recyclerView.layoutManager = LinearLayoutManager(activity)
-            binding.recyclerView.setHasFixedSize(true)
-            binding.recyclerView.adapter = adapter
-            binding.tabLayout.addOnTabSelectedListener(this)
         adapter.setOnItemClickListener(this)
+
     }
 
    private fun getAllCarBrands(){
-       binding.progressBar.visibility = View.VISIBLE
-       model.getAllCarBrands().observe(viewLifecycleOwner, {
-            when(it.status){
-                Status.SUCCESS -> {
-                    binding.recyclerView.visibility = View.VISIBLE
-                    binding.progressBar.visibility = View.GONE
-                    it.data?.forEach {
-                        val oneTab = binding.tabLayout.newTab()
-                        oneTab.text= it
-                        binding.tabLayout.addTab(oneTab)
-                    }
-                }
-
-                Status.ERROR -> {
-                    binding.progressBar.visibility = View.GONE
-                    Snackbar.make(binding.tabLayout, it.message.toString(), Snackbar.LENGTH_LONG)
-                        .setBackgroundTint(resources.getColor(R.color.pink2, null))
-                        .show()
-                }
-                Status.LOADING -> TODO()
-            }
-        })
+       val brands = resources.getStringArray(R.array.brands)
+       brands.forEach {
+           val oneTab: TabLayout.Tab = binding.tabLayout.newTab()
+           oneTab.text = it
+           binding.tabLayout.addTab(oneTab)
+       }
+       getCarsFromBrand(brands[0])
     }
 
     override fun onDestroyView() {
