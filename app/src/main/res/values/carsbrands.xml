@@ -9,21 +9,22 @@
         <item>Ford</item>
         <item>Mercedes-Benz</item>
         <item>BMW</item>
-       <!-- <item>Volkswagen</item>
-        <item>Nissan</item>
-        <item>Hyundai</item>
-        <item>Kia</item>
-        <item>Audi</item>
-        <item>Porsche</item>
-        <item>Chevrolet</item>
-        <item>Mazda</item>
-        <item>Tasla</item>
-        <item>Dodge</item>
-        <item>Renault</item>
-        <item>Ferrari</item>
-        <item>Jeep</item>
-        <item>Jaguar</item>
-        <item>Cadilac</item>-->
+        <item>Alfa-Romeo</item>
+        <!-- <item>Volkswagen</item>
+         <item>Nissan</item>
+         <item>Hyundai</item>
+         <item>Kia</item>
+         <item>Audi</item>
+         <item>Porsche</item>
+         <item>Chevrolet</item>
+         <item>Mazda</item>
+         <item>Tasla</item>
+         <item>Dodge</item>
+         <item>Renault</item>
+         <item>Ferrari</item>
+         <item>Jeep</item>
+         <item>Jaguar</item>
+         <item>Cadilac</item>-->
     </string-array>
 
     <string-array name="Toyota">

@@ -10,12 +10,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel
+class CompleteRegisterViewModel
    @Inject constructor(private val profileChanges: ProfileChanges): ViewModel() {
-
-       fun createNewUser(user: User): LiveData<Resource<String>>{
-          return profileChanges.createNewUser(user)
-       }
 
       fun changeProfileNameAndPhoto(uri: Uri?, name: String): LiveData<Resource<String>>{
          return profileChanges.changeProfilePhotoAndName(uri, name)

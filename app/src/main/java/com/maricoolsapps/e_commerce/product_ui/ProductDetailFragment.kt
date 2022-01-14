@@ -1,43 +1,36 @@
 package com.maricoolsapps.e_commerce.product_ui
 
-import android.content.res.ColorStateList
-import android.os.Build
+
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavArgs
-import androidx.navigation.NavArgument
-import androidx.navigation.NavOptions
-import androidx.navigation.NavOptionsBuilder
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.maricoolsapps.e_commerce.R
-import com.maricoolsapps.e_commerce.adapters.ProductListAdapter
 import com.maricoolsapps.e_commerce.adapters.SliderImageAdapter
 import com.maricoolsapps.e_commerce.databinding.FragmentProductDetailBinding
-import com.maricoolsapps.e_commerce.interfaces.OnItemClickListener
-import com.maricoolsapps.e_commerce.model.Product
+import com.maricoolsapps.e_commerce.room_db.FavoriteProductEntity
 import com.maricoolsapps.e_commerce.utils.Status
-import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
-import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
 import dagger.hilt.android.AndroidEntryPoint
-import hilt_aggregated_deps._com_maricoolsapps_e_commerce_product_ui_MainViewModel_HiltModules_BindsModule
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ProductDetailFragment : Fragment(R.layout.fragment_product_detail){
+class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
 
     private var _binding: FragmentProductDetailBinding? = null
     private val binding get() = _binding!!
     private val args: ProductDetailFragmentArgs by navArgs()
-    private val model: ProductDetailViewModel by viewModels()
 
     @Inject
     lateinit var adapter: SliderImageAdapter
@@ -47,27 +40,26 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail){
         _binding = FragmentProductDetailBinding.bind(view)
         val nav = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
         nav?.visibility = View.GONE
+        toolbarInit()
         placeAllViews()
         viewlisteners()
     }
 
     private fun viewlisteners() {
         binding.ownerId.setOnClickListener {
-            val action = ProductDetailFragmentDirections.actionProductDetailFragmentToSellerFragment(args.product.ownerId)
+            val action =
+                ProductDetailFragmentDirections.actionProductDetailFragmentToSellerFragment(args.product.ownerId)
             findNavController().navigate(action)
         }
 
         binding.report.setOnClickListener {
-            val action = ProductDetailFragmentDirections.actionProductDetailFragmentToReportFragment(args.product)
+            val action =
+                ProductDetailFragmentDirections.actionProductDetailFragmentToReportFragment(args.product)
             findNavController().navigate(action)
-        }
-
-        binding.backButton.setOnClickListener {
-            activity?.onBackPressed()
         }
     }
 
-    private fun placeAllViews(){
+    private fun placeAllViews() {
         binding.sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
 
         args.product.apply {
@@ -86,6 +78,13 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail){
             binding.location.text = location
         }
         binding.sliderView.setSliderAdapter(adapter)
+    }
+
+    private fun toolbarInit() {
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        binding.toolbar.title = args.product.brand
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onDestroyView() {

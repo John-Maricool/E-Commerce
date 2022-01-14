@@ -47,6 +47,8 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentSellerBinding.bind(view)
 
+        toolbarInit()
+
         binding.follow.setOnClickListener {
             buttonClickFollow()
         }
@@ -54,10 +56,13 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
         initSpinnerAndAdapter()
         updateFollowButton()
         updateUI()
+    }
 
+    private fun toolbarInit() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         binding.toolbar.title = args.ownerId
-
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onStart() {

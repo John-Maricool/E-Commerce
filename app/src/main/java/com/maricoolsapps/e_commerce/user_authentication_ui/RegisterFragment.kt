@@ -174,7 +174,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
         binding.progressBar.visibility = View.VISIBLE
 
-        model.changeProfileNameAndPhoto(intent_data!!, username)
+        model.changeProfileNameAndPhoto(null, username)
             .observe(viewLifecycleOwner, {
                 when(it.status){
                     Status.SUCCESS -> {

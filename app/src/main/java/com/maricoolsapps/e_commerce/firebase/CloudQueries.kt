@@ -1,15 +1,17 @@
 package com.maricoolsapps.e_commerce.firebase
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
 import com.maricoolsapps.e_commerce.model.Product
 import com.maricoolsapps.e_commerce.model.CarBuyerOrSeller
 import com.maricoolsapps.e_commerce.model.Follow
 import com.maricoolsapps.e_commerce.utils.Constants
 import com.maricoolsapps.e_commerce.utils.Resource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 import javax.inject.Inject
@@ -26,7 +28,7 @@ class CloudQueries
         val carsFromDb = MutableLiveData<Resource<List<Product>>>()
 
         cloud.collection(Constants.car).document(name).collection(Constants.models)
-            .get()
+            .get(Source.SERVER)
             .addOnSuccessListener {
                 val cars: List<Product> = it.toObjects(Product::class.java)
                 carsFromDb.value = Resource.success(cars)
@@ -96,7 +98,7 @@ class CloudQueries
         return done
     }
 
-     fun getNumberOfFollowing(userIdOrName: String): LiveData<Resource<Int>> {
+    fun getNumberOfFollowing(userIdOrName: String): LiveData<Resource<Int>> {
 
          val done = MutableLiveData<Resource<Int>>()
          cloud.collection(Constants.sellerorbuyer).document(userIdOrName)
@@ -163,4 +165,11 @@ class CloudQueries
         return isFollowed
     }
 
+    suspend fun getCar(brand: String, id: String): Product? {
+        return cloud.collection(Constants.car).document(brand)
+            .collection(Constants.models)
+            .document(id)
+            .get()
+            .await().toObject(Product::class.java)
+    }
 }

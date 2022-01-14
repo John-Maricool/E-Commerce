@@ -9,36 +9,22 @@
     android:background="@color/grey"
     tools:context=".product_ui.ProductDetailFragment">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/back_button"
-        android:layout_width="@dimen/margin_30"
-        android:layout_height="@dimen/margin_30"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-       android:background="@color/grey"
-        app:layout_constraintStart_toStartOf="@+id/parent"
-        app:layout_constraintTop_toTopOf="@+id/parent"
-        app:srcCompat="@drawable/ic_left" />
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/fav"
-        android:layout_width="@dimen/margin_20"
-        android:layout_height="@dimen/margin_20"
-        android:layout_marginEnd="16dp"
-        android:background="@color/grey"
-        app:layout_constraintBottom_toBottomOf="@+id/back_button"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/back_button"
-        app:srcCompat="@drawable/ic_favorite_border" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.smarteist.autoimageslider.SliderView
         android:id="@+id/sliderView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_button"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:sliderAnimationDuration="600"
         app:sliderAutoCycleDirection="back_and_forth"
         android:paddingBottom="16dp"
@@ -63,7 +49,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sliderView"
         app:layout_constraintVertical_bias="0.0" />
-
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

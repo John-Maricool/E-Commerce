@@ -1,6 +1,7 @@
 package com.maricoolsapps.e_commerce.product_ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
@@ -40,7 +41,7 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
         binding.tabLayout.addOnTabSelectedListener(this)
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.setHasFixedSize(true)
-        binding.recyclerView.adapter = adapter
+        //binding.recyclerView.adapter = adapter
 
     }
 
@@ -75,15 +76,15 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
                         binding.noResult.visibility = View.VISIBLE
                     } else {
                         adapter.getProducts(it.data)
+                        binding.recyclerView.adapter = adapter
                         binding.noResult.visibility = View.GONE
                     }
                     binding.checkInternet.visibility = View.GONE
-                    binding.retry.visibility = View.GONE
                 }
                 Status.ERROR -> {
                     binding.progressBar.visibility = View.GONE
+                    binding.noResult.visibility = View.GONE
                     binding.checkInternet.visibility = View.VISIBLE
-                    binding.retry.visibility = View.VISIBLE
                 }
                 Status.LOADING -> TODO()
             }
@@ -99,7 +100,6 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
     }
 
     override fun onTabReselected(tab: TabLayout.Tab?) {
-        getCarsFromBrand(tab?.text.toString())
     }
 
     override fun onItemClick(t: Product) {

@@ -61,7 +61,7 @@ class ProfileChanges
         return photoValue
     }
 
-    fun changeProfilePhotoAndName(uri: Uri, name: String): LiveData<Resource<String>> {
+    fun changeProfilePhotoAndName(uri: Uri?, name: String): LiveData<Resource<String>> {
         val profileChanges = MutableLiveData<Resource<String>>()
         try {
             val profile = UserProfileChangeRequest.Builder()
