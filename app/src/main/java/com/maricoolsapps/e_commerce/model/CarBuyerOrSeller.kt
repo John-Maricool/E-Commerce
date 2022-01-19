@@ -1,7 +1,5 @@
 package com.maricoolsapps.e_commerce.model
 
-import android.provider.ContactsContract
-
 data class CarBuyerOrSeller
 (
     val image: String?,

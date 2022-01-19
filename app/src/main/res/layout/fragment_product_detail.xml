@@ -19,8 +19,8 @@
 
     <com.smarteist.autoimageslider.SliderView
         android:id="@+id/sliderView"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="400dp"
+        android:layout_height="300dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,30 +80,19 @@
                 tools:text="Camry Le" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/by"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/by"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_15"
-                app:layout_constraintStart_toStartOf="@id/product_name"
-                app:layout_constraintTop_toBottomOf="@+id/product_name" />
-
-            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/owner_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
                 android:background="@drawable/blue"
                 android:padding="@dimen/margin_3"
+                android:text="@string/see_seller"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_15"
                 android:textStyle="italic|bold"
-                app:layout_constraintBottom_toBottomOf="@+id/by"
-                app:layout_constraintStart_toEndOf="@+id/by"
-                app:layout_constraintTop_toTopOf="@+id/by"
-                tools:text="Admin" />
+                app:layout_constraintEnd_toEndOf="@+id/product_name"
+                app:layout_constraintStart_toStartOf="@+id/product_name"
+                app:layout_constraintTop_toBottomOf="@+id/product_name" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/rate_image"
@@ -137,8 +126,8 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_17"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/by"
-                app:layout_constraintTop_toBottomOf="@+id/by" />
+                app:layout_constraintStart_toStartOf="@+id/owner_id"
+                app:layout_constraintTop_toBottomOf="@+id/owner_id" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/prod_desc"
@@ -394,8 +383,8 @@
                 app:layout_constraintVertical_bias="1.0" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
                 android:id="@+id/report"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:drawableStart="@drawable/ic_report"

@@ -1,14 +1,388 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/margin_50"
+    android:background="@color/grey"
     tools:context=".product_ui.SellFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:layout_margin="@dimen/margin_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/par"
+            android:layout_width="match_parent"
+            android:padding="@dimen/margin_12"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_20"
+            android:background="@color/white">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/regions"
+                style="@style/ThemeOverlay.AppCompat.Light"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/border_black"
+                android:backgroundTintMode="src_in"
+                android:entries="@array/car_town"
+                android:pointerIcon="arrow"
+                android:spinnerMode="dialog"
+                app:barrierDirection="right"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:targetApi="n" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/brands"
+                style="@style/ThemeOverlay.AppCompat.Light"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/border_black"
+                android:backgroundTintMode="src_in"
+                android:entries="@array/brands"
+                android:pointerIcon="arrow"
+                android:spinnerMode="dialog"
+                app:barrierDirection="right"
+                app:layout_constraintEnd_toEndOf="@+id/regions"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/regions"
+                app:layout_constraintTop_toBottomOf="@+id/regions"
+                tools:ignore="HardcodedText"
+                tools:targetApi="n" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/models"
+                style="@style/ThemeOverlay.AppCompat.Light"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/border_black"
+                android:backgroundTintMode="src_in"
+                android:entries="@array/Lexus"
+                android:pointerIcon="arrow"
+                android:spinnerMode="dialog"
+                app:barrierDirection="right"
+                app:layout_constraintEnd_toEndOf="@+id/brands"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/brands"
+                app:layout_constraintTop_toBottomOf="@+id/brands"
+                tools:targetApi="n" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/colors"
+                style="@style/ThemeOverlay.AppCompat.Light"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/border_black"
+                android:backgroundTintMode="src_in"
+                android:entries="@array/car_colors"
+                android:pointerIcon="arrow"
+                android:spinnerMode="dialog"
+                app:barrierDirection="right"
+                app:layout_constraintEnd_toEndOf="@+id/models"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/models"
+                app:layout_constraintTop_toBottomOf="@+id/models"
+                tools:targetApi="n" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/rating"
+                style="@style/ThemeOverlay.AppCompat.Light"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/border_black"
+                android:backgroundTintMode="src_in"
+                android:entries="@array/car_rating"
+                android:pointerIcon="arrow"
+                android:spinnerMode="dialog"
+                app:barrierDirection="right"
+                app:layout_constraintEnd_toEndOf="@+id/colors"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/colors"
+                app:layout_constraintTop_toBottomOf="@+id/colors"
+                tools:targetApi="n" />
+
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/state"
+                style="@style/ThemeOverlay.AppCompat.Light"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/border_black"
+                android:backgroundTintMode="src_in"
+                android:entries="@array/car_state"
+                android:pointerIcon="arrow"
+                android:spinnerMode="dialog"
+                app:barrierDirection="right"
+                app:layout_constraintEnd_toEndOf="@+id/rating"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/rating"
+                app:layout_constraintTop_toBottomOf="@+id/rating"
+                tools:targetApi="n" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/condition"
+                style="@style/ThemeOverlay.AppCompat.Light"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/border_black"
+                android:backgroundTintMode="src_in"
+                android:entries="@array/car_condition"
+                android:pointerIcon="arrow"
+                android:spinnerMode="dialog"
+                app:barrierDirection="right"
+                app:layout_constraintEnd_toEndOf="@+id/state"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/state"
+                app:layout_constraintTop_toBottomOf="@+id/state"
+                tools:targetApi="n" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeWidth="2dp"
+                app:errorTextColor="@color/pink2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/condition">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_20"
+                    android:hint="@string/enter_amount_in"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeWidth="2dp"
+                app:errorTextColor="@color/pink2"
+                app:layout_constraintEnd_toEndOf="@+id/_price"
+                app:layout_constraintStart_toStartOf="@+id/_price"
+                app:layout_constraintTop_toBottomOf="@+id/_price">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_20"
+                    android:hint="@string/enter_address_or_location"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/year_of_manu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeWidth="2dp"
+                app:errorTextColor="@color/pink2"
+                app:layout_constraintEnd_toEndOf="@+id/_location"
+                app:layout_constraintStart_toStartOf="@+id/_location"
+                app:layout_constraintTop_toBottomOf="@+id/_location">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/yr_of_manufacturing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_20"
+                    android:hint="@string/year_of_manufacturing"
+                    android:inputType="number" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/_desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeWidth="2dp"
+                app:errorTextColor="@color/pink2"
+                app:layout_constraintEnd_toEndOf="@+id/year_of_manu"
+                app:layout_constraintStart_toStartOf="@+id/year_of_manu"
+                app:layout_constraintTop_toBottomOf="@+id/year_of_manu">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_20"
+                    android:lines="20"
+                    android:gravity="top"
+                    android:maxLines="25"
+                    tools:text="i hope u are doing wellhow are u doing i hope u are doing well"
+                    android:hint="@string/enter_description"
+                    android:inputType="textMultiLine" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/add_phot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/add_photo"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/_desc"
+                app:layout_constraintTop_toBottomOf="@+id/_desc" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/add_photo_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/first_picture_is_the_title_picture"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15"
+                app:layout_constraintStart_toStartOf="@+id/add_phot"
+                app:layout_constraintTop_toBottomOf="@+id/add_phot" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/add_photo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/add_photo_desc"
+                app:layout_constraintStart_toEndOf="@+id/add_photo_desc"
+                app:layout_constraintTop_toTopOf="@+id/add_photo_desc"
+                app:srcCompat="@drawable/ic_add_circle" />
+
+            <ImageSwitcher
+                android:id="@+id/image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/post_ad"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_photo"
+                tools:visibility="visible" />
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/remove_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="fitXY"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/image"
+                app:layout_constraintEnd_toEndOf="@+id/image"
+                app:layout_constraintTop_toTopOf="@+id/image"
+                app:srcCompat="@drawable/ic_close"
+                tools:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/previous"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/ic_left"
+                android:text="@string/previous"
+                android:textSize="@dimen/text_size_12"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/image"
+                app:layout_constraintEnd_toStartOf="@+id/image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/image"
+                tools:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/next"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_right"
+                android:text="@string/next"
+                android:textSize="@dimen/text_size_12"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image"
+                app:layout_constraintTop_toTopOf="@+id/image"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/post_ad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@color/pink"
+                android:text="@string/post_ad"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/notice_on_posting_ad"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/progress_bar"
+                style="@style/SpinKitView.Large.ThreeBounce"
+                android:layout_width="@dimen/margin_50"
+                android:layout_height="@dimen/margin_50"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                app:SpinKit_Color="@color/pink"
+                app:layout_constraintEnd_toEndOf="@+id/post_ad"
+                app:layout_constraintStart_toStartOf="@+id/post_ad"
+                app:layout_constraintTop_toBottomOf="@+id/post_ad" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

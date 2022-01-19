@@ -17,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.adapters.SliderImageAdapter
 import com.maricoolsapps.e_commerce.databinding.FragmentProductDetailBinding
+import com.maricoolsapps.e_commerce.interfaces.OnItemClickListener
 import com.maricoolsapps.e_commerce.room_db.FavoriteProductEntity
 import com.maricoolsapps.e_commerce.utils.Status
 import com.smarteist.autoimageslider.SliderView
@@ -26,7 +27,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
+class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
+    OnItemClickListener<List<String>> {
 
     private var _binding: FragmentProductDetailBinding? = null
     private val binding get() = _binding!!
@@ -57,6 +59,8 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
                 ProductDetailFragmentDirections.actionProductDetailFragmentToReportFragment(args.product)
             findNavController().navigate(action)
         }
+
+        adapter.setOnItemClickListener(this)
     }
 
     private fun placeAllViews() {
@@ -67,7 +71,6 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
             binding.productName.text = "$brand $type"
             binding.brand.text = brand
             binding.type.text = type
-            binding.ownerId.text = ownerId
             binding.color.text = color
             binding.condition.text = condition
             binding.yr.text = yearOfManufacturing
@@ -90,5 +93,12 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemClick(t: List<String>) {
+        val action = ProductDetailFragmentDirections.actionProductDetailFragmentToPictureFragment(
+            args.product.photos.toTypedArray()
+        )
+        findNavController().navigate(action)
     }
 }

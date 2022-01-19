@@ -16,6 +16,7 @@ import com.maricoolsapps.e_commerce.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
@@ -60,7 +61,6 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
 
     private fun toolbarInit() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        binding.toolbar.title = args.ownerId
         val actionBar = (activity as AppCompatActivity).supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
     }
@@ -72,21 +72,29 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
     }
 
     private fun buttonClickFollow() {
-        if (isFollowed){
-            model.unfollowUser(auth.currentUser?.displayName.toString(), args.ownerId)
-            sellerUnfollowed()
-        }else{
-            model.followUser(auth.currentUser?.displayName.toString(), args.ownerId)
-            sellerFollowed()
+        if (auth.currentUser?.uid.toString() != args.ownerId) {
+            if (isFollowed) {
+                model.unfollowUser(auth.currentUser?.uid.toString(), args.ownerId)
+                sellerUnfollowed()
+            } else {
+                model.followUser(auth.currentUser?.uid.toString(), args.ownerId)
+                sellerFollowed()
+            }
+        }
+        else{
+            binding.follow.isEnabled = false
+            Toast.makeText(activity, "You can't follow yourself", Toast.LENGTH_LONG).show()
+            return
         }
     }
 
     private fun updateFollowButton() {
-        model.isUserFollowed(auth.currentUser?.displayName.toString(), args.ownerId).observe(viewLifecycleOwner, {
+        model.isUserFollowed(auth.currentUser?.uid.toString(), args.ownerId).observe(viewLifecycleOwner, {
             when(it.status) {
                 Status.SUCCESS -> {
                   sellerFollowed()
                 }
+
                 Status.ERROR -> {
                     sellerUnfollowed()
                 }
@@ -112,7 +120,7 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
     }
 
     private fun initSpinnerAndAdapter() {
-         carBrands = resources.getStringArray(R.array.brands)
+         carBrands = resources.getStringArray(R.array.brands).drop(1).toTypedArray()
         val spinnerAdapter = ArrayAdapter(requireActivity(),
             R.layout.support_simple_spinner_dropdown_item,
             carBrands)
@@ -131,6 +139,7 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
                         val seller = it.data
                         binding.apply {
                             name.text = seller?.name
+                            binding.toolbar.title = seller?.name
                             location.text = seller?.businessLocation
                             Glide.with(requireActivity())
                                 .load(seller?.image)
@@ -204,8 +213,8 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val value = parent?.getItemAtPosition(position).toString()
-        getSellerCars(args.ownerId, value)
+            val value = parent?.getItemAtPosition(position).toString()
+            getSellerCars(args.ownerId, value)
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {

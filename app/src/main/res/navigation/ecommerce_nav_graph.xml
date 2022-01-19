@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_productDetailFragment_to_reportFragment"
             app:destination="@id/reportFragment" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_pictureFragment"
+            app:destination="@id/pictureFragment" />
     </fragment>
     <fragment
         android:id="@+id/sellerFragment"
@@ -64,5 +67,14 @@
         <argument
             android:name="product"
             app:argType="com.maricoolsapps.e_commerce.model.Product" />
+    </fragment>
+    <fragment
+        android:id="@+id/pictureFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.PictureFragment"
+        android:label="fragment_picture"
+        tools:layout="@layout/fragment_picture" >
+        <argument
+            android:name="pictures"
+            app:argType="string[]" />
     </fragment>
 </navigation>

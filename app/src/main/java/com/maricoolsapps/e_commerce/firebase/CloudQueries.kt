@@ -1,13 +1,16 @@
 package com.maricoolsapps.e_commerce.firebase
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
+import com.google.firebase.storage.FirebaseStorage
 import com.maricoolsapps.e_commerce.model.Product
 import com.maricoolsapps.e_commerce.model.CarBuyerOrSeller
 import com.maricoolsapps.e_commerce.model.Follow
+import com.maricoolsapps.e_commerce.model.ProductId
 import com.maricoolsapps.e_commerce.utils.Constants
 import com.maricoolsapps.e_commerce.utils.Resource
 import kotlinx.coroutines.Dispatchers
@@ -48,7 +51,7 @@ class CloudQueries
         cloud.collection(Constants.sellerorbuyer).document(name)
             .collection(brand).get()
             .addOnSuccessListener {
-                if(it.documents.isNotEmpty()) {
+                if (it.documents.isNotEmpty()) {
                     it.documents.forEach { snap ->
                         val ref = snap.reference.id
                         cloud.collection(Constants.car).document(brand)
@@ -88,7 +91,7 @@ class CloudQueries
     fun getNumberOfFollowers(userIdOrName: String): LiveData<Resource<Int>> {
 
         val done = MutableLiveData<Resource<Int>>()
-      cloud.collection(Constants.sellerorbuyer).document(userIdOrName)
+        cloud.collection(Constants.sellerorbuyer).document(userIdOrName)
             .collection(Constants.followers)
             .get().addOnSuccessListener {
                 done.value = Resource.success(it.documents.size)
@@ -100,15 +103,15 @@ class CloudQueries
 
     fun getNumberOfFollowing(userIdOrName: String): LiveData<Resource<Int>> {
 
-         val done = MutableLiveData<Resource<Int>>()
-         cloud.collection(Constants.sellerorbuyer).document(userIdOrName)
-                    .collection(Constants.following)
-                    .get().addOnSuccessListener {
-                        done.value = Resource.success(it.documents.size)
-             }.addOnFailureListener {
-                 done.value = Resource.error(it.message.toString(), 0)
-             }
-         return done
+        val done = MutableLiveData<Resource<Int>>()
+        cloud.collection(Constants.sellerorbuyer).document(userIdOrName)
+            .collection(Constants.following)
+            .get().addOnSuccessListener {
+                done.value = Resource.success(it.documents.size)
+            }.addOnFailureListener {
+                done.value = Resource.error(it.message.toString(), 0)
+            }
+        return done
     }
 
     suspend fun followUser(userIdOrName: String, userToFollow: String): Resource<String> {
@@ -171,5 +174,37 @@ class CloudQueries
             .document(id)
             .get()
             .await().toObject(Product::class.java)
+    }
+
+    suspend fun getAllImageDownloadUri(images: List<Uri>): List<String> {
+        val productImages = mutableListOf<String>()
+        images.forEach {
+            val image = FirebaseStorage.getInstance().getReference("$it.jpg").putFile(it)
+            image.await()
+            if (image.isComplete) {
+                val imgUrl = FirebaseStorage.getInstance().getReference("${it}.jpg").downloadUrl.await()
+                productImages.add(imgUrl.toString())
+            }
+        }
+        return productImages
+    }
+
+    suspend fun addCarToDb(product: Product, userIdOrName: String): Resource<String> {
+        val productID = ProductId(product.id)
+        val productCar = cloud.collection(Constants.car).document(product.brand)
+            .collection(Constants.models).document(product.id).set(product)
+        productCar.await()
+        return if (productCar.isSuccessful) {
+            val sellerCar = cloud.collection(Constants.sellerorbuyer).document(userIdOrName)
+                .collection(product.brand).document(product.id).set(productID)
+            sellerCar.await()
+            if (sellerCar.isSuccessful) {
+                Resource.success("Successful")
+            }else{
+                Resource.error("Error", null)
+            }
+        }else{
+            Resource.error("Error", null)
+        }
     }
 }

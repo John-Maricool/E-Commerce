@@ -48,11 +48,10 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
     override fun onStart() {
         super.onStart()
         adapter.setOnItemClickListener(this)
-
     }
 
    private fun getAllCarBrands(){
-       val brands = resources.getStringArray(R.array.brands)
+       val brands = resources.getStringArray(R.array.brands).drop(1)
        brands.forEach {
            val oneTab: TabLayout.Tab = binding.tabLayout.newTab()
            oneTab.text = it

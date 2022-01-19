@@ -50,4 +50,150 @@
     <string name="followers">Followers</string>
     <string name="user_image">user_image</string>
     <string name="favorites">Favorites</string>
+    <string name="year_of_manufacturing">Year of Manufacturing *</string>
+    <string name="enter_address_or_location">Enter Address or location*</string>
+    <string name="enter_description">Enter description *</string>
+    <string name="add_5_photos">Add photos</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="first_picture_is_the_title_picture">First Picture is the title picture</string>
+    <string name="supported_formats">Supported formats are .jpg, .gif, and .png. Each picture must not exceed 5Mb</string>
+    <string name="post_ad">Post Ad</string>
+    <string name="notice_on_posting_ad">By clicking on Post Ad, you accept the Terms of use. Your email, phone number and name will be gotten from your profile details</string>
+    <string name="enter_amount_in">Enter amount in $ *</string>
+    <string name="previous">PREVIOUS</string>
+    <string name="see_seller">See Seller</string>
+    <string name="download">Download</string>
+
+    <string-array name="car_colors">
+        <item>Colors *</item>
+        <item>Black</item>
+        <item>Silver</item>
+        <item>Gray</item>
+        <item>White</item>
+        <item>Blue</item>
+        <item>Brown</item>
+        <item>Beige</item>
+        <item>Gold</item>
+        <item>Green</item>
+        <item>Burgandy</item>
+        <item>Ivory</item>
+        <item>Matt Black</item>
+        <item>Off White</item>
+        <item>Orange</item>
+        <item>Pearl</item>
+        <item>Pink</item>
+        <item>Purple</item>
+        <item>Red</item>
+        <item>Teal</item>
+        <item>Yellow</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="car_rating">
+        <item>Rating *</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="car_state">
+        <item>Car State *</item>
+        <item>Available</item>
+        <item>Aunction</item>
+    </string-array>
+
+    <string-array name="car_condition">
+        <item>Car Condition *</item>
+        <item>Brand New</item>
+        <item>Foreign used</item>
+        <item>Local used</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="car_town">
+        <item>Town *</item>
+        <item>Aba</item>
+        <item>Umuahia</item>
+        <item>Arochukwu</item>
+        <item>Abakaliki</item>
+        <item>Abeokuta</item>
+        <item>Abonnema</item>
+        <item>Abuja</item>
+        <item>Ado Ekiti</item>
+        <item>Afikpo</item>
+        <item>Akpawfu</item>
+        <item>Akure</item>
+        <item>Asaba</item>
+        <item>Awgu</item>
+        <item>Awka</item>
+        <item>Bauchi</item>
+        <item>Batagarawa</item>
+        <item>Benin City</item>
+        <item>Bida</item>
+        <item>Birnin Kebbi</item>
+        <item>Buguma</item>
+        <item>Calabar</item>
+        <item>Damaturu</item>
+        <item>Dutse</item>
+        <item>Ede</item>
+        <item>Eket</item>
+        <item>Enugu</item>
+        <item>Gombe</item>
+        <item>Gusau</item>
+        <item>Ibadan</item>
+        <item>Ife</item>
+        <item>Ikeja</item>
+        <item>Ikirun</item>
+        <item>Ikot-Abasi</item>
+        <item>Ikot Ekpene</item>
+        <item>Ilorin</item>
+        <item>Iwo</item>
+        <item>Jalingo</item>
+        <item>Jebba</item>
+        <item>Jimeta</item>
+        <item>Jos</item>
+        <item>Kabba</item>
+        <item>Kaduna</item>
+        <item>Kano</item>
+        <item>Katsina</item>
+        <item>Karu</item>
+        <item>Kontagora</item>
+        <item>Kutigi</item>
+        <item>Kumariya</item>
+        <item>Lafia</item>
+        <item>Lagos</item>
+        <item>Lekki</item>
+        <item>Lokoja</item>
+        <item>Maiduguri</item>
+        <item>Makurdi</item>
+        <item>Minna</item>
+        <item>Nnewi</item>
+        <item>Nsukka</item>
+        <item>Offa</item>
+        <item>Ogbomoso</item>
+        <item>Onitsha</item>
+        <item>Okene</item>
+        <item>Ogaminana</item>
+        <item>Omu-Aran</item>
+        <item>Ondo City</item>
+        <item>Oron</item>
+        <item>Oshogbo</item>
+        <item>Owerri</item>
+        <item>Owo</item>
+        <item>Orlu</item>
+        <item>Oyo</item>
+        <item>Port Harcourt</item>
+        <item>Potiskum</item>
+        <item>Sokoto</item>
+        <item>Suleja</item>
+        <item>Umuahia</item>
+        <item>Uyo</item>
+        <item>Warri</item>
+        <item>Wukari</item>
+        <item>Yenagoa</item>
+        <item>Yola</item>
+        <item>Zaria</item>
+    </string-array>
 </resources>

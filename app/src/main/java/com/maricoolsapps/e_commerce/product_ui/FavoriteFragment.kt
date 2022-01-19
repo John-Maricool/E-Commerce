@@ -35,16 +35,19 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
         initAdapter()
 
         model.result.observe(viewLifecycleOwner, {
-            when(it.status){
+            binding.progressBar.visibility = View.VISIBLE
+            when(it.status) {
                 Status.SUCCESS -> {
-                    if (it.data != null){
+                    if (it.data != null && it.data.isNotEmpty()) {
                         binding.error.visibility = View.GONE
                         adapter.getProducts(it.data)
-                    }else{
+                    } else {
                         binding.error.visibility = View.VISIBLE
                     }
+                    binding.progressBar.visibility = View.GONE
                 }
-                Status.ERROR -> {
+            Status.ERROR -> {
+                    binding.progressBar.visibility = View.GONE
                     binding.error.visibility = View.VISIBLE
                 }
                 Status.LOADING -> TODO()

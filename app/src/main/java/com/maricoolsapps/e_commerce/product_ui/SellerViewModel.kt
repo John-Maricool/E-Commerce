@@ -27,7 +27,6 @@ class SellerViewModel
 
     fun getFollowers(userId: String): LiveData<Resource<Int>> {
         return cloud.getNumberOfFollowers(userId)
-
     }
 
     fun getFollowing(userId: String): LiveData<Resource<Int>> {
