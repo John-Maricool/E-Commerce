@@ -160,7 +160,6 @@ class SellFragment : Fragment(R.layout.fragment_sell), AdapterView.OnItemSelecte
         val desc = binding.desc.text.toString().trim()
         val id = viewModel.getRandomString()
 
-
         disableAllViews()
 
         binding.progressBar.visibility = View.VISIBLE

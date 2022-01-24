@@ -17,7 +17,23 @@
         android:id="@+id/profileFragment"
         android:name="com.maricoolsapps.e_commerce.product_ui.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_advertsFragment"
+            app:destination="@id/advertsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_followersFragment"
+            app:destination="@id/followersFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_feedbackFragment"
+            app:destination="@id/feedbackFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_contactDetailsFragment"
+            app:destination="@id/contactDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/sellFragment"
         android:name="com.maricoolsapps.e_commerce.product_ui.SellFragment"
@@ -77,4 +93,29 @@
             android:name="pictures"
             app:argType="string[]" />
     </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/feedbackFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.FeedbackFragment"
+        android:label="fragment_feedbact"
+        tools:layout="@layout/fragment_feedbact" />
+    <fragment
+        android:id="@+id/contactDetailsFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.ContactDetailsFragment"
+        android:label="fragment_contact_details"
+        tools:layout="@layout/fragment_contact_details" />
+    <fragment
+        android:id="@+id/followersFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.FollowersFragment"
+        android:label="fragment_followers"
+        tools:layout="@layout/fragment_followers" />
+    <fragment
+        android:id="@+id/advertsFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.AdvertsFragment"
+        android:label="fragment_adverts"
+        tools:layout="@layout/fragment_adverts" />
 </navigation>

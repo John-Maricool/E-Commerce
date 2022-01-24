@@ -27,4 +27,6 @@
     <dimen name="text_size_35">35sp</dimen>
     <dimen name="margin_3">3dp</dimen>
     <dimen name="text_size_17">17sp</dimen>
+    <dimen name="margin_5">5dp</dimen>
+    <dimen name="margin_15">15dp</dimen>
 </resources>

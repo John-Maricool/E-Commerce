@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
@@ -19,8 +20,11 @@ import com.maricoolsapps.e_commerce.product_ui.EcommerceActivity
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.utils.Status
 import com.maricoolsapps.e_commerce.databinding.FragmentRegisterBinding
+import com.maricoolsapps.e_commerce.model.CarBuyerOrSeller
 import com.maricoolsapps.e_commerce.model.User
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment(R.layout.fragment_register) {
@@ -56,7 +60,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             userRegistration()
         }
         binding.finish.setOnClickListener {
-            completeRegistration()
+            saveToDb()
         }
         binding.logIn.setOnClickListener {
             val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
@@ -132,6 +136,9 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             camera.visibility = View.GONE
             usernameField.visibility = View.GONE
             finish.visibility = View.GONE
+            location.visibility = View.GONE
+            number.visibility = View.GONE
+            regions.visibility = View.GONE
 
             emailField.visibility = View.VISIBLE
             passwordField.visibility = View.VISIBLE
@@ -146,6 +153,9 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             camera.visibility = View.VISIBLE
             usernameField.visibility = View.VISIBLE
             finish.visibility = View.VISIBLE
+            location.visibility = View.VISIBLE
+            number.visibility = View.VISIBLE
+            regions.visibility = View.VISIBLE
 
             emailField.visibility = View.GONE
             passwordField.visibility = View.GONE
@@ -159,40 +169,28 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         _binding = null
     }
 
-    private fun completeRegistration(){
+    private fun saveToDb() {
+        val location = binding.location.text.toString().trim()
+        val name = binding.username.text.toString().trim()
+        val email = binding.email.text.toString().trim()
+        val number = binding.number.text.toString().trim()
+        val region = binding.regions.selectedItem.toString()
 
-        val username = binding.username.text.toString().trim()
-
-        if (username.isEmpty()){
-            binding.username.error = "Enter a valid username"
-            return
-        }
-        if (intent_data == null){
-            Toast.makeText(activity, "Please select an image", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        binding.progressBar.visibility = View.VISIBLE
-
-        model.changeProfileNameAndPhoto(null, username)
-            .observe(viewLifecycleOwner, {
-                when(it.status){
-                    Status.SUCCESS -> {
-                        binding.progressBar.visibility = View.GONE
-                        Toast.makeText(activity, "Successfully Registered", Toast.LENGTH_LONG).show()
-                        startActivity(Intent(activity, EcommerceActivity::class.java))
-                        activity?.finish()
-                    }
-                    Status.ERROR -> {
-                        binding.progressBar.visibility = View.GONE
-                        Snackbar.make(binding.progressBar, it.data.toString(), Snackbar.LENGTH_LONG)
-                            .setBackgroundTint(resources.getColor(R.color.pink, null))
-                            .show()
-
-                    }
-                    Status.LOADING -> TODO()
+        if (location.isEmpty() || name.isEmpty() || email.isEmpty() ||
+            number.isEmpty() || binding.regions.selectedItemPosition == 0 || intent_data == null){
+            model.showSnackBar(binding.progressBar, "Complete your Entries", requireActivity())
+        }else{
+            binding.progressBar.visibility = View.VISIBLE
+            val user = CarBuyerOrSeller(intent_data.toString(), name, email, number, region, location)
+            lifecycleScope.launch(Dispatchers.Main) {
+                val job = model.completeRegistration(user)
+                if (job.isCompleted){
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(activity, "Successfully Registered", Toast.LENGTH_LONG).show()
+                    startActivity(Intent(activity, EcommerceActivity::class.java))
+                    activity?.finish()
                 }
-            })
+            }
+        }
     }
-
 }

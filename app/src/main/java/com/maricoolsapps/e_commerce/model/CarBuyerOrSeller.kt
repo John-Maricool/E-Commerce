@@ -2,7 +2,7 @@ package com.maricoolsapps.e_commerce.model
 
 data class CarBuyerOrSeller
 (
-    val image: String?,
+    var image: String?,
     val name: String,
     val email: String,
     val phoneNumber: String,

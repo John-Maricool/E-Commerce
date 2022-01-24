@@ -1,6 +1,7 @@
 package com.maricoolsapps.e_commerce.firebase
 
 import android.net.Uri
+import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.DocumentSnapshot
@@ -99,6 +100,91 @@ class CloudQueries
                 done.value = Resource.error(it.message.toString(), 0)
             }
         return done
+    }
+
+    suspend fun changeProfile(id: String, person: CarBuyerOrSeller): Resource<String> {
+        val userimage = person.image?.toUri()
+
+        if (userimage.toString().take(4) == "http"){
+            val imgUrl = FirebaseStorage.getInstance()
+                .getReference("${id}.jpg")
+                .downloadUrl.await()
+            person.image = imgUrl.toString()
+        }else{
+            val image = FirebaseStorage.getInstance()
+                .getReference("${id}.jpg")
+                .putFile(userimage!!)
+            image.await()
+             if (image.isComplete) {
+                val imgUrl = FirebaseStorage.getInstance()
+                    .getReference("${id}.jpg")
+                    .downloadUrl.await()
+                person.image = imgUrl.toString()
+            }else{
+                Resource.error("Error", null)
+            }
+        }
+        return try {
+            cloud.collection(Constants.sellerorbuyer)
+                .document(id).set(person).await()
+            Resource.success("Successful")
+        } catch (e: Exception) {
+            Resource.error(e.message.toString(), null)
+        }
+    }
+
+    suspend fun removeProduct(name: String, brand: String, id: List<String>): Resource<String>{
+       return try {
+           id.forEach { it ->
+               cloud.collection(Constants.sellerorbuyer).document(name)
+                   .collection(brand).document(it).delete().await()
+               cloud.collection(Constants.car).document(brand)
+                   .collection(Constants.models).document(it).delete().await()
+           }
+            Resource.success("Successfully deleted")
+        }catch (e: Exception){
+            Resource.error(e.message.toString(), null)
+        }
+    }
+
+    fun getFollowers(userIdOrName: String): LiveData<Resource<List<CarBuyerOrSeller>?>>{
+        val followers = mutableListOf<CarBuyerOrSeller?>()
+        val result = MutableLiveData<Resource<List<CarBuyerOrSeller>?>>()
+        cloud.collection(Constants.sellerorbuyer).document(userIdOrName)
+            .collection(Constants.followers).get()
+            .addOnSuccessListener {query ->
+                query.documents.forEach { documentSnapshot ->
+                    documentSnapshot.reference.get().addOnSuccessListener {
+                        followers.add(it.toObject(CarBuyerOrSeller::class.java))
+                    }.addOnFailureListener{
+                        result.postValue(Resource.error(it.message.toString(), null))
+                    }
+                }
+                result.postValue(Resource.success(followers.toList()) as Resource<List<CarBuyerOrSeller>>?)
+            }.addOnFailureListener {
+                result.postValue(Resource.error(it.message.toString(), null))
+            }
+        return result
+    }
+
+    fun getFollowing(userIdOrName: String): LiveData<Resource<List<CarBuyerOrSeller>?>>{
+        val followers = mutableListOf<CarBuyerOrSeller?>()
+        val result = MutableLiveData<Resource<List<CarBuyerOrSeller>?>>()
+        cloud.collection(Constants.sellerorbuyer).document(userIdOrName)
+            .collection(Constants.following).get()
+            .addOnSuccessListener {query ->
+                query.documents.forEach { documentSnapshot ->
+                    documentSnapshot.reference.get().addOnSuccessListener {
+                        followers.add(it.toObject(CarBuyerOrSeller::class.java))
+                    }.addOnFailureListener{
+                        result.postValue(Resource.error(it.message.toString(), null))
+                    }
+                }
+                result.postValue(Resource.success(followers.toList()) as Resource<List<CarBuyerOrSeller>>?)
+            }.addOnFailureListener {
+                result.postValue(Resource.error(it.message.toString(), null))
+            }
+        return result
     }
 
     fun getNumberOfFollowing(userIdOrName: String): LiveData<Resource<Int>> {

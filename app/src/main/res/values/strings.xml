@@ -25,8 +25,6 @@
     <string name="best_cars">Best Cars</string>
     <string name="perfect_choice">Perfect choice!</string>
     <string name="buy">Buy</string>
-    <string name="check_your_internet_connection">Check your internet connection</string>
-    <string name="retry">Retry</string>
     <string name="buy_now">Buy Now</string>
     <string name="description">Description</string>
     <string name="specifications">Specifications</string>
@@ -63,6 +61,21 @@
     <string name="previous">PREVIOUS</string>
     <string name="see_seller">See Seller</string>
     <string name="download">Download</string>
+    <string name="contact_details">Contact details</string>
+    <string name="notifications">Notifications</string>
+    <string name="my_adverts">My Adverts</string>
+    <string name="feedback">Feedback</string>
+    <string name="check_your_internet_connection">Check your internet connection</string>
+    <string name="retry">Retry</string>
+    <string name="edit_contacts">Edit Contacts</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="number">Number</string>
+    <string name="business_address">Business Address</string>
+    <string name="save">SAVE</string>
+    <string name="name">Full Name</string>
+    <string name="change_email">Change Email</string>
+    <string name="change_password">Change Password</string>
 
     <string-array name="car_colors">
         <item>Colors *</item>
@@ -113,7 +126,7 @@
     </string-array>
 
     <string-array name="car_town">
-        <item>Town *</item>
+        <item>Region *</item>
         <item>Aba</item>
         <item>Umuahia</item>
         <item>Arochukwu</item>
