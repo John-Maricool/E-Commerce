@@ -24,6 +24,8 @@ import com.maricoolsapps.e_commerce.model.CarBuyerOrSeller
 import com.maricoolsapps.e_commerce.model.User
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -38,20 +40,21 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                 intent_data = result.data?.data
-                if (intent_data != null) {
-                    Glide.with(requireActivity())
-                        .load(intent_data)
-                        .circleCrop()
-                        .into(binding.userImage)
+        resultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    intent_data = result.data?.data
+                    if (intent_data != null) {
+                        Glide.with(requireActivity())
+                            .load(intent_data)
+                            .circleCrop()
+                            .into(binding.userImage)
+                    }
                 }
             }
-        }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?){
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentRegisterBinding.bind(view)
         showLoginDetails()
@@ -67,13 +70,14 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             findNavController().navigate(action)
         }
         binding.camera.setOnClickListener {
-            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            val intent =
+                Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             intent.type = "image/*"
             resultLauncher.launch(intent)
         }
     }
 
-    private fun userRegistration(){
+    private fun userRegistration() {
         val userEmail: String = binding.email.text.toString().trim()
         val userPassword: String = binding.password.text.toString().trim()
         val userReenterPassword: String = binding.reenterPassword.text.toString().trim()
@@ -114,7 +118,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         binding.progressBar.visibility = View.VISIBLE
         val user = User(userEmail, userPassword)
         model.createNewUser(user).observe(viewLifecycleOwner, {
-            when(it.status){
+            when (it.status) {
                 Status.SUCCESS -> {
                     binding.progressBar.visibility = View.GONE
                     hideLoginDetails()
@@ -130,7 +134,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         })
     }
 
-    private fun showLoginDetails(){
+    private fun showLoginDetails() {
         binding.apply {
             userImage.visibility = View.GONE
             camera.visibility = View.GONE
@@ -147,7 +151,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         }
     }
 
-    private fun hideLoginDetails(){
+    private fun hideLoginDetails() {
         binding.apply {
             userImage.visibility = View.VISIBLE
             camera.visibility = View.VISIBLE
@@ -176,21 +180,34 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         val number = binding.number.text.toString().trim()
         val region = binding.regions.selectedItem.toString()
 
-        if (location.isEmpty() || name.isEmpty() || email.isEmpty() ||
-            number.isEmpty() || binding.regions.selectedItemPosition == 0 || intent_data == null){
+        if (name.isEmpty() || email.isEmpty() ||
+            number.isEmpty() || binding.regions.selectedItemPosition == 0 || intent_data == null
+        ) {
             model.showSnackBar(binding.progressBar, "Complete your Entries", requireActivity())
-        }else{
+        } else {
             binding.progressBar.visibility = View.VISIBLE
             val user = CarBuyerOrSeller(intent_data.toString(), name, email, number, region, location)
-            lifecycleScope.launch(Dispatchers.Main) {
-                val job = model.completeRegistration(user)
-                if (job.isCompleted){
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(activity, "Successfully Registered", Toast.LENGTH_LONG).show()
-                    startActivity(Intent(activity, EcommerceActivity::class.java))
-                    activity?.finish()
+            model.getUser().observe(viewLifecycleOwner, {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        lifecycleScope.launch (Main){
+                          val job =  lifecycleScope.launch (IO){
+                                model.completeRegistration(it.data!!.uid, user)
+                            }
+                            job.join()
+                            if (job.isCompleted){
+                                binding.progressBar.visibility = View.GONE
+                                startActivity(Intent(activity, EcommerceActivity::class.java))
+                                activity?.finish()
+                            }
+                        }
+                    }
+                    Status.ERROR -> {
+                        binding.progressBar.visibility = View.GONE
+                    }
+                    Status.LOADING -> TODO()
                 }
-            }
+            })
         }
     }
 }

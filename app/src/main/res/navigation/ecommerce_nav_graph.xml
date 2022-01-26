@@ -107,7 +107,11 @@
         android:id="@+id/contactDetailsFragment"
         android:name="com.maricoolsapps.e_commerce.product_ui.ContactDetailsFragment"
         android:label="fragment_contact_details"
-        tools:layout="@layout/fragment_contact_details" />
+        tools:layout="@layout/fragment_contact_details" >
+        <action
+            android:id="@+id/action_contactDetailsFragment_to_changeEmailAndPassword"
+            app:destination="@id/changeEmailAndPassword" />
+    </fragment>
     <fragment
         android:id="@+id/followersFragment"
         android:name="com.maricoolsapps.e_commerce.product_ui.FollowersFragment"
@@ -118,4 +122,9 @@
         android:name="com.maricoolsapps.e_commerce.product_ui.AdvertsFragment"
         android:label="fragment_adverts"
         tools:layout="@layout/fragment_adverts" />
+    <fragment
+        android:id="@+id/changeEmailAndPassword"
+        android:name="com.maricoolsapps.e_commerce.product_ui.ChangeEmailFragment"
+        android:label="fragment_change_email_and_password"
+        tools:layout="@layout/fragment_change_email_and_password" />
 </navigation>

@@ -4,29 +4,20 @@ import android.app.Activity
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseUser
 import com.maricoolsapps.e_commerce.R
-import com.maricoolsapps.e_commerce.firebase.CloudQueries
 import com.maricoolsapps.e_commerce.firebase.ProfileChanges
-import com.maricoolsapps.e_commerce.model.CarBuyerOrSeller
 import com.maricoolsapps.e_commerce.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ContactDetailsViewModel
-@Inject constructor(var cloud: CloudQueries, var profileChanges: ProfileChanges): ViewModel(){
+class ChangeEmailViewModel
+@Inject constructor(val profileChanges: ProfileChanges): ViewModel(){
 
-    fun getSeller(): LiveData<Resource<CarBuyerOrSeller>> {
-        return cloud.getSeller(profileChanges.auth.uid.toString())
-    }
-
-    suspend fun changeProfile(carBuyerOrSeller: CarBuyerOrSeller){
-            cloud.changeProfile(profileChanges.auth.uid.toString(), carBuyerOrSeller)
+    suspend fun changeEmail(user: FirebaseUser, email: String, password: String, newEmail: String): Resource<String> {
+        return profileChanges.changeEmail(user, email, password, newEmail)
     }
 
     fun showSnackBar(view: View, it: String, activity: Activity){
@@ -34,4 +25,7 @@ class ContactDetailsViewModel
             .setBackgroundTint(activity.resources.getColor(R.color.pink2, null)).show()
     }
 
+    fun getUser(): LiveData<Resource<FirebaseUser>> {
+        return profileChanges.getAuthState()
+    }
 }

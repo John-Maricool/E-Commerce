@@ -76,6 +76,12 @@
     <string name="name">Full Name</string>
     <string name="change_email">Change Email</string>
     <string name="change_password">Change Password</string>
+    <string name="business_address_optional">Business Address (optional)</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="new_password">New Password</string>
+    <string name="old_password">Old Password</string>
+    <string name="re_enter_new_password">Re-enter new password</string>
+    <string name="new_email">Enter New Email</string>
 
     <string-array name="car_colors">
         <item>Colors *</item>

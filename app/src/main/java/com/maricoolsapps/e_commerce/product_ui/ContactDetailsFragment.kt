@@ -12,13 +12,16 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.databinding.FragmentContactDetailsBinding
 import com.maricoolsapps.e_commerce.model.CarBuyerOrSeller
+import com.maricoolsapps.e_commerce.utils.Constants
 import com.maricoolsapps.e_commerce.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -78,6 +81,10 @@ class ContactDetailsFragment : Fragment(R.layout.fragment_contact_details){
             intent.type = "image/*"
             resultLauncher.launch(intent)
         }
+        binding.changeEmail.setOnClickListener {
+            val action = ContactDetailsFragmentDirections.actionContactDetailsFragmentToChangeEmailAndPassword()
+            findNavController().navigate(action)
+        }
     }
 
     private fun fillViews() {
@@ -87,7 +94,7 @@ class ContactDetailsFragment : Fragment(R.layout.fragment_contact_details){
                 Status.SUCCESS -> {
                     val user = it.data
                     binding.name.setText(user?.name)
-                    binding.email.setText(model.profileChanges.user?.email)
+                    binding.email.setText(model.profileChanges.auth.currentUser?.email)
                     binding.number.setText(user?.phoneNumber)
                     binding.location.setText(user?.businessLocation)
                     binding.regions.setSelection(setRegion(user?.state))
@@ -136,10 +143,14 @@ class ContactDetailsFragment : Fragment(R.layout.fragment_contact_details){
             binding.progressBar.visibility = View.VISIBLE
             val user = CarBuyerOrSeller(imageUri, name, email, number, region, location)
             lifecycleScope.launch(Main) {
-                val job = model.changeProfile(user)
+                val job = lifecycleScope.launch(IO) {
+                    model.changeProfile(user)
+                }
+                job.join()
                 if (job.isCompleted){
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(activity, "Success", Toast.LENGTH_SHORT).show()
+                    activity?.onBackPressed()
                 }
             }
         }
