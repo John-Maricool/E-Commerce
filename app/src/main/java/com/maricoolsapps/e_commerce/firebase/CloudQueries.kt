@@ -62,14 +62,15 @@ class CloudQueries
                                 sellerCars.add(product!!)
                                 done.value = Resource.success(sellerCars)
                             }.addOnFailureListener {
-                                done.value = Resource.error(it.message.toString(), null)
+                                done.value = Resource.error("Check your internet connection", null)
                             }
                     }
-
                     done.value = Resource.success(sellerCars)
+                }else{
+                    done.value = Resource.error("You have not uploaded any data", null)
                 }
             }.addOnFailureListener {
-                done.value = Resource.error(it.message.toString(), null)
+                done.value = Resource.error("Check your internet connection", null)
             }
         return done
     }
