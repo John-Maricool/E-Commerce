@@ -6,14 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.maricoolsapps.e_commerce.firebase.CloudQueries
 import com.maricoolsapps.e_commerce.model.Product
-import com.maricoolsapps.e_commerce.model.ProductModel
 import com.maricoolsapps.e_commerce.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import java.lang.ref.SoftReference
 import javax.inject.Inject
 
 @HiltViewModel

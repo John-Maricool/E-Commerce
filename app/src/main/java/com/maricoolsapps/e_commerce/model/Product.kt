@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.google.firebase.Timestamp
 import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Product(
     val type: String,
     val description: String,
@@ -19,7 +20,7 @@ data class Product(
     val price: Long,
     val rating: String,
     val photos: List<String>
-) {
+) : Parcelable {
     constructor(): this(
         "",
         "",

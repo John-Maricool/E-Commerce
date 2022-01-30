@@ -45,7 +45,7 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
         _binding = FragmentProductDetailBinding.bind(view)
         val nav = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
         nav?.visibility = View.GONE
-        model.getCar(args.id, args.brand)
+        model.getCar(args.brand, args.id)
         toolbarInit()
         placeAllViews()
         viewlisteners()
@@ -92,6 +92,7 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
                         binding.retry.visibility = View.VISIBLE
                     }
                 }
+
                 Status.ERROR -> {
                     binding.progressBar.visibility = View.GONE
                     binding.error.visibility = View.VISIBLE
@@ -100,7 +101,6 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
                 }
                 Status.LOADING -> TODO()
             }
-
         })
         binding.sliderView.setSliderAdapter(adapter)
     }

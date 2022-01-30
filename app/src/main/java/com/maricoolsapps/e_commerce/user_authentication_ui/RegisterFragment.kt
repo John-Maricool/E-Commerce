@@ -8,7 +8,6 @@ import android.provider.MediaStore
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
@@ -16,14 +15,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
-import com.maricoolsapps.e_commerce.product_ui.EcommerceActivity
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.utils.Status
 import com.maricoolsapps.e_commerce.databinding.FragmentRegisterBinding
 import com.maricoolsapps.e_commerce.model.CarBuyerOrSeller
 import com.maricoolsapps.e_commerce.model.User
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch

@@ -14,10 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ECommerce">
         <activity
-            android:name=".product_ui.EcommerceActivity"
-            android:exported="true" >
-        </activity>
-        <activity
             android:name=".user_authentication_ui.MainActivity"
             android:exported="true">
             <intent-filter>

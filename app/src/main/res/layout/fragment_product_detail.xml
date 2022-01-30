@@ -458,7 +458,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:SpinKit_Color="@color/pink"
         android:visibility="gone"
-        style="@style/SpinKitView.Large.RotatingCircle"
+        style="@style/SpinKitView.Large.ChasingDots"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>

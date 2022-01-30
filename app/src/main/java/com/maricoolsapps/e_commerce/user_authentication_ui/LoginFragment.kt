@@ -1,6 +1,5 @@
 package com.maricoolsapps.e_commerce.user_authentication_ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import androidx.fragment.app.Fragment
@@ -9,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.maricoolsapps.e_commerce.product_ui.EcommerceActivity
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.utils.Status
 import com.maricoolsapps.e_commerce.databinding.FragmentLoginBinding
