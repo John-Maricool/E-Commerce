@@ -3,6 +3,7 @@ package com.maricoolsapps.e_commerce.product_ui
 import android.app.Activity
 import android.view.View
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.snackbar.Snackbar
@@ -14,6 +15,7 @@ import com.maricoolsapps.e_commerce.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,11 +23,20 @@ import javax.inject.Inject
 class ContactDetailsViewModel
 @Inject constructor(var cloud: CloudQueries, var profileChanges: ProfileChanges): ViewModel(){
 
-    fun getSeller(): LiveData<Resource<CarBuyerOrSeller>> {
-        return cloud.getSeller(profileChanges.auth.uid.toString())
+    private val _result = MutableLiveData<Resource<CarBuyerOrSeller>>()
+    val result: LiveData<Resource<CarBuyerOrSeller>> get() = _result
+
+    init {
+        viewModelScope.launch {
+            val job = viewModelScope.async {
+                cloud.getSeller(profileChanges.auth.uid.toString())
+            }
+            _result.postValue(job.await())
+        }
     }
 
     suspend fun changeProfile(carBuyerOrSeller: CarBuyerOrSeller){
+        carBuyerOrSeller.id = profileChanges.auth.uid.toString()
             cloud.changeProfile(profileChanges.auth.uid.toString(), carBuyerOrSeller)
     }
 
@@ -33,5 +44,4 @@ class ContactDetailsViewModel
         Snackbar.make(view, it, Snackbar.LENGTH_LONG)
             .setBackgroundTint(activity.resources.getColor(R.color.pink2, null)).show()
     }
-
 }

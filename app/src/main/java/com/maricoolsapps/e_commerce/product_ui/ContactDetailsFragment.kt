@@ -89,7 +89,7 @@ class ContactDetailsFragment : Fragment(R.layout.fragment_contact_details){
 
     private fun fillViews() {
         binding.progressBar.visibility = View.VISIBLE
-        model.getSeller().observe(viewLifecycleOwner, {
+        model.result.observe(viewLifecycleOwner, {
             when(it.status){
                 Status.SUCCESS -> {
                     val user = it.data
@@ -104,11 +104,11 @@ class ContactDetailsFragment : Fragment(R.layout.fragment_contact_details){
                         .circleCrop()
                         .into(binding.image)
                     imageUri = user?.image
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.visibility = View.INVISIBLE
                 }
                 Status.ERROR -> {
                     Snackbar.make(binding.image, it.message.toString(), Snackbar.LENGTH_SHORT).show()
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.visibility = View.INVISIBLE
                 }
                 Status.LOADING -> TODO()
             }
@@ -141,14 +141,14 @@ class ContactDetailsFragment : Fragment(R.layout.fragment_contact_details){
             model.showSnackBar(binding.progressBar, "Complete your Entries", requireActivity())
         }else{
             binding.progressBar.visibility = View.VISIBLE
-            val user = CarBuyerOrSeller(imageUri, name, email, number, region, location)
+            val user = CarBuyerOrSeller("", imageUri, name, email, number, region, location)
             lifecycleScope.launch(Main) {
                 val job = lifecycleScope.launch(IO) {
                     model.changeProfile(user)
                 }
                 job.join()
                 if (job.isCompleted){
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.visibility = View.INVISIBLE
                     Toast.makeText(activity, "Success", Toast.LENGTH_SHORT).show()
                     activity?.onBackPressed()
                 }
@@ -159,7 +159,7 @@ class ContactDetailsFragment : Fragment(R.layout.fragment_contact_details){
     private fun toolbarInit() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         val actionBar = (activity as AppCompatActivity).supportActionBar
-        binding.toolbar.title = "Adverts"
+        binding.toolbar.title = "Edit Contact Details"
         actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

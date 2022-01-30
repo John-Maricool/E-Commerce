@@ -18,6 +18,7 @@ import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.adapters.SliderImageAdapter
 import com.maricoolsapps.e_commerce.databinding.FragmentProductDetailBinding
 import com.maricoolsapps.e_commerce.interfaces.OnItemClickListener
+import com.maricoolsapps.e_commerce.model.Product
 import com.maricoolsapps.e_commerce.room_db.FavoriteProductEntity
 import com.maricoolsapps.e_commerce.utils.Status
 import com.smarteist.autoimageslider.SliderView
@@ -33,6 +34,8 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
     private var _binding: FragmentProductDetailBinding? = null
     private val binding get() = _binding!!
     private val args: ProductDetailFragmentArgs by navArgs()
+    private val model: ProductDetailViewModel by viewModels()
+    lateinit var theProduct: Product
 
     @Inject
     lateinit var adapter: SliderImageAdapter
@@ -42,21 +45,29 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
         _binding = FragmentProductDetailBinding.bind(view)
         val nav = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
         nav?.visibility = View.GONE
+        model.getCar(args.id, args.brand)
         toolbarInit()
         placeAllViews()
         viewlisteners()
     }
 
+    override fun onStart() {
+        super.onStart()
+        binding.retry.setOnClickListener {
+            placeAllViews()
+        }
+    }
+
     private fun viewlisteners() {
         binding.ownerId.setOnClickListener {
             val action =
-                ProductDetailFragmentDirections.actionProductDetailFragmentToSellerFragment(args.product.ownerId)
+                ProductDetailFragmentDirections.actionProductDetailFragmentToSellerFragment(theProduct.ownerId)
             findNavController().navigate(action)
         }
 
         binding.report.setOnClickListener {
             val action =
-                ProductDetailFragmentDirections.actionProductDetailFragmentToReportFragment(args.product)
+                ProductDetailFragmentDirections.actionProductDetailFragmentToReportFragment(theProduct)
             findNavController().navigate(action)
         }
 
@@ -66,26 +77,37 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
     private fun placeAllViews() {
         binding.sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
 
-        args.product.apply {
-            adapter.getProductsImage(args.product.photos)
-            binding.productName.text = "$brand $type"
-            binding.brand.text = brand
-            binding.type.text = type
-            binding.color.text = color
-            binding.condition.text = condition
-            binding.yr.text = yearOfManufacturing
-            binding.prodDesc.text = description
-            binding.state.text = state
-            binding.ratingText.text = rating
-            binding.productPrice.text = "$${price}"
-            binding.location.text = location
-        }
+        binding.progressBar.visibility = View.VISIBLE
+        model.result.observe(viewLifecycleOwner, {
+            when(it.status){
+                Status.SUCCESS -> {
+                    val product = it.data
+                    if (product != null) {
+                        showViews(product)
+                        theProduct = product
+                        binding.progressBar.visibility = View.GONE
+                    }else{
+                        binding.progressBar.visibility = View.GONE
+                        binding.error.visibility = View.VISIBLE
+                        binding.retry.visibility = View.VISIBLE
+                    }
+                }
+                Status.ERROR -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.error.visibility = View.VISIBLE
+                    binding.retry.visibility = View.VISIBLE
+                    binding.error.text = it.message
+                }
+                Status.LOADING -> TODO()
+            }
+
+        })
         binding.sliderView.setSliderAdapter(adapter)
     }
 
     private fun toolbarInit() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        binding.toolbar.title = args.product.brand
+        binding.toolbar.title = args.brand
         val actionBar = (activity as AppCompatActivity).supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
     }
@@ -95,10 +117,28 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
         _binding = null
     }
 
-    override fun onItemClick(t: List<String>) {
+    override fun onItemClick(t: Any, p: Any?) {
         val action = ProductDetailFragmentDirections.actionProductDetailFragmentToPictureFragment(
-            args.product.photos.toTypedArray()
+            theProduct.photos.toTypedArray()
         )
         findNavController().navigate(action)
+    }
+
+    private fun showViews(product: Product){
+        binding.apply {
+            productName.text = "${product.brand} ${product.type}"
+            brand.text = product.brand
+            type.text = product.type
+            color.text = product.color
+            condition.text = product.condition
+            yr.text = product.yearOfManufacturing
+            prodDesc.text = product.description
+            state.text = product.state
+            ratingText.text = product.rating
+            productPrice.text = "$${product.price}"
+            location.text = product.location
+        }
+        adapter.getProductsImage(product.photos)
+
     }
 }

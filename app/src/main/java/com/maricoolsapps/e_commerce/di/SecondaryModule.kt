@@ -25,8 +25,8 @@ import javax.inject.Singleton
 @InstallIn(ActivityComponent::class)
 class SecondaryModule {
 
-    @Provides
+  /*  @Provides
     fun provideNavController(activity: Activity): NavController {
         return activity.findNavController(R.id.nav_host_fragment)
-    }
+    }*/
 }

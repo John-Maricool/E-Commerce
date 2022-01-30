@@ -1,19 +1,20 @@
 package com.maricoolsapps.e_commerce.product_ui
 
 import android.app.Activity
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.*
 import com.google.android.material.snackbar.Snackbar
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.firebase.CloudQueries
-import com.maricoolsapps.e_commerce.model.CarBuyerOrSeller
 import com.maricoolsapps.e_commerce.model.CarSellerProfile
 import com.maricoolsapps.e_commerce.model.Product
+import com.maricoolsapps.e_commerce.model.ProductModel
 import com.maricoolsapps.e_commerce.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,19 +22,37 @@ import javax.inject.Inject
 class SellerViewModel
     @Inject constructor(val cloud: CloudQueries):ViewModel() {
 
-    fun sellerProfile(userId: String): LiveData<Resource<CarBuyerOrSeller>> {
-        return cloud.getSeller(userId)
+    private val _result = MutableLiveData<CarSellerProfile>()
+    val result get() = _result
+
+    fun sellerProfile(userId: String, userToFollow: String) {
+        viewModelScope.launch(Main) {
+            val seller = viewModelScope.async(IO) {
+                cloud.getSeller(userId)
+            }
+
+            val followers = viewModelScope.async(IO) {
+                cloud.getNumberOfFollowers(userId)
+            }
+
+            val following = viewModelScope.async(IO) {
+                cloud.getNumberOfFollowing(userId)
+            }
+
+            val isFollowed = viewModelScope.async(IO) {
+                cloud.isUserFollowed(userId, userToFollow)
+            }
+
+            val sellerProfile = CarSellerProfile(seller.await().data,
+                followers.await().data,
+                following.await().data,
+                isFollowed.await().data
+            )
+            _result.postValue(sellerProfile)
+        }
     }
 
-    fun getFollowers(userId: String): LiveData<Resource<Int>> {
-        return cloud.getNumberOfFollowers(userId)
-    }
-
-    fun getFollowing(userId: String): LiveData<Resource<Int>> {
-           return cloud.getNumberOfFollowing(userId)
-    }
-
-    fun getCarsFromSeller(userId: String, brand: String): LiveData<Resource<List<Product>>> {
+    fun getCarsFromSeller(userId: String, brand: String): LiveData<Resource<List<ProductModel>>> {
             return cloud.getCarsFromSeller(userId, brand)
     }
 
@@ -50,7 +69,4 @@ class SellerViewModel
         cloud.unfollowUser(userIdOrName, userToUnFollow)
     }
 
-    fun isUserFollowed(userId: String, userToFollow: String): LiveData<Resource<Boolean>>{
-        return cloud.isUserFollowed(userId, userToFollow)
-    }
 }

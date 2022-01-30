@@ -186,19 +186,18 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             model.showSnackBar(binding.progressBar, "Complete your Entries", requireActivity())
         } else {
             binding.progressBar.visibility = View.VISIBLE
-            val user = CarBuyerOrSeller(intent_data.toString(), name, email, number, region, location)
             model.getUser().observe(viewLifecycleOwner, {
                 when (it.status) {
                     Status.SUCCESS -> {
                         lifecycleScope.launch (Main){
                           val job =  lifecycleScope.launch (IO){
-                                model.completeRegistration(it.data!!.uid, user)
+                              val user = CarBuyerOrSeller(it.data!!.uid, intent_data.toString(), name, email, number, region, location)
+                              model.completeRegistration(it.data.uid, user)
                             }
                             job.join()
                             if (job.isCompleted){
                                 binding.progressBar.visibility = View.GONE
-                                startActivity(Intent(activity, EcommerceActivity::class.java))
-                                activity?.finish()
+                                findNavController().navigate(R.id.mainFragment)
                             }
                         }
                     }

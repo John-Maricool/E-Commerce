@@ -51,7 +51,7 @@ class SliderImageAdapter
     inner class SliderViewHolder(var binding: SliderProductImageBinding): SliderViewAdapter.ViewHolder(binding.root){
             init{
                 binding.productImage.setOnClickListener {
-                    listener.onItemClick(images)
+                    listener.onItemClick(images, null)
                 }
             }
         }

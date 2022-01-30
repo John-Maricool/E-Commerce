@@ -4,10 +4,12 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.maricoolsapps.e_commerce.firebase.CloudQueries
 import com.maricoolsapps.e_commerce.model.Product
+import com.maricoolsapps.e_commerce.model.ProductModel
 import com.maricoolsapps.e_commerce.repos.FavRepository
 import com.maricoolsapps.e_commerce.repos.ProductDetailRepo
 import com.maricoolsapps.e_commerce.room_db.FavoriteProductEntity
 import com.maricoolsapps.e_commerce.room_db.ProductDao
+import com.maricoolsapps.e_commerce.utils.MapperImpl
 import com.maricoolsapps.e_commerce.utils.Resource
 import com.maricoolsapps.e_commerce.utils.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,26 +22,30 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteViewModel
-   @Inject constructor(val repo: FavRepository): ViewModel() {
+@Inject constructor(val repo: FavRepository) : ViewModel() {
 
-   private val _result = MutableLiveData<Resource<List<Product>?>>()
-   val result: LiveData<Resource<List<Product>?>> get() = _result
+    private val _result = MutableLiveData<Resource<List<ProductModel>?>>()
+    val result: LiveData<Resource<List<ProductModel>?>> get() = _result
 
-   private val products = mutableListOf<Product>()
+    private val products = mutableListOf<ProductModel>()
 
-   init {
-      viewModelScope.launch(Main) {
-       val job =   viewModelScope.async {
-            repo.getAllFavCarsFromDb()
-         }.await()
+    init {
+        viewModelScope.launch(Main) {
+            val job = viewModelScope.async {
+                repo.getAllFavCarsFromDb()
+            }.await()
 
-         job.forEach { product ->
-           val prod =  repo.getCar(product)
-             if (prod != null) {
-                 products.add(prod)
-             }
+            job.forEach { product ->
+                val prod = repo.getCar(product)
+                when(prod.status){
+                    Status.SUCCESS -> {
+                        products.add(MapperImpl.mapToCache(prod.data!!))
+                    }
+                    Status.ERROR -> TODO()
+                    Status.LOADING -> TODO()
+                }
             }
-         _result.value = Resource.success(products)
-      }
-   }
+            _result.value = Resource.success(products)
+        }
+    }
 }

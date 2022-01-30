@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.maricoolsapps.e_commerce.firebase.CloudQueries
 import com.maricoolsapps.e_commerce.firebase.ProfileChanges
 import com.maricoolsapps.e_commerce.model.Product
+import com.maricoolsapps.e_commerce.model.ProductModel
 import com.maricoolsapps.e_commerce.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -16,7 +17,7 @@ class AdvertsViewModel
 
                         val user = profileChanges.auth.currentUser!!.uid
 
-    fun getCarsFromSeller(brand: String): LiveData<Resource<List<Product>>> {
+    fun getCarsFromSeller(brand: String): LiveData<Resource<List<ProductModel>>> {
         return cloudQueries.getCarsFromSeller(user, brand)
     }
 

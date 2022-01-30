@@ -37,8 +37,7 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
     override fun onStart() {
         super.onStart()
         if(auth.currentUser != null){
-            startActivity(Intent(activity, EcommerceActivity::class.java))
-            activity?.finish()
+            findNavController().navigate(R.id.mainFragment)
         }
     }
     override fun onDestroyView() {

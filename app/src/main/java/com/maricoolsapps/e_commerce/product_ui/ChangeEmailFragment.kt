@@ -25,6 +25,7 @@ class ChangeEmailFragment : Fragment(R.layout.fragment_change_email_and_password
     private val binding get() = _binding!!
     private val model: ChangeEmailViewModel by viewModels()
 
+    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentChangeEmailAndPasswordBinding.bind(view)
@@ -61,9 +62,9 @@ class ChangeEmailFragment : Fragment(R.layout.fragment_change_email_and_password
 
                                 if (job.getCompleted() == Resource.success("Success")) {
                                     activity?.onBackPressed()
-                                    binding.progressBar.visibility = View.GONE
+                                    binding.progressBar.visibility = View.INVISIBLE
                                 } else {
-                                    binding.progressBar.visibility = View.GONE
+                                    binding.progressBar.visibility = View.INVISIBLE
                                     model.showSnackBar(
                                         binding.progressBar,
                                         "Error", requireActivity()

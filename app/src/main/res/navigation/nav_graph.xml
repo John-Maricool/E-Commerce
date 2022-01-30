@@ -6,6 +6,165 @@
     app:startDestination="@id/firstFragment">
 
     <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_advertsFragment"
+            app:destination="@id/advertsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_followersFragment"
+            app:destination="@id/followersFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_feedbackFragment"
+            app:destination="@id/feedbackFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_contactDetailsFragment"
+            app:destination="@id/contactDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/advertsFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.AdvertsFragment"
+        android:label="fragment_adverts"
+        tools:layout="@layout/fragment_adverts" />
+    <action
+        android:id="@+id/action_productDetailFragment_to_pictureFragment"
+        app:destination="@id/pictureFragment" />
+    <action
+        android:id="@+id/action_productDetailFragment_to_reportFragment"
+        app:destination="@id/reportFragment" />
+    <fragment
+        android:id="@+id/feedbackFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.FeedbackFragment"
+        android:label="fragment_feedbact"
+        tools:layout="@layout/fragment_feedbact" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.SellFragment"
+        android:label="fragment_sell"
+        tools:layout="@layout/fragment_sell" />
+    <fragment
+        android:id="@+id/followersFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.FollowersFragment"
+        android:label="fragment_followers"
+        tools:layout="@layout/fragment_followers" />
+    <action
+        android:id="@+id/action_profileFragment_to_feedbackFragment"
+        app:destination="@id/feedbackFragment" />
+    <action
+        android:id="@+id/action_contactDetailsFragment_to_changeEmailAndPassword"
+        app:destination="@id/changeEmailAndPassword" />
+    <fragment
+        android:id="@+id/contactDetailsFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.ContactDetailsFragment"
+        android:label="fragment_contact_details"
+        tools:layout="@layout/fragment_contact_details">
+        <action
+            android:id="@+id/action_contactDetailsFragment_to_changeEmailAndPassword"
+            app:destination="@id/changeEmailAndPassword" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeEmailAndPassword"
+        android:name="com.maricoolsapps.e_commerce.product_ui.ChangeEmailFragment"
+        android:label="fragment_change_email_and_password"
+        tools:layout="@layout/fragment_change_email_and_password" />
+    <action
+        android:id="@+id/action_profileFragment_to_advertsFragment"
+        app:destination="@id/advertsFragment" />
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.ReportFragment"
+        android:label="fragment_report"
+        tools:layout="@layout/fragment_report">
+        <argument
+            android:name="product"
+            app:argType="com.maricoolsapps.e_commerce.model.Product" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellerFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.SellerFragment"
+        android:label="fragment_seller"
+        tools:layout="@layout/fragment_seller">
+        <argument
+            android:name="ownerId"
+            android:defaultValue="Admin"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_sellerFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+    <action
+        android:id="@+id/action_profileFragment_to_notificationFragment"
+        app:destination="@id/notificationFragment" />
+    <action
+        android:id="@+id/action_profileFragment_to_contactDetailsFragment"
+        app:destination="@id/contactDetailsFragment" />
+    <action
+        android:id="@+id/action_profileFragment_to_followersFragment"
+        app:destination="@id/followersFragment" />
+    <fragment
+        android:id="@+id/pictureFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.PictureFragment"
+        android:label="fragment_picture"
+        tools:layout="@layout/fragment_picture">
+        <argument
+            android:name="pictures"
+            app:argType="string[]" />
+    </fragment>
+    <action
+        android:id="@+id/action_mainFragment_to_productDetailFragment"
+        app:destination="@id/productDetailFragment" />
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.maricoolsapps.e_commerce.product_ui.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail">
+        <action
+            android:id="@+id/action_productDetailFragment_to_sellerFragment"
+            app:destination="@id/sellerFragment" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_reportFragment"
+            app:destination="@id/reportFragment" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_pictureFragment"
+            app:destination="@id/pictureFragment" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="brand"
+            app:argType="string" />
+    </fragment>
+    <action
+        android:id="@+id/action_sellerFragment_to_productDetailFragment"
+        app:destination="@id/productDetailFragment" />
+    <action
+        android:id="@+id/action_productDetailFragment_to_sellerFragment"
+        app:destination="@id/sellerFragment" />
+    <fragment
         android:id="@+id/registerFragment"
         android:name="com.maricoolsapps.e_commerce.user_authentication_ui.RegisterFragment"
         android:label="fragment_register"
@@ -19,9 +178,6 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left" />
-        <action
-            android:id="@+id/action_registerFragment_to_completeRegistrationFragment"
-            app:destination="@id/completeRegistrationFragment" />
     </fragment>
     <fragment
         android:id="@+id/firstFragment"
@@ -58,9 +214,4 @@
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left" />
     </fragment>
-    <fragment
-        android:id="@+id/completeRegistrationFragment"
-        android:name="com.maricoolsapps.e_commerce.user_authentication_ui.CompleteRegistrationFragment"
-        android:label="fragment_complete_registration"
-        tools:layout="@layout/fragment_complete_registration" />
 </navigation>

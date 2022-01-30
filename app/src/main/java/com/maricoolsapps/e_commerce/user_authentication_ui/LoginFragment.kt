@@ -74,8 +74,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     //navigate
                     Toast.makeText(activity, it.data, Toast.LENGTH_LONG)
                         .show()
-                    startActivity(Intent(activity, EcommerceActivity::class.java))
-                    activity?.finish()
+                    findNavController().navigate(R.id.mainFragment)
                 }
 
                 Status.ERROR -> {

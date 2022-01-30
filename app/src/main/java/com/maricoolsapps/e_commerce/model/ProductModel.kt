@@ -4,23 +4,19 @@ import android.os.Parcelable
 import com.google.firebase.Timestamp
 import kotlinx.parcelize.Parcelize
 
-data class Product(
+data class ProductModel(
     val type: String,
     val description: String,
     val state: String,
-    val ownerId: String,
-    val location: String,
-    val yearOfManufacturing: String?,
     val town: String,
     val id: String,
     val condition: String,
     val brand: String,
-    val color: String,
-    val price: Long,
-    val rating: String,
-    val photos: List<String>
+    val photo: String,
+    val price: Long
 ) {
     constructor(): this(
+        "",
         "",
         "",
         "",
@@ -28,11 +24,5 @@ data class Product(
         "",
         "",
         "",
-        "",
-        "",
-        "",
-        "",
-        0,
-        "",
-        listOf())
+        0)
 }

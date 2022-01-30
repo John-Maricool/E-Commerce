@@ -17,18 +17,20 @@ import com.maricoolsapps.e_commerce.adapters.ProductListAdapter
 import com.maricoolsapps.e_commerce.databinding.FragmentMainBinding
 import com.maricoolsapps.e_commerce.interfaces.OnItemClickListener
 import com.maricoolsapps.e_commerce.model.Product
+import com.maricoolsapps.e_commerce.model.ProductModel
 import com.maricoolsapps.e_commerce.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedListener,
-    OnItemClickListener<Product> {
+    OnItemClickListener<ProductModel> {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
     private val model: MainViewModel by viewModels()
+
     @Inject
      lateinit var adapter: ProductListAdapter
 
@@ -41,8 +43,6 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
         binding.tabLayout.addOnTabSelectedListener(this)
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.setHasFixedSize(true)
-        //binding.recyclerView.adapter = adapter
-
     }
 
     override fun onStart() {
@@ -70,20 +70,22 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
         model.getCarsFromBrand(brand).observe(viewLifecycleOwner, {
             when(it.status){
                 Status.SUCCESS -> {
-                    binding.progressBar.visibility = View.GONE
-                    if (it.data!!.isEmpty()) {
+                    if (it.data == null || it.data.isEmpty()){
                         binding.noResult.visibility = View.VISIBLE
-                    } else {
+                    }else{
                         adapter.getProducts(it.data)
                         binding.recyclerView.adapter = adapter
-                        binding.noResult.visibility = View.GONE
                     }
+                    binding.progressBar.visibility = View.GONE
+                    binding.noResult.visibility = View.GONE
                     binding.checkInternet.visibility = View.GONE
                 }
+
                 Status.ERROR -> {
                     binding.progressBar.visibility = View.GONE
                     binding.noResult.visibility = View.GONE
                     binding.checkInternet.visibility = View.VISIBLE
+                    binding.checkInternet.text = it.message
                 }
                 Status.LOADING -> TODO()
             }
@@ -101,8 +103,9 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
     override fun onTabReselected(tab: TabLayout.Tab?) {
     }
 
-    override fun onItemClick(t: Product) {
-        val action = MainFragmentDirections.actionMainFragmentToProductDetailFragment(t)
+    override fun onItemClick(t: Any, p: Any?) {
+        val action = MainFragmentDirections.actionMainFragmentToProductDetailFragment(t as String, p as String)
         findNavController().navigate(action)
     }
+
 }

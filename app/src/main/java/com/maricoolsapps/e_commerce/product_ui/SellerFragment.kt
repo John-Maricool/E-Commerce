@@ -19,16 +19,18 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.maricoolsapps.e_commerce.interfaces.OnItemClickListener
 import com.maricoolsapps.e_commerce.model.Product
+import com.maricoolsapps.e_commerce.model.ProductModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<Product>,
+class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<ProductModel>,
     AdapterView.OnItemSelectedListener {
 
     private var _binding: FragmentSellerBinding? = null
@@ -48,14 +50,13 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentSellerBinding.bind(view)
 
+        model.sellerProfile(auth.currentUser!!.uid, args.ownerId)
         toolbarInit()
-
         binding.follow.setOnClickListener {
             buttonClickFollow()
         }
 
         initSpinnerAndAdapter()
-        updateFollowButton()
         updateUI()
     }
 
@@ -68,7 +69,7 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
     override fun onStart() {
         super.onStart()
         adapter.setOnItemClickListener(this)
-       binding.spinnerCategory.onItemSelectedListener = this
+        binding.spinnerCategory.onItemSelectedListener = this
     }
 
     private fun buttonClickFollow() {
@@ -80,50 +81,36 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
                 model.followUser(auth.currentUser?.uid.toString(), args.ownerId)
                 sellerFollowed()
             }
-        }
-        else{
+        } else {
             binding.follow.isEnabled = false
             Toast.makeText(activity, "You can't follow yourself", Toast.LENGTH_LONG).show()
             return
         }
     }
 
-    private fun updateFollowButton() {
-        model.isUserFollowed(auth.currentUser?.uid.toString(), args.ownerId).observe(viewLifecycleOwner, {
-            when(it.status) {
-                Status.SUCCESS -> {
-                  sellerFollowed()
-                }
-
-                Status.ERROR -> {
-                    sellerUnfollowed()
-                }
-                Status.LOADING -> {
-
-                }
-            }
-        })
-    }
-
-    private fun sellerFollowed(){
+    private fun sellerFollowed() {
         isFollowed = true
-        binding.follow.background = ResourcesCompat.getDrawable(resources, R.drawable.blue_solid, null)
+        binding.follow.background =
+            ResourcesCompat.getDrawable(resources, R.drawable.blue_solid, null)
         binding.follow.setTextColor(resources.getColor(R.color.white, null))
         binding.follow.text = resources.getString(R.string.following)
     }
 
-    private fun sellerUnfollowed(){
+    private fun sellerUnfollowed() {
         isFollowed = false
-        binding.follow.background = ResourcesCompat.getDrawable(resources, R.drawable.blue_border, null)
+        binding.follow.background =
+            ResourcesCompat.getDrawable(resources, R.drawable.blue_border, null)
         binding.follow.setTextColor(resources.getColor(R.color.blue, null))
         binding.follow.text = resources.getString(R.string.follow)
     }
 
     private fun initSpinnerAndAdapter() {
-         carBrands = resources.getStringArray(R.array.brands).drop(1).toTypedArray()
-        val spinnerAdapter = ArrayAdapter(requireActivity(),
+        carBrands = resources.getStringArray(R.array.brands).drop(1).toTypedArray()
+        val spinnerAdapter = ArrayAdapter(
+            requireActivity(),
             R.layout.support_simple_spinner_dropdown_item,
-            carBrands)
+            carBrands
+        )
 
         binding.spinnerCategory.adapter = spinnerAdapter
         binding.recyclerView.setHasFixedSize(true)
@@ -132,80 +119,56 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
 
     }
 
-    private fun updateUI(){
-        model.sellerProfile(args.ownerId).observe(viewLifecycleOwner, {
-            when(it.status){
-                Status.SUCCESS -> {
-                        val seller = it.data
-                        binding.apply {
-                            name.text = seller?.name
-                            binding.toolbar.title = seller?.name
-                            location.text = seller?.businessLocation
-                            Glide.with(requireActivity())
-                                .load(seller?.image)
-                                .circleCrop()
-                                .into(image)
-                        }
-                    }
-                Status.ERROR -> {
-                    binding.error.visibility = View.VISIBLE
-                    model.showSnackBar(binding.recyclerView, it.message.toString(), requireActivity())
-                }
-                Status.LOADING -> TODO()
-            }
-        })
-        model.getFollowers(args.ownerId).observe(viewLifecycleOwner, {
-            when(it.status){
-                Status.SUCCESS -> {
-                    binding.followers.text = it.data.toString()
-                }
-                Status.ERROR -> {
-                    model.showSnackBar(binding.recyclerView, it.message!!, requireActivity())
-                }
-                Status.LOADING -> TODO()
-            }
-        })
-        model.getFollowing(args.ownerId).observe(viewLifecycleOwner, {
-            when(it.status){
-                Status.SUCCESS -> {
-                    binding.following.text = it.data.toString()
-                }
-                Status.ERROR -> {
-                    model.showSnackBar(binding.recyclerView, it.message!!, requireActivity())
-                }
-                Status.LOADING -> TODO()
-            }
-        })
-        getSellerCars(args.ownerId, carBrands[0])
+    private fun updateUI() {
+        model.result.observe(viewLifecycleOwner, Observer {
+            val seller = it.seller
+            binding.apply {
 
+                if (it.isFollowing == true) {
+                    sellerFollowed()
+                } else {
+                    sellerUnfollowed()
+                }
+                name.text = seller?.name
+                binding.toolbar.title = seller?.name
+                location.text = seller?.businessLocation
+                Glide.with(requireActivity())
+                    .load(seller?.image)
+                    .circleCrop()
+                    .into(image)
+                followers.text = it.followers.toString()
+                following.text = it.following.toString()
+            }
+        })
     }
 
-    private fun getSellerCars(name: String, brand: String){
+    private fun getSellerCars(name: String, brand: String) {
         adapter.getProducts(listOf())
-        model.getCarsFromSeller(name, brand).observe(viewLifecycleOwner,{
-            when(it.status){
+        model.getCarsFromSeller(name, brand).observe(viewLifecycleOwner, {
+            when (it.status) {
                 Status.SUCCESS -> {
-                    if (it.data == null || it.data.isEmpty()){
+                    if (it.data == null || it.data.isEmpty()) {
                         binding.recyclerView.visibility = View.GONE
                         binding.error.visibility = View.VISIBLE
-                    }else{
+                    } else {
                         binding.recyclerView.visibility = View.VISIBLE
                         binding.error.visibility = View.GONE
                         adapter.getProducts(it.data)
                     }
                 }
+
                 Status.ERROR -> {
-                    model.showSnackBar(binding.recyclerView, it.message.toString(), requireActivity())
+                    model.showSnackBar(
+                        binding.recyclerView,
+                        it.message.toString(),
+                        requireActivity()
+                    )
                 }
                 Status.LOADING -> TODO()
             }
         })
     }
 
-    override fun onItemClick(t: Product) {
-        val action = SellerFragmentDirections.actionSellerFragmentToProductDetailFragment(t)
-        findNavController().navigate(action)
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -213,12 +176,17 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            val value = parent?.getItemAtPosition(position).toString()
-            getSellerCars(args.ownerId, value)
+        val value = parent?.getItemAtPosition(position).toString()
+        getSellerCars(args.ownerId, value)
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         TODO("Not yet implemented")
+    }
+
+    override fun onItemClick(t: Any, p: Any?) {
+        val action = SellerFragmentDirections.actionSellerFragmentToProductDetailFragment(t as String, p as String)
+        findNavController().navigate(action)
     }
 
 }
