@@ -1,6 +1,7 @@
 package com.maricoolsapps.e_commerce.firebase
 
 import android.net.Uri
+import android.util.Log
 import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -162,13 +163,21 @@ class CloudQueries
         val followers = mutableListOf<CarBuyerOrSeller?>()
         val result = MutableLiveData<Resource<List<CarBuyerOrSeller>?>>()
         cloud.collection(Constants.sellerorbuyer).document(userIdOrName)
-            .collection(Constants.followers).get()
-            .addOnSuccessListener { query ->
-                query.documents.forEach { documentSnapshot ->
-                    documentSnapshot.reference.get().addOnSuccessListener {
-                        followers.add(it.toObject(CarBuyerOrSeller::class.java))
-                    }.addOnFailureListener {
-                        result.postValue(Resource.error(it.message.toString(), null))
+            .collection(Constants.followers)
+            .get()
+            .addOnSuccessListener {query ->
+                if (query.documents.isEmpty()){
+                    result.postValue(Resource.error(Constants.no_followers, null))
+                }else {
+                    query.documents.forEach { documentSnapshot ->
+                        cloud.collection(Constants.sellerorbuyer)
+                            .document(documentSnapshot.reference.id)
+                            .get().addOnSuccessListener {
+                                followers.add(it.toObject(CarBuyerOrSeller::class.java))
+                                Log.d("dff", followers.toString())
+                            }.addOnFailureListener {
+                                result.postValue(Resource.error(it.message.toString(), null))
+                            }
                     }
                 }
                 result.postValue(Resource.success(followers.toList()) as Resource<List<CarBuyerOrSeller>>?)
@@ -184,11 +193,18 @@ class CloudQueries
         cloud.collection(Constants.sellerorbuyer).document(userIdOrName)
             .collection(Constants.following).get()
             .addOnSuccessListener { query ->
-                query.documents.forEach { documentSnapshot ->
-                    documentSnapshot.reference.get().addOnSuccessListener {
-                        followers.add(it.toObject(CarBuyerOrSeller::class.java))
-                    }.addOnFailureListener {
-                        result.postValue(Resource.error(it.message.toString(), null))
+                if (query.documents.isEmpty()){
+                    result.postValue(Resource.error(Constants.no_following, null))
+                }else {
+                    query.documents.forEach { documentSnapshot ->
+                        cloud.collection(Constants.sellerorbuyer)
+                            .document(documentSnapshot.reference.id)
+                            .get().addOnSuccessListener {
+                                followers.add(it.toObject(CarBuyerOrSeller::class.java))
+                                Log.d("dff", followers.toString())
+                            }.addOnFailureListener {
+                                result.postValue(Resource.error(it.message.toString(), null))
+                            }
                     }
                 }
                 result.postValue(Resource.success(followers.toList()) as Resource<List<CarBuyerOrSeller>>?)

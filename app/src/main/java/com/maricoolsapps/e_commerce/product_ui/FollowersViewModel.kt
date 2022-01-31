@@ -26,12 +26,13 @@ import javax.inject.Inject
 class FollowersViewModel
 @Inject constructor(val cloudQueries: CloudQueries, val auth: FirebaseAuth) : ViewModel() {
 
-    fun getFollowers(): LiveData<Resource<List<CarBuyerOrSeller>?>> {
-        return cloudQueries.getFollowers(auth.currentUser!!.uid)
+    val user = auth.currentUser!!.uid
+
+    fun getFollowers(id: String): LiveData<Resource<List<CarBuyerOrSeller>?>> {
+        return cloudQueries.getFollowers(id)
     }
 
-    fun getFollowing(): LiveData<Resource<List<CarBuyerOrSeller>?>> {
-        return cloudQueries.getFollowing(auth.currentUser!!.uid)
+    fun getFollowing(id: String): LiveData<Resource<List<CarBuyerOrSeller>?>> {
+        return cloudQueries.getFollowing(id)
     }
-
 }

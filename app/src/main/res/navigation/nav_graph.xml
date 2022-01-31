@@ -74,6 +74,10 @@
         <action
             android:id="@+id/action_followersFragment_to_sellerFragment"
             app:destination="@id/sellerFragment" />
+        <argument
+            android:name="id"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <action
         android:id="@+id/action_profileFragment_to_feedbackFragment"
@@ -119,6 +123,9 @@
         <action
             android:id="@+id/action_sellerFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />
+        <action
+            android:id="@+id/action_sellerFragment_to_followersFragment"
+            app:destination="@id/followersFragment" />
     </fragment>
     <action
         android:id="@+id/action_profileFragment_to_notificationFragment"

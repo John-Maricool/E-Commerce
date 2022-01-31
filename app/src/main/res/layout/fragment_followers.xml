@@ -32,10 +32,33 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:background="@color/grey"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         tools:listitem="@layout/followers_single_item"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabs" />
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        style="@style/SpinKitView.Small.ThreeBounce"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/progress_bar"
+        android:visibility="gone"
+        app:SpinKit_Color="@color/pink"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_error"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/retry"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

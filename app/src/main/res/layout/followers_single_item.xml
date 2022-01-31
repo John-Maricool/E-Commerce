@@ -46,9 +46,9 @@
             android:gravity="start"
             android:maxLines="1"
             android:textSize="@dimen/text_size_15"
+            app:layout_constraintStart_toStartOf="@+id/name"
             app:layout_constraintTop_toBottomOf="@+id/name"
             tools:ignore="RtlHardcoded"
-            tools:layout_editor_absoluteX="100dp"
             tools:text="ebukaikenwa" />
 
         <androidx.appcompat.widget.AppCompatButton

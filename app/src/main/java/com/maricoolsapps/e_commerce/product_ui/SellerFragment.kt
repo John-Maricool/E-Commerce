@@ -70,6 +70,10 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
         super.onStart()
         adapter.setOnItemClickListener(this)
         binding.spinnerCategory.onItemSelectedListener = this
+        binding.followers.setOnClickListener {
+            val action = SellerFragmentDirections.actionSellerFragmentToFollowersFragment(args.ownerId)
+            findNavController().navigate(action)
+        }
     }
 
     private fun buttonClickFollow() {

@@ -28,15 +28,15 @@ class SellerViewModel
     fun sellerProfile(userId: String, userToFollow: String) {
         viewModelScope.launch(Main) {
             val seller = viewModelScope.async(IO) {
-                cloud.getSeller(userId)
+                cloud.getSeller(userToFollow)
             }
 
             val followers = viewModelScope.async(IO) {
-                cloud.getNumberOfFollowers(userId)
+                cloud.getNumberOfFollowers(userToFollow)
             }
 
             val following = viewModelScope.async(IO) {
-                cloud.getNumberOfFollowing(userId)
+                cloud.getNumberOfFollowing(userToFollow)
             }
 
             val isFollowed = viewModelScope.async(IO) {

@@ -47,7 +47,6 @@ class FollowersListAdapter
                 Status.LOADING -> TODO()
             }
         }
-
         holder.binding.apply {
             name.text = person.name
             email.text = person.email
