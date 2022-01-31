@@ -3,28 +3,21 @@ package com.maricoolsapps.e_commerce.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.databinding.FollowersSingleItemBinding
-import com.maricoolsapps.e_commerce.databinding.RecyclerSingleItemBinding
 import com.maricoolsapps.e_commerce.interfaces.OnItemClickListener
 import com.maricoolsapps.e_commerce.model.CarBuyerOrSeller
-import com.maricoolsapps.e_commerce.model.FollowersModel
-import com.maricoolsapps.e_commerce.model.Product
-import com.maricoolsapps.e_commerce.product_ui.MainFragmentDirections
-import com.maricoolsapps.e_commerce.repos.ProductDetailRepo
-import com.maricoolsapps.e_commerce.room_db.FavoriteProductEntity
+import com.maricoolsapps.e_commerce.repos.FollowersStatus
+import com.maricoolsapps.e_commerce.utils.Status
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class FollowersListAdapter
-@Inject constructor(@ApplicationContext val context: Context) :
+@Inject constructor(@ApplicationContext val context: Context, val status: FollowersStatus):
     RecyclerView.Adapter<FollowersListAdapter.RecyclerViewHolder>() {
 
     private var user: List<CarBuyerOrSeller> = listOf()
@@ -45,12 +38,19 @@ class FollowersListAdapter
     }
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
-        val person = user.get(position)
+        val person = user[position]
+
+        status.scope.launch(Main) {
+            when(status.isUserFollowed(person.id).status){
+                Status.SUCCESS -> {holder.changeBtnToFollowed()}
+                Status.ERROR -> {holder.changeBtnToDefault()}
+                Status.LOADING -> TODO()
+            }
+        }
 
         holder.binding.apply {
             name.text = person.name
             email.text = person.email
-
             Glide.with(context)
                 .load(person.image)
                 .circleCrop()
@@ -71,7 +71,43 @@ class FollowersListAdapter
     inner class RecyclerViewHolder(var binding: FollowersSingleItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
-
+            val person = user[absoluteAdapterPosition]
+            binding.followBtn.setOnClickListener {
+                if (binding.followBtn.text == "Followed"){
+                    status.scope.launch(Main) {
+                        when(status.unfollowUser(person.id).status){
+                            Status.SUCCESS -> {changeBtnToDefault()}
+                            Status.ERROR -> {}
+                            Status.LOADING -> TODO()
+                        }
+                    }
+                }else{
+                    status.scope.launch(Main) {
+                        when(status.followUser(person.id).status){
+                            Status.SUCCESS -> {changeBtnToFollowed()}
+                            Status.ERROR -> {}
+                            Status.LOADING -> TODO()
+                        }
+                    }
+                }
+            }
+            binding.card.setOnClickListener {
+                listener.onItemClick(person.id, null)
+            }
         }
+
+        fun changeBtnToFollowed(){
+            binding.followBtn.setTextColor(context.resources.getColor(R.color.white, null))
+            binding.followBtn.text = "Followed"
+            binding.followBtn.background = context.resources.getDrawable(R.drawable.blue_solid, null)
+        }
+
+        fun changeBtnToDefault(){
+            binding.followBtn.setTextColor(context.resources.getColor(R.color.blue, null))
+            binding.followBtn.text = "Follow"
+            binding.followBtn.background = context.resources.getDrawable(R.drawable.blue_border, null)
+        }
+
     }
+
 }

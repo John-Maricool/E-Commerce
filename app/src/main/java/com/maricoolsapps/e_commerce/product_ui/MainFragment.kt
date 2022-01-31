@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBar
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -19,6 +20,7 @@ import com.maricoolsapps.e_commerce.databinding.FragmentMainBinding
 import com.maricoolsapps.e_commerce.interfaces.OnItemClickListener
 import com.maricoolsapps.e_commerce.model.Product
 import com.maricoolsapps.e_commerce.model.ProductModel
+import com.maricoolsapps.e_commerce.utils.Constants
 import com.maricoolsapps.e_commerce.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -29,7 +31,6 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-
     private val model: MainViewModel by viewModels()
 
     @Inject
@@ -44,7 +45,10 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
         binding.tabLayout.addOnTabSelectedListener(this)
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.setHasFixedSize(true)
+        handleBackPress()
+    }
 
+    private fun handleBackPress() {
         requireActivity()
             .onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
@@ -58,6 +62,9 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
     override fun onStart() {
         super.onStart()
         adapter.setOnItemClickListener(this)
+        binding.retry.setOnClickListener {
+            getCarsFromBrand(binding.tabLayout[binding.tabLayout.selectedTabPosition].toString())
+        }
     }
 
     private fun getAllCarBrands() {
@@ -70,30 +77,26 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
         getCarsFromBrand(brands[0])
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     private fun getCarsFromBrand(brand: String) {
         binding.progressBar.visibility = View.VISIBLE
+        binding.retry.visibility = View.GONE
+        binding.checkInternet.visibility = View.GONE
+
         model.getCarsFromBrand(brand).observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
-                    if (it.data == null || it.data.isEmpty()) {
-                        binding.noResult.visibility = View.VISIBLE
-                    } else {
-                        adapter.getProducts(it.data)
-                        binding.recyclerView.adapter = adapter
-                    }
+                    adapter.getProducts(it.data!!)
+                    binding.recyclerView.adapter = adapter
+                    binding.retry.visibility = View.GONE
                     binding.progressBar.visibility = View.GONE
-                    binding.noResult.visibility = View.GONE
                     binding.checkInternet.visibility = View.GONE
                 }
 
                 Status.ERROR -> {
+                    if (it.message != Constants.no_data){
+                        binding.retry.visibility = View.VISIBLE
+                    }
                     binding.progressBar.visibility = View.GONE
-                    binding.noResult.visibility = View.GONE
                     binding.checkInternet.visibility = View.VISIBLE
                     binding.checkInternet.text = it.message
                 }
@@ -111,6 +114,7 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
     }
 
     override fun onTabReselected(tab: TabLayout.Tab?) {
+        TODO("Not yet implemented")
     }
 
     override fun onItemClick(t: Any, p: Any?) {
@@ -121,4 +125,8 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
         findNavController().navigate(action)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

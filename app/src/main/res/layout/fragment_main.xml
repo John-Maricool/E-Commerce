@@ -121,17 +121,6 @@
         app:layout_constraintStart_toStartOf="@+id/check_internet"
         app:layout_constraintTop_toBottomOf="@+id/check_internet" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:src="@drawable/no_result"
-        android:id="@+id/no_result"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
-
     <com.github.ybq.android.spinkit.SpinKitView
         android:layout_width="@dimen/margin_50"
         android:layout_height="@dimen/margin_50"

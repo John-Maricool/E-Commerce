@@ -14,7 +14,6 @@ class FavRepository
 @Inject constructor(val cloud: CloudQueries, val dao: ProductDao){
 
      suspend fun getAllFavCarsFromDb(): List<FavoriteProductEntity> {
-         Log.d("asn", dao.getFavs().toString())
          return dao.getFavs()
     }
 

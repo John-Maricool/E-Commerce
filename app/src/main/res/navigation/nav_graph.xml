@@ -70,7 +70,11 @@
         android:id="@+id/followersFragment"
         android:name="com.maricoolsapps.e_commerce.product_ui.FollowersFragment"
         android:label="fragment_followers"
-        tools:layout="@layout/fragment_followers" />
+        tools:layout="@layout/fragment_followers" >
+        <action
+            android:id="@+id/action_followersFragment_to_sellerFragment"
+            app:destination="@id/sellerFragment" />
+    </fragment>
     <action
         android:id="@+id/action_profileFragment_to_feedbackFragment"
         app:destination="@id/feedbackFragment" />

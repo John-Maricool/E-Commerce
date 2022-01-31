@@ -35,12 +35,12 @@ class CloudQueries
                 val cars: List<Product> = it.toObjects(Product::class.java)
                 val mapper = MapperImpl.mapAllToCache(cars)
                 if (cars.isEmpty()){
-                    carsFromDb.value = Resource.error("No data", null)
+                    carsFromDb.value = Resource.error(Constants.no_data, null)
                 }else{
                     carsFromDb.value = Resource.success(mapper)
                 }
             }.addOnFailureListener {
-                carsFromDb.value = Resource.error("Check your internet connection", null)
+                carsFromDb.value = Resource.error(Constants.check_internet, null)
             }
         return carsFromDb
     }
@@ -87,7 +87,7 @@ class CloudQueries
                 .document(name).get().await().toObject(CarBuyerOrSeller::class.java)
             Resource.success(result)
         } catch (e: Exception) {
-            Resource.error("Check your internet connection and try again", null)
+            Resource.error(Constants.check_internet, null)
         }
     }
 
@@ -98,7 +98,7 @@ class CloudQueries
                 .get().await().documents.size
             Resource.success(result)
         }catch (e: Exception) {
-            Resource.error("Check your internet connection and try again", 0)
+            Resource.error(Constants.check_internet, 0)
         }
     }
 
@@ -109,7 +109,7 @@ class CloudQueries
                 .get().await().documents.size
             Resource.success(result)
         }catch (e: Exception) {
-            Resource.error("Check your internet connection and try again", 0)
+            Resource.error(Constants.check_internet, 0)
         }
     }
 
@@ -132,13 +132,13 @@ class CloudQueries
                     .downloadUrl.await()
                 person.image = imgUrl.toString()
             } else {
-                Resource.error("Error", null)
+                Resource.error(Constants.error, null)
             }
         }
         return try {
             cloud.collection(Constants.sellerorbuyer)
                 .document(id).set(person).await()
-            Resource.success("Successful")
+            Resource.success(Constants.successful)
         } catch (e: Exception) {
             Resource.error(e.message.toString(), null)
         }
@@ -152,7 +152,7 @@ class CloudQueries
                 cloud.collection(Constants.car).document(brand)
                     .collection(Constants.models).document(it).delete().await()
             }
-            Resource.success("Successfully deleted")
+            Resource.success(Constants.successful)
         } catch (e: Exception) {
             Resource.error(e.message.toString(), null)
         }
@@ -211,9 +211,9 @@ class CloudQueries
                     .collection(Constants.followers)
                     .document(userIdOrName).set(foll)
             }
-            Resource.success("Followed user...")
+            Resource.success(Constants.successful)
         } catch (e: Exception) {
-            Resource.error("Error following user", null)
+            Resource.error(Constants.error, null)
         }
     }
 
@@ -229,9 +229,9 @@ class CloudQueries
                     .document(userIdOrName)
                     .delete()
             }
-            Resource.success("Followed user")
+            Resource.success(Constants.successful)
         } catch (e: Exception) {
-            Resource.error("Error following user", null)
+            Resource.error(Constants.error, null)
         }
     }
 
@@ -243,10 +243,10 @@ class CloudQueries
             if (following.exists()) {
                 Resource.success(true)
             } else {
-                Resource.error("You are not following this user", false)
+                Resource.error(Constants.error, false)
             }
         } catch (e: Exception) {
-            Resource.error("Check yoour internet connection", false)
+            Resource.error(Constants.check_internet, false)
         }
     }
 
@@ -259,7 +259,7 @@ class CloudQueries
                 .await().toObject(Product::class.java)
             Resource.success(result)
         } catch (e: Exception) {
-            Resource.error("Check your internet connection and try again", null)
+            Resource.error(Constants.check_internet, null)
         }
     }
 
@@ -289,12 +289,12 @@ class CloudQueries
                 .collection(product.brand).document(product.id).set(productID)
             sellerCar.await()
             if (sellerCar.isSuccessful) {
-                Resource.success("Successful")
+                Resource.success(Constants.successful)
             } else {
-                Resource.error("Error", null)
+                Resource.error(Constants.error, null)
             }
         } else {
-            Resource.error("Error", null)
+            Resource.error(Constants.error,null)
         }
     }
 }

@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".product_ui.FollowersFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <View
+        android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:background="@color/blue"
@@ -24,23 +24,10 @@
         app:tabTextColor="@color/white"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/view"
         app:tabGravity="fill"
-        app:tabMode="fixed">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/_following"
-            android:text="@string/following"/>
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/_followers"
-            android:text="@string/followers"/>
-    </com.google.android.material.tabs.TabLayout>
+        app:tabMode="fixed"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
