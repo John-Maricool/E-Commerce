@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey"
-    tools:context=".product_ui.ProductDetailFragment">
+    tools:context=".ui.product_ui.ProductDetailFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user_authentication_ui.FirstFragment">
+    tools:context=".ui.user_authentication_ui.FirstFragment">
 
     <include layout="@layout/oracle" />
 

@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ECommerce">
         <activity
-            android:name=".user_authentication_ui.MainActivity"
+            android:name="com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

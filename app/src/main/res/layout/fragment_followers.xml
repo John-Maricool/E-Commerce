@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".product_ui.FollowersFragment">
+    tools:context=".ui.product_ui.FollowersFragment">
 
     <View
         android:id="@+id/view"

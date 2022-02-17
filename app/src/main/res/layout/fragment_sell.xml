@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="@dimen/margin_50"
     android:background="@color/grey"
-    tools:context=".product_ui.SellFragment">
+    tools:context=".ui.product_ui.SellFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

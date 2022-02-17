@@ -1,8 +1,8 @@
 package com.maricoolsapps.e_commerce.utils
 
-import com.maricoolsapps.e_commerce.interfaces.MapperInterface
-import com.maricoolsapps.e_commerce.model.Product
-import com.maricoolsapps.e_commerce.model.ProductModel
+import com.maricoolsapps.e_commerce.data.interfaces.MapperInterface
+import com.maricoolsapps.e_commerce.data.model.Product
+import com.maricoolsapps.e_commerce.data.model.ProductModel
 
 object MapperImpl: MapperInterface<ProductModel, Product> {
 

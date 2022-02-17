@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user_authentication_ui.LoginFragment">
+    tools:context=".ui.user_authentication_ui.LoginFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView"

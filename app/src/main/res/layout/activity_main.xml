@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user_authentication_ui.MainActivity">
+    tools:context=".ui.user_authentication_ui.MainActivity">
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/second_nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"

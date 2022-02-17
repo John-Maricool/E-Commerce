@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.maricoolsapps.e_commerce.product_ui.ProfileFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.product_ui.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile">
         <action
@@ -28,12 +28,12 @@
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="com.maricoolsapps.e_commerce.product_ui.NotificationFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.product_ui.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/advertsFragment"
-        android:name="com.maricoolsapps.e_commerce.product_ui.AdvertsFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.product_ui.AdvertsFragment"
         android:label="fragment_adverts"
         tools:layout="@layout/fragment_adverts" />
     <action
@@ -44,17 +44,17 @@
         app:destination="@id/reportFragment" />
     <fragment
         android:id="@+id/feedbackFragment"
-        android:name="com.maricoolsapps.e_commerce.product_ui.FeedbackFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.product_ui.FeedbackFragment"
         android:label="fragment_feedbact"
         tools:layout="@layout/fragment_feedbact" />
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.maricoolsapps.e_commerce.product_ui.FavoriteFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.product_ui.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.maricoolsapps.e_commerce.product_ui.MainFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.product_ui.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
         <action
@@ -63,12 +63,12 @@
     </fragment>
     <fragment
         android:id="@+id/sellFragment"
-        android:name="com.maricoolsapps.e_commerce.product_ui.SellFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.product_ui.SellFragment"
         android:label="fragment_sell"
         tools:layout="@layout/fragment_sell" />
     <fragment
         android:id="@+id/followersFragment"
-        android:name="com.maricoolsapps.e_commerce.product_ui.FollowersFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.product_ui.FollowersFragment"
         android:label="fragment_followers"
         tools:layout="@layout/fragment_followers" >
         <action
@@ -87,7 +87,7 @@
         app:destination="@id/changeEmailAndPassword" />
     <fragment
         android:id="@+id/contactDetailsFragment"
-        android:name="com.maricoolsapps.e_commerce.product_ui.ContactDetailsFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.product_ui.ContactDetailsFragment"
         android:label="fragment_contact_details"
         tools:layout="@layout/fragment_contact_details">
         <action
@@ -96,7 +96,7 @@
     </fragment>
     <fragment
         android:id="@+id/changeEmailAndPassword"
-        android:name="com.maricoolsapps.e_commerce.product_ui.ChangeEmailFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.product_ui.ChangeEmailFragment"
         android:label="fragment_change_email_and_password"
         tools:layout="@layout/fragment_change_email_and_password" />
     <action
@@ -104,7 +104,7 @@
         app:destination="@id/advertsFragment" />
     <fragment
         android:id="@+id/reportFragment"
-        android:name="com.maricoolsapps.e_commerce.product_ui.ReportFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.product_ui.ReportFragment"
         android:label="fragment_report"
         tools:layout="@layout/fragment_report">
         <argument
@@ -113,7 +113,7 @@
     </fragment>
     <fragment
         android:id="@+id/sellerFragment"
-        android:name="com.maricoolsapps.e_commerce.product_ui.SellerFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.product_ui.SellerFragment"
         android:label="fragment_seller"
         tools:layout="@layout/fragment_seller">
         <argument
@@ -138,7 +138,7 @@
         app:destination="@id/followersFragment" />
     <fragment
         android:id="@+id/pictureFragment"
-        android:name="com.maricoolsapps.e_commerce.product_ui.PictureFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.product_ui.PictureFragment"
         android:label="fragment_picture"
         tools:layout="@layout/fragment_picture">
         <argument
@@ -150,7 +150,7 @@
         app:destination="@id/productDetailFragment" />
     <fragment
         android:id="@+id/productDetailFragment"
-        android:name="com.maricoolsapps.e_commerce.product_ui.ProductDetailFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.product_ui.ProductDetailFragment"
         android:label="fragment_product_detail"
         tools:layout="@layout/fragment_product_detail">
         <action
@@ -177,7 +177,7 @@
         app:destination="@id/sellerFragment" />
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.maricoolsapps.e_commerce.user_authentication_ui.RegisterFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.user_authentication_ui.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -192,7 +192,7 @@
     </fragment>
     <fragment
         android:id="@+id/firstFragment"
-        android:name="com.maricoolsapps.e_commerce.user_authentication_ui.FirstFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.user_authentication_ui.FirstFragment"
         android:label="fragment_first"
         tools:layout="@layout/fragment_first" >
         <action
@@ -212,7 +212,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.maricoolsapps.e_commerce.user_authentication_ui.LoginFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.user_authentication_ui.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
