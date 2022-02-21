@@ -3,11 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
-    tools:context=".ui.product_ui.ProductDetailFragment">
+    android:background="@color/white"
+    tools:context=".ui.product_ui.product_detail.ProductDetailFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -17,54 +16,57 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.smarteist.autoimageslider.SliderView
-        android:id="@+id/sliderView"
-        android:layout_width="400dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:sliderAnimationDuration="600"
-        app:sliderAutoCycleDirection="back_and_forth"
-        android:paddingBottom="16dp"
-        app:sliderIndicatorAnimationDuration="600"
-        app:sliderIndicatorEnabled="true"
-        app:sliderIndicatorGravity="center_horizontal|bottom"
-        app:sliderIndicatorMargin="15dp"
-        app:sliderIndicatorOrientation="horizontal"
-        app:sliderIndicatorPadding="3dp"
-        app:sliderIndicatorRadius="2dp"
-        app:sliderIndicatorSelectedColor="@color/grey"
-        app:sliderIndicatorUnselectedColor="@color/pink2" />
-
-    <View
-        android:id="@+id/card"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/border_white_top"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sliderView"
-        app:layout_constraintVertical_bias="0.0" />
-
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/parent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/card"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="1.0"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/sliderView"
+                android:layout_width="400dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="8dp"
+                android:paddingBottom="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:sliderAnimationDuration="600"
+                app:sliderAutoCycleDirection="back_and_forth"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorEnabled="true"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="15dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderIndicatorSelectedColor="@color/grey"
+                app:sliderIndicatorUnselectedColor="@color/pink2" />
+
+            <View
+                android:id="@+id/card"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/border_white_top"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sliderView"
+                app:layout_constraintVertical_bias="0.0" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/product_name"
@@ -73,13 +75,13 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:textColor="@color/black"
-                tools:visibility="visible"
-                android:visibility="visible"
                 android:textSize="@dimen/text_size_20"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Camry Le" />
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="@id/view"
+                app:layout_constraintTop_toBottomOf="@id/sliderView"
+                tools:text="Camry Le"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/owner_id"
@@ -99,13 +101,13 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/rate_image"
                 android:layout_width="@dimen/margin_20"
-                tools:visibility="visible"
                 android:layout_height="@dimen/margin_20"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/rating_text"
                 app:layout_constraintEnd_toStartOf="@+id/rating_text"
                 app:layout_constraintTop_toTopOf="@+id/rating_text"
-                app:srcCompat="@drawable/ic_star_rate" />
+                app:srcCompat="@drawable/ic_star_rate"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/rating_text"
@@ -113,31 +115,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
-                tools:visibility="visible"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_25"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="4.7" />
+                app:layout_constraintTop_toTopOf="@id/product_name"
+                tools:text="4.7"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:visibility="visible"
                 android:layout_marginTop="24dp"
                 android:text="@string/description"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_17"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/owner_id"
-                app:layout_constraintTop_toBottomOf="@+id/owner_id" />
+                app:layout_constraintTop_toBottomOf="@+id/owner_id"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/prod_desc"
                 android:layout_width="0dp"
-                tools:visibility="visible"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:textColor="@color/black"
@@ -146,20 +147,21 @@
                 app:layout_constraintEnd_toEndOf="@+id/rating_text"
                 app:layout_constraintStart_toStartOf="@+id/desc"
                 app:layout_constraintTop_toBottomOf="@+id/desc"
-                tools:text="This is a very nice car that you will love. IT is very cheap and affordable" />
+                tools:text="This is a very nice car that you will love. IT is very cheap and affordable"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/spec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:visibility="visible"
                 android:layout_marginTop="24dp"
                 android:text="@string/specifications"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_17"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/prod_desc"
-                app:layout_constraintTop_toBottomOf="@+id/prod_desc" />
+                app:layout_constraintTop_toBottomOf="@+id/prod_desc"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/_typE"
@@ -167,20 +169,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
-                tools:visibility="visible"
                 android:layout_marginEnd="8dp"
                 android:text="@string/type"
-                android:textColor="@color/grey"
+                android:textColor="@color/very_grey"
                 android:textSize="@dimen/text_size_17"
                 android:textStyle="normal"
                 app:layout_constraintEnd_toEndOf="@+id/spec"
                 app:layout_constraintStart_toStartOf="@+id/scroll"
-                app:layout_constraintTop_toBottomOf="@+id/spec" />
+                app:layout_constraintTop_toBottomOf="@+id/spec"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/type"
                 android:layout_width="0dp"
-                tools:visibility="visible"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/black"
@@ -188,7 +189,8 @@
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="@+id/_typE"
                 app:layout_constraintTop_toBottomOf="@+id/_typE"
-                tools:text="type" />
+                tools:text="type"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/_product_pricE"
@@ -196,12 +198,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/price"
-                tools:visibility="visible"
-                android:textColor="@color/grey"
+                android:textColor="@color/very_grey"
                 android:textSize="@dimen/text_size_17"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="@+id/type"
-                app:layout_constraintTop_toBottomOf="@+id/type" />
+                app:layout_constraintTop_toBottomOf="@+id/type"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/product_price"
@@ -210,81 +212,80 @@
                 android:layout_marginTop="8dp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_17"
-                tools:visibility="visible"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="@+id/_product_pricE"
                 app:layout_constraintTop_toBottomOf="@+id/_product_pricE"
-                tools:text="$10000" />
+                tools:text="$10000"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/_conditioN"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                tools:visibility="visible"
                 android:text="@string/condition"
-                android:textColor="@color/grey"
+                android:textColor="@color/very_grey"
                 android:textSize="@dimen/text_size_17"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="@+id/product_price"
-                app:layout_constraintTop_toBottomOf="@+id/product_price" />
+                app:layout_constraintTop_toBottomOf="@+id/product_price"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/condition"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                tools:visibility="visible"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_17"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="@+id/_conditioN"
                 app:layout_constraintTop_toBottomOf="@+id/_conditioN"
-                tools:text="condition" />
+                tools:text="condition"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/_coloR"
-                tools:visibility="visible"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/color"
-                android:textColor="@color/grey"
+                android:textColor="@color/very_grey"
                 android:textSize="@dimen/text_size_17"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="@+id/condition"
-                app:layout_constraintTop_toBottomOf="@+id/condition" />
+                app:layout_constraintTop_toBottomOf="@+id/condition"
+                tools:visibility="visible" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/color"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                tools:visibility="visible"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_17"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="@+id/_coloR"
                 app:layout_constraintTop_toBottomOf="@+id/_coloR"
-                tools:text="red" />
+                tools:text="red"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/_branD"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="72dp"
-                tools:visibility="visible"
                 android:text="@string/brand"
-                android:textColor="@color/grey"
+                android:textColor="@color/very_grey"
                 android:textSize="@dimen/text_size_17"
                 android:textStyle="normal"
                 app:layout_constraintStart_toEndOf="@+id/_typE"
-                app:layout_constraintTop_toTopOf="@+id/_typE" />
+                app:layout_constraintTop_toTopOf="@+id/_typE"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/brand"
-                tools:visibility="visible"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -293,24 +294,24 @@
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="@+id/_branD"
                 app:layout_constraintTop_toBottomOf="@+id/_branD"
-                tools:text="Lexus" />
+                tools:text="Lexus"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/_statE"
                 android:layout_width="0dp"
-                tools:visibility="visible"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/state"
-                android:textColor="@color/grey"
+                android:textColor="@color/very_grey"
                 android:textSize="@dimen/text_size_17"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="@+id/brand"
-                app:layout_constraintTop_toBottomOf="@+id/brand" />
+                app:layout_constraintTop_toBottomOf="@+id/brand"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/state"
-                tools:visibility="visible"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -319,25 +320,25 @@
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="@+id/_statE"
                 app:layout_constraintTop_toBottomOf="@+id/_statE"
-                tools:text="Available" />
+                tools:text="Available"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/_yR"
                 android:layout_width="0dp"
-                tools:visibility="visible"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/yrOfManufacturing"
-                android:textColor="@color/grey"
+                android:textColor="@color/very_grey"
                 android:textSize="@dimen/text_size_17"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="@+id/state"
-                app:layout_constraintTop_toBottomOf="@+id/state" />
+                app:layout_constraintTop_toBottomOf="@+id/state"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/yr"
                 android:layout_width="0dp"
-                tools:visibility="visible"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/black"
@@ -345,41 +346,54 @@
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="@+id/_yR"
                 app:layout_constraintTop_toBottomOf="@+id/_yR"
-                tools:text="2010" />
-
+                tools:text="2010"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/_locatioN"
                 android:layout_width="0dp"
-                tools:visibility="visible"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/location"
-                android:textColor="@color/grey"
+                android:textColor="@color/very_grey"
                 android:textSize="@dimen/text_size_17"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="@+id/yr"
-                app:layout_constraintTop_toBottomOf="@+id/yr" />
+                app:layout_constraintTop_toBottomOf="@+id/yr"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/location"
                 android:layout_width="0dp"
-                tools:visibility="visible"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_17"
+                android:gravity="start"
+                android:layout_marginEnd="@dimen/margin_15"
                 android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/_locatioN"
                 app:layout_constraintTop_toBottomOf="@+id/_locatioN"
-                tools:text="Lagos" />
+                tools:text="Lagos"
+                tools:visibility="visible" />
+
+            <View
+                android:id="@+id/view_third"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginTop="@dimen/margin_12"
+                android:layout_marginBottom="@dimen/margin_20"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/location" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/message_seller"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                tools:visibility="visible"
                 android:background="@drawable/blue_border"
                 android:drawableStart="@drawable/ic_message"
                 android:drawablePadding="5dp"
@@ -388,40 +402,150 @@
                 android:textColor="@color/blue"
                 android:textSize="@dimen/text_size_20"
                 app:layout_constraintStart_toStartOf="@+id/color"
-                app:layout_constraintTop_toBottomOf="@+id/color" />
+                app:layout_constraintTop_toBottomOf="@+id/view_third"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/call"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/blue_solid"
                 android:drawableStart="@drawable/ic_call"
                 android:drawablePadding="5dp"
-                android:id="@+id/call"
                 android:padding="@dimen/margin_12"
-                tools:visibility="visible"
                 android:text="@string/call_Seller"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_20"
                 app:layout_constraintBottom_toBottomOf="@+id/message_seller"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/message_seller"
                 app:layout_constraintTop_toTopOf="@+id/message_seller"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="1.0"
+                tools:visibility="visible" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginTop="@dimen/margin_12"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/call" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/feedback_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_20"
+                android:text="@string/feedback"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/view_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:text="@string/view_all"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/text_size_15"
+                app:drawableEndCompat="@drawable/ic_right"
+                app:layout_constraintBottom_toBottomOf="@+id/feedback_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/feedback_text" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyeler_feedback"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_margin="15dp"
+                android:background="@color/grey"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/feedback_text"
+                tools:listitem="@layout/feedback_list_item" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/leave_feedback"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_feedback_yellow"
+                android:gravity="start"
+                android:paddingStart="40dp"
+                android:text="@string/leave_feedback"
+                android:layout_marginTop="@dimen/margin_20"
+                android:textAllCaps="false"
+                android:textColor="#F4D502"
+                android:textSize="@dimen/text_size_20"
+                app:layout_constraintStart_toStartOf="@+id/recyeler_feedback"
+                app:layout_constraintTop_toBottomOf="@+id/recyeler_feedback"
+                tools:ignore="RtlSymmetry" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/report"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                tools:visibility="visible"
                 android:drawableStart="@drawable/ic_report"
                 android:drawablePadding="3dp"
                 android:text="@string/report_abuse"
                 android:textColor="@color/red"
                 android:textSize="@dimen/text_size_20"
+                app:layout_constraintEnd_toEndOf="@+id/recyeler_feedback"
+                app:layout_constraintTop_toTopOf="@+id/leave_feedback"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/post_ad_like_this"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/blue_border"
+                android:text="@string/post_ad_like_this"
+                android:textColor="@color/blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/leave_feedback"
+                app:layout_constraintTop_toBottomOf="@+id/report" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/similar_ads"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:text="@string/similar_ads"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/post_ad_like_this"
+                app:layout_constraintTop_toBottomOf="@id/post_ad_like_this" />
+
+            <View
+                android:id="@+id/view_second"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginTop="@dimen/margin_12"
+                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/message_seller" />
+                app:layout_constraintTop_toBottomOf="@+id/similar_ads" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_similar_Ads"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_second"
+                tools:listitem="@layout/recycler_single_item" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
@@ -456,9 +580,9 @@
         android:layout_height="@dimen/margin_50"
         android:id="@+id/progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:SpinKit_Color="@color/pink"
+        app:SpinKit_Color="@color/pink2"
         android:visibility="gone"
-        style="@style/SpinKitView.Large.ChasingDots"
+        app:SpinKit_Style="ThreeBounce"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>

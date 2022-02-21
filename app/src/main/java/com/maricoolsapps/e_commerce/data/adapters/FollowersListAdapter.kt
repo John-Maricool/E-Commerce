@@ -16,9 +16,11 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/*
 class FollowersListAdapter
 @Inject constructor(@ApplicationContext val context: Context, val status: FollowersStatus):
     RecyclerView.Adapter<FollowersListAdapter.RecyclerViewHolder>() {
+
 
     private var user: List<CarBuyerOrSeller> = listOf()
 
@@ -109,4 +111,5 @@ class FollowersListAdapter
 
     }
 
-}
+
+}*/

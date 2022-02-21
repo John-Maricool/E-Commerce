@@ -5,6 +5,7 @@ import androidx.room.CoroutinesRoom
 import androidx.room.Room
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import com.maricoolsapps.e_commerce.room_db.ProductDao
 import com.maricoolsapps.e_commerce.room_db.ProductDatabase
 import dagger.Module
@@ -54,5 +55,11 @@ class ApplicationModule {
     @Singleton
     fun provideDao(productDatabase: ProductDatabase): ProductDao{
         return productDatabase.productDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseStorage():FirebaseStorage{
+        return FirebaseStorage.getInstance()
     }
 }

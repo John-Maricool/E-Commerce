@@ -1,0 +1,39 @@
+package com.maricoolsapps.e_commerce.ui.product_ui.change_email
+
+import android.app.Activity
+import android.view.View
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseUser
+import com.maricoolsapps.e_commerce.R
+import com.maricoolsapps.e_commerce.data.db.ProfileChanges
+import com.maricoolsapps.e_commerce.data.model.User
+import com.maricoolsapps.e_commerce.data.repositories.DefaultRepository
+import com.maricoolsapps.e_commerce.utils.Resource
+import com.maricoolsapps.e_commerce.utils.Status
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class ChangeEmailViewModel
+@Inject constructor(val profileChanges: ProfileChanges, val defaultRepo: DefaultRepository): ViewModel(){
+
+    private val _result = MutableLiveData<String>()
+    val result: LiveData<String> get() = _result
+
+     fun changeEmail(email: String, user: User){
+         viewModelScope.launch (IO){
+             profileChanges.changeEmail(email, user){
+                defaultRepo.onResult(it)
+                 when(it.status){
+                     Status.SUCCESS -> {_result.postValue(it.data)}
+                 }
+             }
+         }
+    }
+}

@@ -82,6 +82,45 @@
     <string name="old_password">Old Password</string>
     <string name="re_enter_new_password">Re-enter new password</string>
     <string name="new_email">Enter New Email</string>
+    <string name="leave_feedback">Leave Feedback</string>
+    <string name="message">Message</string>
+    <string name="sad">Sad</string>
+    <string name="neutral">Neutral</string>
+    <string name="happy">Happy</string>
+    <string name="write_a_detailed_feedback">Write a detailed Feedback*</string>
+    <string name="send_feedback">Send Feedback</string>
+    <string name="write_feedback">Write Feedback</string>
+    <string name="why_do_you_want_to_report_an_abuse">Why do you want to report an abuse?</string>
+    <string name="report">REPORT</string>
+    <string name="describe_your_issue">Describe your issue...</string>
+    <string name="view_all">view all</string>
+    <string name="post_ad_like_this">Post ad like this</string>
+    <string name="similar_ads">Similar Ads</string>
+    <string name="positive">Positive</string>
+    <string name="negative">Negative</string>
+    <string-array name="sorts">
+        <item>Newest</item>
+        <item>Cheapest First</item>
+        <item>Expensive First</item>
+    </string-array>
+
+    <string-array name="choose_report">
+        <item>Choose report reasons…</item>
+        <item>This is illegal</item>
+        <item>The ad is spam</item>
+        <item>The price is wrong</item>
+        <item>Seller asked for prepayment</item>
+        <item>User is Unreachable</item>
+        <item>Wrong Category</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="how_it_was">
+        <item>How it was*</item>
+        <item>Successful Purchase</item>
+        <item>Failed Deal</item>
+        <item>Didn`t come to a deal</item>
+        <item>Can`t reach the seller</item>
+    </string-array>
 
     <string-array name="car_colors">
         <item>Colors *</item>

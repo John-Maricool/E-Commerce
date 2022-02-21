@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.product_ui.feedback.FeedbackListFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/happy"
+        android:layout_marginTop="@dimen/margin_12"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toStartOf="@+id/neutral"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:srcCompat="@drawable/happy" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/positive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/positive"
+        android:textColor="#2CF30A"
+        android:textSize="@dimen/text_size_20"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="@+id/happy"
+        app:layout_constraintStart_toStartOf="@+id/happy"
+        app:layout_constraintTop_toBottomOf="@+id/happy" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/positive_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_3"
+        tools:text="0"
+        android:textColor="#2CF30A"
+        android:textSize="@dimen/text_size_20"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/happy"
+        app:layout_constraintStart_toEndOf="@+id/happy"
+        app:layout_constraintTop_toTopOf="@+id/happy"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/neutral"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:srcCompat="@drawable/neutral" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/neutral"
+        android:textColor="#F3DB06"
+        android:textSize="@dimen/text_size_20"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="@+id/neutral"
+        app:layout_constraintStart_toStartOf="@+id/neutral"
+        app:layout_constraintTop_toBottomOf="@+id/neutral" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/neutral_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="0"
+        android:textColor="#FDF10B"
+        android:layout_marginStart="@dimen/margin_3"
+        android:textSize="@dimen/text_size_20"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/neutral"
+        app:layout_constraintStart_toEndOf="@+id/neutral"
+        app:layout_constraintTop_toTopOf="@+id/neutral"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/sad"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/neutral"
+        app:layout_constraintTop_toTopOf="@+id/neutral"
+        app:srcCompat="@drawable/sad" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/negative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/negative"
+        android:textColor="#F32206"
+        android:textSize="@dimen/text_size_20"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="@+id/sad"
+        app:layout_constraintStart_toStartOf="@+id/sad"
+        app:layout_constraintTop_toBottomOf="@+id/sad" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/negative_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="0"
+        android:textColor="#F32206"
+        android:layout_marginStart="@dimen/margin_3"
+        android:textSize="@dimen/text_size_20"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/sad"
+        app:layout_constraintStart_toEndOf="@+id/sad"
+        app:layout_constraintTop_toTopOf="@+id/sad"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/leave_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_12"
+        android:background="#2CF30A"
+        android:text="@string/leave_feedback"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_20"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/normal" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/recycler_view"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/feedback_list_item"
+        android:layout_margin="@dimen/margin_3"
+        android:background="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/leave_feedback" />
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/progress_bar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:SpinKit_Color="@color/pink2"
+        app:SpinKit_Style="ThreeBounce"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

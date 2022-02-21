@@ -1,7 +1,7 @@
 package com.maricoolsapps.e_commerce.data.repositories
 
 import com.google.firebase.auth.FirebaseAuth
-import com.maricoolsapps.e_commerce.data.repositories.CloudQueries
+import com.maricoolsapps.e_commerce.data.db.CloudQueries
 import com.maricoolsapps.e_commerce.utils.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -10,6 +10,7 @@ import javax.inject.Inject
 
 class FollowersStatus
 @Inject constructor(val cloud: CloudQueries, val auth: FirebaseAuth, val scope: CoroutineScope){
+/*
 
     suspend fun isUserFollowed(name: String): Resource<Boolean> {
         val job = scope.async (IO){
@@ -31,5 +32,6 @@ class FollowersStatus
         }
         return job.await()
     }
+*/
 
 }

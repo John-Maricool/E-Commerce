@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@color/grey"
     android:layout_height="match_parent"
-    tools:context=".ui.product_ui.ContactDetailsFragment">
+    tools:context=".ui.product_ui.contact_details.ContactDetailsFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

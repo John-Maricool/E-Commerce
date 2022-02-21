@@ -1,13 +1,10 @@
 package com.maricoolsapps.e_commerce.ui.user_authentication_ui
 
 import android.os.Bundle
-import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.databinding.FragmentLoginBinding
 import com.maricoolsapps.e_commerce.data.model.User
@@ -24,26 +21,39 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentLoginBinding.bind(view)
+        navigateClicks()
+        observeLiveData()
+    }
 
+    private fun navigateClicks() {
         binding.signIn.setOnClickListener {
             userLogin()
         }
+
         binding.registerHere.setOnClickListener {
             val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
             findNavController().navigate(action)
         }
+
         binding.forgotPassword.setOnClickListener {
             forgotPassword()
         }
-        observeLiveData()
     }
 
     private fun observeLiveData() {
         model.defaultRepo.dataLoading.observe(viewLifecycleOwner) {
             binding.progressBar.toggleVisibility(it)
         }
-        model.defaultRepo.resultData.observe(viewLifecycleOwner){
+        model.defaultRepo.resultError.observe(viewLifecycleOwner){
             binding.progressBar.displaySnack(it)
+        }
+        model.done.observe(viewLifecycleOwner){
+            when(it){
+                true -> {
+                    val action = LoginFragmentDirections.actionLoginFragmentToMainFragment()
+                    findNavController().navigate(action)
+                }
+            }
         }
     }
 
