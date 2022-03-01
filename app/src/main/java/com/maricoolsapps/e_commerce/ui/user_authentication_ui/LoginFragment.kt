@@ -31,8 +31,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         binding.registerHere.setOnClickListener {
-            val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
-            findNavController().navigate(action)
+            findNavController().navigate(R.id.registerFragment)
         }
 
         binding.forgotPassword.setOnClickListener {
@@ -50,8 +49,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         model.done.observe(viewLifecycleOwner){
             when(it){
                 true -> {
-                    val action = LoginFragmentDirections.actionLoginFragmentToMainFragment()
-                    findNavController().navigate(action)
+                    findNavController().navigate(R.id.mainFragment)
                 }
             }
         }

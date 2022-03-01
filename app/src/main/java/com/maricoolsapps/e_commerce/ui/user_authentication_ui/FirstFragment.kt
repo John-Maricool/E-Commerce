@@ -23,12 +23,10 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
         _binding = FragmentFirstBinding.bind(view)
 
         binding.signIn.setOnClickListener {
-            val action = FirstFragmentDirections.actionFirstFragmentToLoginFragment()
-            findNavController().navigate(action)
+            findNavController().navigate(R.id.loginFragment)
         }
         binding.register.setOnClickListener {
-            val action = FirstFragmentDirections.actionFirstFragmentToRegisterFragment()
-            findNavController().navigate(action)
+            findNavController().navigate(R.id.registerFragment)
         }
     }
 

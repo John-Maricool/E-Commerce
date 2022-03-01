@@ -15,6 +15,7 @@ import com.maricoolsapps.e_commerce.data.adapters.ProductListAdapter
 import com.maricoolsapps.e_commerce.data.adapters.SliderImageAdapter
 import com.maricoolsapps.e_commerce.databinding.FragmentProductDetailBinding
 import com.maricoolsapps.e_commerce.data.interfaces.OnItemClickListener
+import com.maricoolsapps.e_commerce.data.model.ChatChannel
 import com.maricoolsapps.e_commerce.data.model.Product
 import com.maricoolsapps.e_commerce.data.model.ProductModel
 import com.maricoolsapps.e_commerce.utils.toggleVisibility
@@ -83,6 +84,12 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
                 binding.parent.toggleVisibility(true)
                 binding.error.toggleVisibility(false)
                 binding.retry.toggleVisibility(false)
+            }
+        }
+        model.channelCreated.observe(viewLifecycleOwner){
+            if (it != null){
+              val action = ProductDetailFragmentDirections.actionProductDetailFragmentToChatFragment(it)
+                findNavController().navigate(action)
             }
         }
         model.defaultRepo.dataLoading.observe(viewLifecycleOwner) {
@@ -175,6 +182,9 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
                     theProduct.id
                 )
             findNavController().navigate(action)
+        }
+        binding.messageSeller.setOnClickListener {
+            model.createChatChannel(userToChat = theProduct.ownerId)
         }
         binding.report.setOnClickListener {
             val action =

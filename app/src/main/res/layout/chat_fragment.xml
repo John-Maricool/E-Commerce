@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.product_ui.chat.ChatFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/car" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_12"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/image"
+                app:layout_constraintTop_toTopOf="@+id/image"
+                tools:text="Ikenwa John Ebuka" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="@+id/name"
+                app:layout_constraintStart_toStartOf="@+id/name"
+                app:layout_constraintTop_toBottomOf="@+id/name"
+                tools:text="online" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/call"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="@dimen/margin_12"
+                app:layout_constraintBottom_toBottomOf="@+id/name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/name"
+                app:srcCompat="@drawable/ic_call" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/margin_12"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/edit_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:listitem="@layout/chat_main_single_item" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edit_text"
+        android:layout_width="0dp"
+        android:layout_height="58dp"
+        android:layout_margin="@dimen/margin_12"
+        android:background="@drawable/grey_border"
+        android:hint="@string/message"
+        android:inputType="textAutoComplete|textMultiLine"
+        android:paddingStart="@dimen/margin_12"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grey"
+        android:textSize="@dimen/text_size_15"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/send_message"
+        app:layout_constraintStart_toEndOf="@+id/open_gallery"
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view"
+        tools:ignore="RtlSymmetry" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/open_gallery"
+        android:layout_width="35dp"
+        android:layout_marginStart="@dimen/margin_5"
+        android:layout_height="35dp"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_text"
+        app:srcCompat="@drawable/ic_attach_file" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/send_message"
+        android:layout_width="@dimen/margin_40"
+        android:layout_height="@dimen/margin_40"
+        android:layout_marginEnd="@dimen/margin_12"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_text"
+        app:srcCompat="@drawable/ic_send" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

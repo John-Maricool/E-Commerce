@@ -98,6 +98,8 @@
     <string name="similar_ads">Similar Ads</string>
     <string name="positive">Positive</string>
     <string name="negative">Negative</string>
+    <string name="messages">Messages</string>
+    <string name="select_the_brand">Select the brand</string>
     <string-array name="sorts">
         <item>Newest</item>
         <item>Cheapest First</item>

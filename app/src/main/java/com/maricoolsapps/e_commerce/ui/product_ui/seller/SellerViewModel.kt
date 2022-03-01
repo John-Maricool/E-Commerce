@@ -1,9 +1,12 @@
 package com.maricoolsapps.e_commerce.ui.product_ui.seller
 
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseAuth
 import com.maricoolsapps.e_commerce.data.db.CloudQueries
 import com.maricoolsapps.e_commerce.data.model.CarSellerProfile
+import com.maricoolsapps.e_commerce.data.model.ChatChannel
 import com.maricoolsapps.e_commerce.data.model.Follow
 import com.maricoolsapps.e_commerce.data.model.ProductModel
 import com.maricoolsapps.e_commerce.data.repositories.DefaultRepository
@@ -23,13 +26,14 @@ class SellerViewModel
     var defaultRepo: DefaultRepository
 ) : ViewModel() {
 
-    private val _result = MutableLiveData<CarSellerProfile>()
-    val result get() = _result
+    private val _result = MutableLiveData<CarSellerProfile?>()
+    val result: LiveData<CarSellerProfile?> get() = _result
 
-    private val _cars = MutableLiveData<List<ProductModel>>()
-    val cars get() = _cars
+    private val _cars = MutableLiveData<List<ProductModel>?>()
+    val cars: LiveData<List<ProductModel>?> get() = _cars
 
-
+    private var _channelCreated = MutableLiveData<ChatChannel?>()
+    val channelCreated: LiveData<ChatChannel?> get() = _channelCreated
 
     var userId = auth.currentUser?.uid
 
@@ -61,4 +65,22 @@ class SellerViewModel
                 defaultRepo.onResult(it)
             }
         }
+
+    fun callUser(phoneNo: String): Intent {
+        val callIntent = Intent(Intent.ACTION_DIAL)
+        callIntent.data = Uri.parse("tel:$phoneNo")
+        return callIntent
+    }
+
+    fun createChatChannel(userId: String = this.userId.toString(), userToChat: String){
+        if (userId == userToChat){
+            return
+        }
+        viewModelScope.launch(IO){
+            cloud.createOrGetChatChannel(userId, userToChat){
+                defaultRepo.onResult(it)
+                _channelCreated.postValue(it.data)
+            }
+        }
+    }
 }

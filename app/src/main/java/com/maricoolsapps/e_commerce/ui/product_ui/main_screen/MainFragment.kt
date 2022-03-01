@@ -14,9 +14,11 @@ import com.maricoolsapps.e_commerce.data.adapters.ProductListAdapter
 import com.maricoolsapps.e_commerce.databinding.FragmentMainBinding
 import com.maricoolsapps.e_commerce.data.interfaces.OnItemClickListener
 import com.maricoolsapps.e_commerce.data.model.ProductModel
+import com.maricoolsapps.e_commerce.data.model.UserStatus
 import com.maricoolsapps.e_commerce.utils.Constants
 import com.maricoolsapps.e_commerce.utils.toggleVisibility
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -33,6 +35,8 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMainBinding.bind(view)
+        val status = UserStatus(true, Date().time)
+        model.toggleUserOnline(status)
         val nav = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
         nav?.visibility = View.VISIBLE
         getAllCarBrands()
@@ -46,6 +50,8 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
             .onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
+                    val status = UserStatus(true, Date().time)
+                    model.toggleUserOnline(status)
                     activity?.finish()
                 }
             }
@@ -58,14 +64,15 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
         binding.retry.setOnClickListener {
             getCarsFromBrand(binding.tabLayout[binding.tabLayout.selectedTabPosition].toString())
         }
-
         observeLiveData()
     }
 
     private fun observeLiveData() {
         model.result.observe(viewLifecycleOwner) {
-            adapter.getProducts(it)
-            binding.recyclerView.adapter = adapter
+            if (it != null) {
+                adapter.getProducts(it)
+                binding.recyclerView.adapter = adapter
+            }
         }
         model.defaultRepo.dataLoading.observe(viewLifecycleOwner) {
             binding.progressBar.toggleVisibility(it)

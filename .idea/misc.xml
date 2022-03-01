@@ -15,16 +15,25 @@
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/border_yellow.xml" value="0.1065" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/bottom_nav.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/bottom_nav_free.xml" value="0.15164473684210528" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/chat_left.xml" value="0.126" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/chat_right.xml" value="0.126" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/circle.xml" value="0.1155" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/circle_offline.xml" value="0.1155" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/grey_border.xml" value="0.126" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_account.xml" value="0.1" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_account_circle.xml" value="0.116" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_add_circle.xml" value="0.1495114006514658" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_attach_file.xml" value="0.121" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_call.xml" value="0.118" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_feedback.xml" value="0.109" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_feedback_yellow.xml" value="0.1065" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_left.xml" value="0.16006944444444443" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_message.xml" value="0.15164473684210528" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_message_grey.xml" value="0.116" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_next.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_photo_camera.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_right.xml" value="0.1501628664495114" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_send.xml" value="0.126" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_star_rate.xml" value="0.21050228310502284" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/light_blue_solid.xml" value="0.118" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/line.xml" value="0.15164473684210528" />
@@ -37,6 +46,11 @@
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/activity_ecommerce.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/blue_view.xml" value="0.22395833333333334" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/chat_fragment.xml" value="0.18" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/chat_list_fragment.xml" value="0.19" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/chat_list_single_item.xml" value="0.1838392475416845" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/chat_main_single_item.xml" value="0.16" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/chat_main_single_item_left.xml" value="0.18" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/feedback_list_item.xml" value="0.16" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/followers_single_item.xml" value="0.13848684210526316" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_adverts.xml" value="0.15" />
@@ -57,7 +71,7 @@
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_profile.xml" value="0.14" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_register.xml" value="0.15" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_report.xml" value="0.14144736842105263" />
-        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_sell.xml" value="0.1" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_sell.xml" value="0.15" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_seller.xml" value="0.15" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/oracle.xml" value="0.22395833333333334" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/recycler_single_item.xml" value="0.18" />

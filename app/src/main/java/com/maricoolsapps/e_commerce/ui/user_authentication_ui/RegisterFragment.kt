@@ -33,7 +33,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                 if (result.resultCode == Activity.RESULT_OK) {
                     intent_data = result.data?.data
                     if (intent_data != null) {
-                        binding.userImage.setResource(intent_data.toString())
+                        binding.userImage.setResourceCenterCrop(intent_data.toString())
                     }
                 }
             }
@@ -55,8 +55,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             saveToDb()
         }
         binding.logIn.setOnClickListener {
-            val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
-            findNavController().navigate(action)
+            findNavController().navigate(R.id.loginFragment)
         }
 
         binding.camera.setOnClickListener {
@@ -68,8 +67,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         model.done.observe(viewLifecycleOwner) {
             when (it) {
                 true -> {
-                    val action = RegisterFragmentDirections.actionRegisterFragmentToMainFragment()
-                    findNavController().navigate(action)
+                    findNavController().navigate(R.id.mainFragment)
                 }
             }
         }

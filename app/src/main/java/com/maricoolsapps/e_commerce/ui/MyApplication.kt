@@ -1,4 +1,4 @@
-package com.maricoolsapps.e_commerce
+package com.maricoolsapps.e_commerce.ui
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

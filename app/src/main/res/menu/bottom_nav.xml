@@ -16,8 +16,15 @@
         android:enabled="true"
         android:icon="@drawable/ic_sell" />
 
+    <item android:id="@+id/chatListFragment"
+        android:enabled="true"
+        android:title="@string/messages"
+        android:icon="@drawable/ic_message_grey"/>
+
     <item android:id="@+id/profileFragment"
         android:enabled="true"
         android:title="@string/profile"
         android:icon="@drawable/ic_account_circle" />
+
+
 </menu>

@@ -14,6 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import android.content.ClipData
 import android.widget.*
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.maricoolsapps.e_commerce.databinding.FragmentSellBinding
 import com.maricoolsapps.e_commerce.data.model.Product
 import com.maricoolsapps.e_commerce.utils.*
@@ -50,7 +51,7 @@ class SellFragment : Fragment(R.layout.fragment_sell), AdapterView.OnItemSelecte
                     } else {
                         val imageurl = result.data!!.data
                         imagesUri.add(imageurl!!)
-                        binding.image.setImageURI(imagesUri[0]);
+                        binding.image.setImageURI(imagesUri[0])
                     }
                 } else {
                     binding.image.visibility = View.GONE
@@ -94,7 +95,7 @@ class SellFragment : Fragment(R.layout.fragment_sell), AdapterView.OnItemSelecte
         binding.previous.setOnClickListener {
             if (position > 0) {
                 position--
-                binding.image.setImageURI(imagesUri[position]);
+                binding.image.setImageURI(imagesUri[position])
                 binding.image.tag = imagesUri[position]
             } else {
                 activity?.showToast("You have reached the start")
@@ -113,7 +114,7 @@ class SellFragment : Fragment(R.layout.fragment_sell), AdapterView.OnItemSelecte
     }
 
     private fun getAllItems() {
-        if (imagesUri.size < 1) {
+        if (imagesUri.size < 3) {
             binding.progressBar.displaySnack("Minimum of 3 photos is required")
             return
         }
@@ -131,7 +132,6 @@ class SellFragment : Fragment(R.layout.fragment_sell), AdapterView.OnItemSelecte
             binding.desc.text.toString().trim().isEmpty() ||
             binding.desc.text.toString().trim().length < 20
         ) {
-
             binding.progressBar.displaySnack("Entries is not Complete")
             return
         }
@@ -154,7 +154,6 @@ class SellFragment : Fragment(R.layout.fragment_sell), AdapterView.OnItemSelecte
 
         disableAllViews()
 
-        binding.progressBar.visibility = View.VISIBLE
         viewModel.getAllImages(imagesUri.toList())
         viewModel.result.observe(viewLifecycleOwner) {
             if (it != null) {
@@ -180,24 +179,15 @@ class SellFragment : Fragment(R.layout.fragment_sell), AdapterView.OnItemSelecte
         viewModel.addResult.observe(viewLifecycleOwner) {
             if (it != null) {
                 activity?.showToast("Successful")
-                enableAllViews()
+                findNavController().navigate(R.id.advertsFragment)
             }
         }
-    }
-
-    private fun enableAllViews() {
-        binding.brands.isEnabled = true
-        binding.models.isEnabled = true
-        binding.regions.isEnabled = true
-        binding.state.isEnabled = true
-        binding.condition.isEnabled = true
-        binding.colors.isEnabled = true
-        binding.rating.isEnabled = true
-        binding.price.isEnabled = true
-        binding.location.isEnabled = true
-        binding.yrOfManufacturing.isEnabled = true
-        binding.desc.isEnabled = true
-        binding.postAd.isEnabled = true
+        viewModel.defaultRepo.dataLoading.observe(viewLifecycleOwner){
+            binding.progressBar.toggleVisibility(it)
+        }
+        viewModel.defaultRepo.resultError.observe(viewLifecycleOwner){
+            binding.progressBar.displaySnack(it)
+        }
     }
 
     private fun disableAllViews() {

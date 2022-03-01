@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/margin_5"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/constraint"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="@dimen/margin_5"
+        android:background="@drawable/chat_right"
+        android:padding="@dimen/margin_5">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:inputType="textMultiLine"
+            android:maxWidth="200dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="ns soisn sks sj sjk kks. what jnjma sjbs sjmbs sibdj n sijbds siubs shijbs sd hbs sdub shdbhs dijbss s sj hdsss sysbdbhsd shbshd s shdbs s hshs sdhbsi jsd sdj" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image"
+            android:layout_width="250dp"
+            android:visibility="gone"
+            android:layout_height="250dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:gravity="start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:gravity="end"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_15"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/message_state"
+            app:layout_constraintTop_toBottomOf="@+id/text"
+            tools:text="10:00 PM" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/message_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_12"
+            android:gravity="end"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_12"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/time"
+            app:layout_constraintEnd_toEndOf="@+id/time"
+            app:layout_constraintTop_toTopOf="@+id/time"
+            tools:text="seen" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

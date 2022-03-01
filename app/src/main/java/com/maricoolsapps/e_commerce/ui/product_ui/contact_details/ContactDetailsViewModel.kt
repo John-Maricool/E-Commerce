@@ -18,11 +18,11 @@ class ContactDetailsViewModel
 ) : ViewModel() {
 
     val userID = auth.currentUser?.uid.toString()
-    private val _result = MutableLiveData<CarBuyerOrSeller>()
-    val result: LiveData<CarBuyerOrSeller> get() = _result
+    private val _result = MutableLiveData<CarBuyerOrSeller?>()
+    val result: LiveData<CarBuyerOrSeller?> get() = _result
 
-    private val _changedProfile = MutableLiveData<String>()
-    val changedProfile: LiveData<String> get() = _changedProfile
+    private val _changedProfile = MutableLiveData<String?>()
+    val changedProfile: LiveData<String?> get() = _changedProfile
 
 
     init {

@@ -2,15 +2,20 @@ package com.maricoolsapps.e_commerce.data.db
 
 import com.maricoolsapps.e_commerce.data.source.FirebaseFirestoreSource
 import com.maricoolsapps.e_commerce.data.model.*
-import com.maricoolsapps.e_commerce.utils.Constants
-import com.maricoolsapps.e_commerce.utils.MapperImpl
-import com.maricoolsapps.e_commerce.utils.Resource
+import android.content.Context
+import android.provider.ContactsContract
+import com.google.firebase.firestore.core.OnlineState
+import com.maricoolsapps.e_commerce.utils.*
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.tasks.await
 import java.lang.Exception
+import java.util.*
 import javax.inject.Inject
 
 class CloudQueries
 @Inject constructor(
-    private var source: FirebaseFirestoreSource
+    private val source: FirebaseFirestoreSource,
+    @ApplicationContext val context: Context
 ) {
 
     suspend fun getCarsFromBrand(name: String, b: (Resource<List<ProductModel>>) -> Unit) {
@@ -19,21 +24,25 @@ class CloudQueries
         cars from a brand in the database, It places tbe cars in the
         recycler view for selection
          */
-        b.invoke(Resource.loading())
-        try {
-            val ans = source.getCarsFromBrand(name)?.toObjects(Product::class.java)
-            if (ans != null) {
-                val cars = MapperImpl.mapAllToCache(ans)
-                if (cars.isNotEmpty()) {
-                    b.invoke(Resource.success(cars))
+        if (!context.checkForInternet()) {
+            b.invoke(Resource.error(Constants.check_internet, null))
+        } else {
+            b.invoke(Resource.loading())
+            try {
+                val ans = source.getCarsFromBrand(name)?.toObjects(Product::class.java)
+                if (ans != null) {
+                    val cars = MapperImpl.mapAllToCache(ans)
+                    if (cars.isNotEmpty()) {
+                        b.invoke(Resource.success(cars))
+                    } else {
+                        b.invoke(Resource.error(Constants.no_data, null))
+                    }
                 } else {
                     b.invoke(Resource.error(Constants.no_data, null))
                 }
-            } else {
-                b.invoke(Resource.error(Constants.no_data, null))
+            } catch (e: Exception) {
+                b.invoke(Resource.error(Constants.check_internet, null))
             }
-        } catch (e: Exception) {
-            b.invoke(Resource.error(Constants.check_internet, null))
         }
     }
 
@@ -66,12 +75,16 @@ class CloudQueries
         /*
         * This function makes it possible to get the seller of the product.
         * */
-        b.invoke(Resource.loading())
-        try {
-            val result = source.getUser(name)?.toObject(CarBuyerOrSeller::class.java)
-            b.invoke(Resource.success(result))
-        } catch (e: Exception) {
+        if (!context.checkForInternet()) {
             b.invoke(Resource.error(Constants.check_internet, null))
+        } else {
+            b.invoke(Resource.loading())
+            try {
+                val result = source.getUser(name)?.toObject(CarBuyerOrSeller::class.java)
+                b.invoke(Resource.success(result))
+            } catch (e: Exception) {
+                b.invoke(Resource.error(Constants.check_internet, null))
+            }
         }
     }
 
@@ -99,27 +112,29 @@ class CloudQueries
         b.invoke(Resource.loading())
         try {
             source.changeProfile(id, person)
+            val status = UserStatus(true, Date().time)
+            source.changeUserStatus(id, status)
             b.invoke(Resource.success(Constants.successful))
         } catch (e: Exception) {
             b.invoke(Resource.error(e.message.toString(), null))
         }
     }
 
-    suspend fun removeProduct(
-        name: String,
-        brand: String,
-        id: List<String>,
-        b: (Resource<String>) -> Unit
-    ) {
-        b.invoke(Resource.loading())
-        try {
-            source.removeUserProducts(name, brand, id)
-            source.removeProducts(brand, id)
-            b.invoke(Resource.success(Constants.successful))
-        } catch (e: Exception) {
-            b.invoke(Resource.error(e.message.toString(), null))
-        }
-    }
+    /* suspend fun removeProduct(
+         name: String,
+         brand: String,
+         id: List<String>,
+         b: (Resource<String>) -> Unit
+     ) {
+         b.invoke(Resource.loading())
+         try {
+             source.removeUserProducts(name, brand, id)
+             source.removeProducts(brand, id)
+             b.invoke(Resource.success(Constants.successful))
+         } catch (e: Exception) {
+             b.invoke(Resource.error(e.message.toString(), null))
+         }
+     }*/
 
     suspend fun getFollowers(userIdOrName: String, b: (Resource<List<CarBuyerOrSeller>>) -> Unit) {
         val followers = mutableListOf<CarBuyerOrSeller>()
@@ -216,24 +231,32 @@ class CloudQueries
     }
 
     suspend fun getCar(brand: String, id: String, b: (Resource<Product>) -> Unit) {
-        b.invoke(Resource.loading())
-        try {
-            val result = source.getCar(brand, id)?.toObject(Product::class.java)
-            b.invoke(Resource.success(result))
-        } catch (e: Exception) {
+        if (!context.checkForInternet()) {
             b.invoke(Resource.error(Constants.check_internet, null))
+        } else {
+            b.invoke(Resource.loading())
+            try {
+                val result = source.getCar(brand, id)?.toObject(Product::class.java)
+                b.invoke(Resource.success(result))
+            } catch (e: Exception) {
+                b.invoke(Resource.error(Constants.check_internet, null))
+            }
         }
     }
 
     suspend fun addCarToDb(product: Product, userIdOrName: String, b: (Resource<String>) -> Unit) {
-        b.invoke(Resource.loading())
-        try {
-            source.setBrandDetails(product)
-            source.addCarToDb(product)
-            source.addCarToSellerList(product, userIdOrName)
-            b.invoke(Resource.success(Constants.successful))
-        } catch (E: Exception) {
-            b.invoke(Resource.error(E.toString(), null))
+        if (!context.checkForInternet()) {
+            b.invoke(Resource.error(Constants.check_internet, null))
+        } else {
+            b.invoke(Resource.loading())
+            try {
+                source.setBrandDetails(product)
+                source.addCarToDb(product)
+                source.addCarToSellerList(product, userIdOrName)
+                b.invoke(Resource.success(Constants.successful))
+            } catch (E: Exception) {
+                b.invoke(Resource.error(E.toString(), null))
+            }
         }
     }
 
@@ -275,5 +298,101 @@ class CloudQueries
         } catch (e: Exception) {
             b.invoke(Resource.error(e.toString(), null))
         }
+    }
+
+    suspend fun createOrGetChatChannel(
+        userId: String,
+        userToChat: String,
+        b: (Resource<ChatChannel>) -> Unit
+    ) {
+        b.invoke(Resource.loading())
+        try {
+            val result = source.createOrGetChatChannel(userId, userToChat)
+            b.invoke(Resource.success(result))
+        } catch (e: Exception) {
+            b.invoke(Resource.error(e.toString(), null))
+        }
+    }
+
+    suspend fun getAllChats(userId: String, b: (Resource<List<ChatList>>) -> Unit) {
+        if (!context.checkForInternet()) {
+            b.invoke(Resource.error(Constants.check_internet, null))
+        } else {
+            b.invoke(Resource.loading())
+            val users = mutableListOf<ChatList>()
+            try {
+                val docs = source.getAllChatsId(userId)?.toObjects(ChatChannel::class.java)
+                if (docs != null) {
+                    docs.forEach { chatChannel ->
+                        val user = source.getUser(chatChannel.personChatting)
+                            ?.toObject(CarBuyerOrSeller::class.java)
+                        val lastMessages = source.getLastMessages(chatChannel.channelId)
+                            ?.toObject(Messages::class.java)
+                        if (user != null && lastMessages != null) {
+                            val chatlist =
+                                ChatList(user, lastMessages)
+                            users.add(chatlist)
+                        } else {
+                            val chatList = ChatList(user!!, Messages())
+                            users.add(chatList)
+                        }
+                    }
+                    b.invoke(Resource.success(users))
+                } else {
+                    b.invoke(Resource.error("Empty Chat", null))
+                }
+            } catch (e: Exception) {
+                b.invoke(Resource.error(b.toString(), null))
+            }
+        }
+    }
+
+    fun getUserOnlineStatus(userId: String, b: (Resource<UserStatus>) -> Unit) {
+        b.invoke(Resource.loading())
+        try {
+            source.getChatStatus(userId).addSnapshotListener { value, error ->
+                if (value != null) {
+                    if (value.exists()) {
+                        b.invoke(Resource.success(value.toObject(UserStatus::class.java)))
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            b.invoke(Resource.error(e.toString(), null))
+        }
+    }
+
+    fun getAllMessages(chatChannel: ChatChannel, b: (Resource<List<Messages>>) -> Unit) {
+        b.invoke(Resource.loading())
+        try {
+            source.getMessagesId(chatChannel).addSnapshotListener { value, error ->
+                if (value != null) {
+                    val docs = value.toObjects(Messages::class.java).distinct().toList()
+                    b.invoke(Resource.success(docs))
+                } else {
+                    b.invoke(Resource.error("No data", null))
+                }
+            }
+        } catch (e: Exception) {
+            b.invoke(Resource.error(e.toString(), null))
+        }
+    }
+
+    suspend fun tagAllMessagesSeen(userID: String, channel: ChatChannel, b: (Resource<String>) -> Unit) {
+        b.invoke(Resource.loading())
+        try {
+            val docs = source.tagAllMessagesSeen(channel)
+            docs?.documents?.forEach {
+                if (!it["senderId"]?.equals(userID)!!)
+                it.reference.update("seen", true)
+            }
+            b.invoke(Resource.success(Constants.successful))
+        } catch (e: Exception) {
+            b.invoke(Resource.error(e.toString(), null))
+        }
+    }
+
+    suspend fun changeUserStatus(userId: String, status: UserStatus){
+            source.changeUserStatus(userId, status)
     }
 }

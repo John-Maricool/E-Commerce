@@ -18,8 +18,8 @@ import javax.inject.Inject
 class FavoriteViewModel
 @Inject constructor(val repo: FavRepository, val defaultRepo: DefaultRepository) : ViewModel() {
 
-    private val _result = MutableLiveData<List<ProductModel>>()
-    val result: LiveData<List<ProductModel>> get() = _result
+    private val _result = MutableLiveData<List<ProductModel>?>()
+    val result: LiveData<List<ProductModel>?> get() = _result
 
     init {
         viewModelScope.launch(IO) {

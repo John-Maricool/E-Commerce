@@ -33,14 +33,16 @@ fun validatePassword(text: String): Boolean {
 }
 
 fun View.displaySnack(text: String) {
-    Snackbar.make(this, text, Snackbar.LENGTH_SHORT).show()
+    Snackbar.make(this, text, Snackbar.LENGTH_SHORT)
+        .setBackgroundTint(this.resources.getColor(R.color.red, null))
+        .show()
 }
 
 fun ImageView.setResourceCenterCrop(data: String) {
     Glide.with(this.context)
         .load(data)
         .circleCrop()
-        .placeholder(R.drawable.car)
+        .placeholder(R.drawable.ic_account_circle)
         .into(this)
 }
 
@@ -54,8 +56,4 @@ fun ImageView.setResource(data: String) {
 
 fun Activity.showToast(msg: String){
     Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
-}
-
-fun Fragment.navigateToProductDetails(){
-    this.findNavController().navigate(R.id.productDetailFragment)
 }

@@ -7,10 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
-import com.maricoolsapps.e_commerce.data.db.CloudQueries
 import com.maricoolsapps.e_commerce.data.db.ProfileChanges
 import com.maricoolsapps.e_commerce.data.model.CarBuyerOrSeller
-import com.maricoolsapps.e_commerce.utils.Resource
 import com.maricoolsapps.e_commerce.data.model.User
 import com.maricoolsapps.e_commerce.data.repositories.DefaultRepository
 import com.maricoolsapps.e_commerce.data.repositories.RegisterRepository

@@ -367,10 +367,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/margin_15"
+                android:gravity="start"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_17"
-                android:gravity="start"
-                android:layout_marginEnd="@dimen/margin_15"
                 android:textStyle="normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/_locatioN"
@@ -401,27 +401,9 @@
                 android:text="@string/message_seller"
                 android:textColor="@color/blue"
                 android:textSize="@dimen/text_size_20"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/color"
                 app:layout_constraintTop_toBottomOf="@+id/view_third"
-                tools:visibility="visible" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/call"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/blue_solid"
-                android:drawableStart="@drawable/ic_call"
-                android:drawablePadding="5dp"
-                android:padding="@dimen/margin_12"
-                android:text="@string/call_Seller"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_20"
-                app:layout_constraintBottom_toBottomOf="@+id/message_seller"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/message_seller"
-                app:layout_constraintTop_toTopOf="@+id/message_seller"
-                app:layout_constraintVertical_bias="1.0"
                 tools:visibility="visible" />
 
             <View
@@ -432,7 +414,7 @@
                 android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/call" />
+                app:layout_constraintTop_toBottomOf="@+id/message_seller" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/feedback_text"
@@ -475,15 +457,15 @@
                 android:id="@+id/leave_feedback"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:layout_marginTop="@dimen/margin_20"
                 android:drawableStart="@drawable/ic_feedback_yellow"
                 android:gravity="start"
-                android:paddingStart="40dp"
                 android:text="@string/leave_feedback"
-                android:layout_marginTop="@dimen/margin_20"
                 android:textAllCaps="false"
                 android:textColor="#F4D502"
                 android:textSize="@dimen/text_size_20"
-                app:layout_constraintStart_toStartOf="@+id/recyeler_feedback"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyeler_feedback"
                 tools:ignore="RtlSymmetry" />
 
@@ -491,12 +473,14 @@
                 android:id="@+id/report"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:drawableStart="@drawable/ic_report"
                 android:drawablePadding="3dp"
                 android:text="@string/report_abuse"
                 android:textColor="@color/red"
                 android:textSize="@dimen/text_size_20"
-                app:layout_constraintEnd_toEndOf="@+id/recyeler_feedback"
+                app:layout_constraintBottom_toBottomOf="@+id/leave_feedback"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/leave_feedback"
                 tools:visibility="visible" />
 
@@ -509,7 +493,7 @@
                 android:background="@drawable/blue_border"
                 android:text="@string/post_ad_like_this"
                 android:textColor="@color/blue"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/report"
                 app:layout_constraintStart_toStartOf="@+id/leave_feedback"
                 app:layout_constraintTop_toBottomOf="@+id/report" />
 

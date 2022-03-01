@@ -23,11 +23,11 @@ class SellViewModel
 ) : ViewModel() {
 
     val userId = auth.currentUser?.uid.toString()
-    private val _result = MutableLiveData<List<String>>()
-    val result: LiveData<List<String>> get() = _result
+    private val _result = MutableLiveData<List<String>?>()
+    val result: LiveData<List<String>?> get() = _result
 
-    private val _addResult = MutableLiveData<String>()
-    val addResult: LiveData<String> get() = _addResult
+    private val _addResult = MutableLiveData<String?>()
+    val addResult: LiveData<String?> get() = _addResult
 
     fun getAllImages(images: List<Uri>) {
         viewModelScope.launch(Main) {

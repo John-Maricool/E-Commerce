@@ -1,10 +1,6 @@
 package com.maricoolsapps.e_commerce.data.source
 
-import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
 import com.maricoolsapps.e_commerce.data.model.*
 import com.maricoolsapps.e_commerce.utils.Constants
 import kotlinx.coroutines.tasks.await
@@ -15,23 +11,23 @@ class FirebaseFirestoreSource
 
     suspend fun getCarsFromBrand(brand: String): QuerySnapshot? {
         return cloud.collection(Constants.car).document(brand)
-            .collection(Constants.models).get().await()
+            .collection(Constants.models).get(Source.SERVER).await()
     }
 
     suspend fun getCarsIdFromSeller(seller: String, brand: String): QuerySnapshot? {
         return cloud.collection(Constants.sellerorbuyer).document(seller)
-            .collection(brand).get().await()
+            .collection(brand).get(Source.DEFAULT).await()
     }
 
     suspend fun getUser(name: String): DocumentSnapshot? {
         return cloud.collection(Constants.sellerorbuyer).document(name)
-            .get().await()
+            .get(Source.SERVER).await()
     }
 
     suspend fun getFollowersId(name: String): QuerySnapshot? {
         return cloud.collection(Constants.sellerorbuyer).document(name)
             .collection(Constants.followers)
-            .get().await()
+            .get(Source.DEFAULT).await()
     }
 
     suspend fun getFollowingId(name: String): QuerySnapshot? {
@@ -86,7 +82,7 @@ class FirebaseFirestoreSource
 
     suspend fun getCar(brand: String, id: String): DocumentSnapshot? {
         return cloud.collection(Constants.car).document(brand)
-            .collection(Constants.models).document(id).get().await()
+            .collection(Constants.models).document(id).get(Source.SERVER).await()
     }
 
     suspend fun addCarToSellerList(product: Product, userId: String): Void? {
@@ -123,5 +119,70 @@ class FirebaseFirestoreSource
         cloud.collection(Constants.report).document(report.id).set(report).await()
        return cloud.collection(Constants.report).document(report.id).collection(product.brand)
             .add(product).await()
+    }
+
+    suspend fun createOrGetChatChannel(userId: String, userToChat: String): ChatChannel? {
+        val channel = cloud.collection(Constants.sellerorbuyer).document(userId)
+            .collection(Constants.chats).document(userToChat).get().await()
+
+        return if (!channel.exists()){
+            //create new channel id
+            val newDoc = cloud.collection(Constants.channels).document()
+            //create new chat channel
+            val chatChannelForUser = ChatChannel(newDoc.id, userToChat)
+            //set chat channel in userId doc
+            cloud.collection(Constants.sellerorbuyer).document(userId)
+                .collection(Constants.chats).document(userToChat).set(chatChannelForUser).await()
+            //set chat channel in second userid doc
+            val chatChannelForSecond = ChatChannel(newDoc.id, userId)
+            cloud.collection(Constants.sellerorbuyer).document(userToChat)
+                .collection(Constants.chats).document(userId).set(chatChannelForSecond).await()
+            //set chat channel in channels collection
+            val chatChannel = ChatChannel(newDoc.id, "")
+            cloud.collection(Constants.channels).document(newDoc.id).set(chatChannel).await()
+            chatChannelForUser
+        }else{
+            channel.toObject(ChatChannel::class.java)
+        }
+    }
+
+    suspend fun getAllChatsId(userId: String): QuerySnapshot? {
+        return cloud.collection(Constants.sellerorbuyer).document(userId)
+            .collection(Constants.chats)
+            .get().await()
+    }
+
+     fun getChatStatus(userId: String): DocumentReference {
+      return cloud.collection(Constants.sellerorbuyer).document(userId)
+            .collection(Constants.status).document(Constants.status)
+    }
+
+     suspend fun changeUserStatus(userId: String, status: UserStatus): Void? {
+        return cloud.collection(Constants.sellerorbuyer).document(userId)
+            .collection(Constants.status).document(Constants.status).set(status).await()
+    }
+
+
+    suspend fun getLastMessages(channelId: String): DocumentSnapshot? {
+            return  cloud.collection(Constants.channels)
+                 .document(channelId)
+                 .collection(Constants.messages).document(Constants.lastMessage).get().await()
+     }
+
+    fun getMessagesId(chatChannel: ChatChannel): Query {
+        return cloud.collection(Constants.channels).document(chatChannel.channelId)
+            .collection(Constants.messages).orderBy("time")
+    }
+
+    suspend fun sendMessage(chatChannel: ChatChannel, messages: Messages){
+        cloud.collection(Constants.channels).document(chatChannel.channelId)
+            .collection(Constants.messages).add(messages).await()
+        cloud.collection(Constants.channels).document(chatChannel.channelId)
+            .collection(Constants.messages).document(Constants.lastMessage).set(messages).await()
+    }
+
+    suspend fun tagAllMessagesSeen(chatChannel: ChatChannel): QuerySnapshot? {
+        return cloud.collection(Constants.channels).document(chatChannel.channelId)
+            .collection(Constants.messages).get().await()
     }
 }
