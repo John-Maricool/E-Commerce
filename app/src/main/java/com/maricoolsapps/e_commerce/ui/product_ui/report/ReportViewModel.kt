@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.maricoolsapps.e_commerce.data.db.CloudQueries
+import com.maricoolsapps.e_commerce.data.db.ProfileChanges
 import com.maricoolsapps.e_commerce.data.model.Product
 import com.maricoolsapps.e_commerce.data.model.Report
 import com.maricoolsapps.e_commerce.data.repositories.DefaultRepository
@@ -16,15 +17,15 @@ import javax.inject.Inject
 @HiltViewModel
 class ReportViewModel
 @Inject constructor(
-    val auth: FirebaseAuth,
+    val auth: ProfileChanges,
     val cloud: CloudQueries,
     val defaultRepo: DefaultRepository
 ) : ViewModel() {
 
-    private val _result = MutableLiveData<String>()
-    val result: LiveData<String> get() = _result
+    private val _result = MutableLiveData<String?>()
+    val result: LiveData<String?> get() = _result
 
-    val userId = auth.currentUser?.uid
+    val userId = auth.getUserUid()
 
     fun report(report: Report, product: Product) {
         viewModelScope.launch {

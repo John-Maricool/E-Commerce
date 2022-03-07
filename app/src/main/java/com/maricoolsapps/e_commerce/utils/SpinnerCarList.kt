@@ -73,3 +73,38 @@ fun Activity.getBMWAdapter(): ArrayAdapter<String> {
     )
     return spinnerAdapter
 }
+
+fun Activity.getRegionIndex(region: String): Int{
+    val regionsInArray = resources.getStringArray(R.array.car_town)
+    var index = 0
+    for (i in regionsInArray.indices) {
+        if (regionsInArray[i] == region) {
+            index = i
+        }
+    }
+    return index
+}
+
+
+fun Activity.getStateIndex(region: String): Int{
+    val regionsInArray = resources.getStringArray(R.array.car_state)
+    var index = 0
+    for (i in regionsInArray.indices) {
+        if (regionsInArray[i] == region) {
+            index = i
+        }
+    }
+    return index
+}
+
+
+fun Activity.getConditionIndex(region: String): Int{
+    val regionsInArray = resources.getStringArray(R.array.car_condition)
+    var index = 0
+    for (i in regionsInArray.indices) {
+        if (regionsInArray[i] == region) {
+            index = i
+        }
+    }
+    return index
+}

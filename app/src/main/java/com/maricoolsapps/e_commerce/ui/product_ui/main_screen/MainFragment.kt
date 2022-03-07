@@ -11,10 +11,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.data.adapters.ProductListAdapter
-import com.maricoolsapps.e_commerce.databinding.FragmentMainBinding
 import com.maricoolsapps.e_commerce.data.interfaces.OnItemClickListener
 import com.maricoolsapps.e_commerce.data.model.ProductModel
 import com.maricoolsapps.e_commerce.data.model.UserStatus
+import com.maricoolsapps.e_commerce.databinding.FragmentMainBinding
 import com.maricoolsapps.e_commerce.utils.Constants
 import com.maricoolsapps.e_commerce.utils.toggleVisibility
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,8 +35,7 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMainBinding.bind(view)
-        val status = UserStatus(true, Date().time)
-        model.toggleUserOnline(status)
+
         val nav = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
         nav?.visibility = View.VISIBLE
         getAllCarBrands()
@@ -50,13 +49,18 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
             .onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    val status = UserStatus(true, Date().time)
-                    model.toggleUserOnline(status)
                     activity?.finish()
                 }
             }
             )
     }
+
+    override fun onPause() {
+        val status = UserStatus(false, Date().time)
+        model.toggleUserOnline(status)
+        super.onPause()
+    }
+
 
     override fun onStart() {
         super.onStart()
@@ -64,7 +68,12 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
         binding.retry.setOnClickListener {
             getCarsFromBrand(binding.tabLayout[binding.tabLayout.selectedTabPosition].toString())
         }
+        binding.filter.setOnClickListener {
+            findNavController().navigate(R.id.filteredListFragment)
+        }
         observeLiveData()
+        val status = UserStatus(true, Date().time)
+        model.toggleUserOnline(status)
     }
 
     private fun observeLiveData() {
@@ -107,7 +116,7 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
     }
 
     override fun onTabReselected(tab: TabLayout.Tab?) {
-        TODO("Not yet implemented")
+        getCarsFromBrand(tab?.text.toString())
     }
 
     override fun onItemClick(t: Any, p: Any?) {

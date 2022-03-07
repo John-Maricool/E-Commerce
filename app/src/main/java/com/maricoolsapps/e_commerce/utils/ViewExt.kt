@@ -5,9 +5,8 @@ import android.util.Patterns
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
+import android.content.Context
+import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.maricoolsapps.e_commerce.R
@@ -56,4 +55,10 @@ fun ImageView.setResource(data: String) {
 
 fun Activity.showToast(msg: String){
     Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+}
+
+fun Context.showAlertDialog(title: String, content: String): AlertDialog.Builder? {
+    return AlertDialog.Builder(this)
+        .setTitle(title)
+        .setMessage(content)
 }

@@ -48,21 +48,6 @@ class ContactDetailsFragment : Fragment(R.layout.fragment_contact_details) {
         fillViews()
     }
 
-    private fun setRegion(region: String?): Int {
-        val regionsInArray = resources.getStringArray(R.array.car_town)
-        var index = 0
-        if (region != null) {
-            for (i in regionsInArray.indices) {
-                if (regionsInArray[i] == region) {
-                    index = i
-                }
-            }
-        } else {
-            index = 0
-        }
-        return index
-    }
-
     override fun onStart() {
         super.onStart()
         binding.image.setOnClickListener {
@@ -72,9 +57,7 @@ class ContactDetailsFragment : Fragment(R.layout.fragment_contact_details) {
             resultLauncher.launch(intent)
         }
         binding.changeEmail.setOnClickListener {
-            val action =
-                ContactDetailsFragmentDirections.actionContactDetailsFragmentToChangeEmailAndPassword()
-            findNavController().navigate(action)
+            findNavController().navigate(R.id.changeEmailAndPassword)
         }
     }
 
@@ -83,10 +66,10 @@ class ContactDetailsFragment : Fragment(R.layout.fragment_contact_details) {
             if (it != null) {
                 val user = it
                 binding.name.setText(user.name)
-                binding.email.setText(model.auth.currentUser?.email)
+                binding.email.setText(model.email)
                 binding.number.setText(user.phoneNumber)
                 binding.location.setText(user.businessLocation)
-                binding.regions.setSelection(setRegion(user.state))
+                binding.regions.setSelection(requireActivity().getRegionIndex(user.state))
                 binding.image.setResourceCenterCrop(user.image.toString())
                 imageUri = user.image
             }

@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.maricoolsapps.e_commerce.data.db.CloudQueries
+import com.maricoolsapps.e_commerce.data.db.ProfileChanges
 import com.maricoolsapps.e_commerce.data.model.CarBuyerOrSeller
 import com.maricoolsapps.e_commerce.data.model.ChatChannel
 import com.maricoolsapps.e_commerce.data.model.Messages
@@ -17,6 +18,7 @@ import com.maricoolsapps.e_commerce.data.model.UserStatus
 import com.maricoolsapps.e_commerce.data.repositories.ChatRepository
 import com.maricoolsapps.e_commerce.data.repositories.DefaultRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,13 +26,13 @@ import javax.inject.Inject
 @HiltViewModel
 class ChatViewModel
 @Inject constructor(
-    val auth: FirebaseAuth,
+    val auth: ProfileChanges,
     val defaultRepo: DefaultRepository,
     val cloud: CloudQueries,
     val repo: ChatRepository
 ) : ViewModel() {
 
-    val userID = auth.currentUser?.uid.toString()
+    val userID = auth.getUserUid()
 
     private val _status = MutableLiveData<UserStatus?>()
     val status: LiveData<UserStatus?> get() = _status
@@ -42,8 +44,8 @@ class ChatViewModel
     val messages: LiveData<List<Messages>?> get() = _messages
 
     fun fillViews(channel: ChatChannel) {
-        viewModelScope.launch {
-            cloud.tagAllMessagesSeen(auth.currentUser?.uid.toString(), channel) {
+        viewModelScope.launch (IO){
+            cloud.tagAllMessagesSeen(userID, channel) {
                 defaultRepo.onResult(it)
             }
             cloud.getSeller(channel.personChatting) {
@@ -76,7 +78,7 @@ class ChatViewModel
     }
 
     fun sendMessage(channel: ChatChannel, message: Messages) {
-        viewModelScope.launch {
+        viewModelScope.launch (IO){
             repo.sendMessage(channel, message) {
                 defaultRepo.onResult(it)
             }

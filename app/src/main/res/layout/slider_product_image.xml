@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/product_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

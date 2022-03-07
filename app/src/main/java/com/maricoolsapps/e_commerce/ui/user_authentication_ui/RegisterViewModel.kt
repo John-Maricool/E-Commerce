@@ -65,7 +65,7 @@ class RegisterViewModel
          }
     }
 
-    fun getUser(): LiveData<FirebaseUser> {
+    fun getUser(): MutableLiveData<FirebaseUser?> {
         return profileChanges.getAuthState()
     }
 

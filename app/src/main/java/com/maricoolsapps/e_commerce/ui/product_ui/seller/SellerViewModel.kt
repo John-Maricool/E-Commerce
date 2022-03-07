@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseAuth
 import com.maricoolsapps.e_commerce.data.db.CloudQueries
+import com.maricoolsapps.e_commerce.data.db.ProfileChanges
 import com.maricoolsapps.e_commerce.data.model.CarSellerProfile
 import com.maricoolsapps.e_commerce.data.model.ChatChannel
 import com.maricoolsapps.e_commerce.data.model.Follow
@@ -22,12 +23,18 @@ class SellerViewModel
 @Inject constructor(
     val repo: SellerRepository,
     val cloud: CloudQueries,
-    var auth: FirebaseAuth,
+    var auth: ProfileChanges,
     var defaultRepo: DefaultRepository
 ) : ViewModel() {
 
     private val _result = MutableLiveData<CarSellerProfile?>()
     val result: LiveData<CarSellerProfile?> get() = _result
+
+    private val _followers = MutableLiveData<Int?>()
+    val followers: LiveData<Int?> get() = _followers
+
+    private val _following = MutableLiveData<Int?>()
+    val following: LiveData<Int?> get() = _following
 
     private val _cars = MutableLiveData<List<ProductModel>?>()
     val cars: LiveData<List<ProductModel>?> get() = _cars
@@ -35,14 +42,24 @@ class SellerViewModel
     private var _channelCreated = MutableLiveData<ChatChannel?>()
     val channelCreated: LiveData<ChatChannel?> get() = _channelCreated
 
-    var userId = auth.currentUser?.uid
+    var userId = auth.getUserUid()
 
-    fun sellerProfile(uid: String = userId.toString(), userToFollow: String) {
+    fun sellerProfile(uid: String = userId, userToFollow: String) {
         viewModelScope.launch(IO) {
             repo.sellerProfile(uid, userToFollow) {
                 defaultRepo.onResult(it)
                 _result.postValue(it.data)
             }
+        }
+        cloud.getNumberOfFollowers(userToFollow){
+            defaultRepo.onResult(it)
+            _followers.postValue(it.data)
+
+        }
+        cloud.getNumberOfFollowing(userToFollow){
+            defaultRepo.onResult(it)
+            _following.postValue(it.data)
+
         }
     }
 
@@ -72,7 +89,7 @@ class SellerViewModel
         return callIntent
     }
 
-    fun createChatChannel(userId: String = this.userId.toString(), userToChat: String){
+    fun createChatChannel(userId: String = this.userId, userToChat: String){
         if (userId == userToChat){
             return
         }

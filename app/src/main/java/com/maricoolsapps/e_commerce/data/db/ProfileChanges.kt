@@ -1,6 +1,5 @@
 package com.maricoolsapps.e_commerce.data.db
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseUser
 import com.maricoolsapps.e_commerce.data.model.User
@@ -17,6 +16,14 @@ This class is where all the functions involving registration, profile changes et
 
 class ProfileChanges
 @Inject constructor(val source: FirebaseAuthSource) {
+
+    fun getUserUid(): String {
+        return source.auth.currentUser?.uid!!
+    }
+
+    fun getEmail(): String{
+        return source.auth.currentUser?.email!!
+    }
 
     suspend fun signInUser(user: User, b: (Resource<String>) -> Unit) {
         b.invoke(Resource.loading())
@@ -38,8 +45,8 @@ class ProfileChanges
         }
     }
 
-    fun getAuthState(): LiveData<FirebaseUser> {
-        val result = MutableLiveData<FirebaseUser>()
+    fun getAuthState(): MutableLiveData<FirebaseUser?> {
+        val result = MutableLiveData<FirebaseUser?>()
         source.auth.addAuthStateListener {
             if (it.currentUser == null && it.uid == null) {
                 result.postValue(null)

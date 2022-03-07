@@ -5,13 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="@dimen/margin_50"
+    android:layout_marginBottom="@dimen/margin_large"
     android:background="@color/grey"
     tools:context=".ui.product_ui.sell.SellFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
+        android:elevation="10dp"
         android:layout_height="wrap_content"
         android:background="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/grey"
-        android:layout_margin="@dimen/margin_12"
+        android:layout_margin="@dimen/margin_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -30,17 +31,17 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/par"
             android:layout_width="match_parent"
-            android:padding="@dimen/margin_12"
             android:layout_height="wrap_content"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:padding="@dimen/margin_medium">
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/regions"
                 style="@style/ThemeOverlay.AppCompat.Light"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_height="@dimen/spinner_height"
+                android:layout_marginStart="@dimen/margin_very_small"
+                android:layout_marginEnd="@dimen/margin_very_small"
                 android:background="@drawable/border_black"
                 android:backgroundTintMode="src_in"
                 android:entries="@array/car_town"
@@ -56,8 +57,8 @@
                 android:id="@+id/brands"
                 style="@style/ThemeOverlay.AppCompat.Light"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
+                android:layout_height="@dimen/spinner_height"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:background="@drawable/border_black"
                 android:backgroundTintMode="src_in"
                 android:entries="@array/brands"
@@ -75,8 +76,8 @@
                 android:id="@+id/models"
                 style="@style/ThemeOverlay.AppCompat.Light"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
+                android:layout_height="@dimen/spinner_height"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:background="@drawable/border_black"
                 android:backgroundTintMode="src_in"
                 android:entries="@array/Lexus"
@@ -93,8 +94,8 @@
                 android:id="@+id/colors"
                 style="@style/ThemeOverlay.AppCompat.Light"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
+                android:layout_height="@dimen/spinner_height"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:background="@drawable/border_black"
                 android:backgroundTintMode="src_in"
                 android:entries="@array/car_colors"
@@ -111,7 +112,7 @@
                 android:id="@+id/rating"
                 style="@style/ThemeOverlay.AppCompat.Light"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/spinner_height"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/border_black"
                 android:backgroundTintMode="src_in"
@@ -130,8 +131,8 @@
                 android:id="@+id/state"
                 style="@style/ThemeOverlay.AppCompat.Light"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
+                android:layout_height="@dimen/spinner_height"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:background="@drawable/border_black"
                 android:backgroundTintMode="src_in"
                 android:entries="@array/car_state"
@@ -148,8 +149,8 @@
                 android:id="@+id/condition"
                 style="@style/ThemeOverlay.AppCompat.Light"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
+                android:layout_height="@dimen/spinner_height"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:background="@drawable/border_black"
                 android:backgroundTintMode="src_in"
                 android:entries="@array/car_condition"
@@ -162,24 +163,36 @@
                 app:layout_constraintTop_toBottomOf="@+id/state"
                 tools:targetApi="n" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/currency_one"
+                android:layout_width="49dp"
+                android:layout_height="57dp"
+                android:textSize="@dimen/text_size_large"
+                app:layout_constraintBottom_toBottomOf="@+id/_price"
+                app:layout_constraintEnd_toStartOf="@+id/_price"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/_price"
+                android:text="₦"/>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_width="200dp"
+                android:layout_height="57dp"
+                android:layout_marginTop="24dp"
                 app:boxBackgroundColor="@color/white"
                 app:boxBackgroundMode="outline"
-                app:boxStrokeWidth="2dp"
                 app:errorTextColor="@color/pink2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/currency_one"
                 app:layout_constraintTop_toBottomOf="@+id/condition">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_20"
                     android:hint="@string/enter_amount_in"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -187,21 +200,20 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/_location"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
                 app:boxBackgroundColor="@color/white"
                 app:boxBackgroundMode="outline"
-                app:boxStrokeWidth="2dp"
                 app:errorTextColor="@color/pink2"
-                app:layout_constraintEnd_toEndOf="@+id/_price"
-                app:layout_constraintStart_toStartOf="@+id/_price"
+                app:layout_constraintEnd_toEndOf="@+id/condition"
+                app:layout_constraintStart_toStartOf="@+id/condition"
                 app:layout_constraintTop_toBottomOf="@+id/_price">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_20"
                     android:hint="@string/enter_address_or_location"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -211,9 +223,9 @@
                 android:id="@+id/year_of_manu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
                 app:boxBackgroundColor="@color/white"
                 app:boxBackgroundMode="outline"
-                app:boxStrokeWidth="2dp"
                 app:errorTextColor="@color/pink2"
                 app:layout_constraintEnd_toEndOf="@+id/_location"
                 app:layout_constraintStart_toStartOf="@+id/_location"
@@ -223,7 +235,6 @@
                     android:id="@+id/yr_of_manufacturing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_20"
                     android:hint="@string/year_of_manufacturing"
                     android:inputType="number" />
 
@@ -233,9 +244,9 @@
                 android:id="@+id/_desc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
                 app:boxBackgroundColor="@color/white"
                 app:boxBackgroundMode="outline"
-                app:boxStrokeWidth="2dp"
                 app:errorTextColor="@color/pink2"
                 app:layout_constraintEnd_toEndOf="@+id/year_of_manu"
                 app:layout_constraintStart_toStartOf="@+id/year_of_manu"
@@ -245,24 +256,23 @@
                     android:id="@+id/desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_20"
-                    android:lines="20"
                     android:gravity="top"
-                    android:maxLines="25"
-                    tools:text="i hope u are doing wellhow are u doing i hope u are doing well"
                     android:hint="@string/enter_description"
-                    android:inputType="textMultiLine" />
+                    android:inputType="textMultiLine"
+                    android:lines="7"
+                    android:maxLines="25"
+                    tools:text="i hope u are doing wellhow are u doing i hope u are doing well" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/add_phot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:text="@string/add_photo"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_20"
+                android:textSize="@dimen/text_size_large"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/_desc"
                 app:layout_constraintTop_toBottomOf="@+id/_desc" />
@@ -273,15 +283,15 @@
                 android:layout_height="wrap_content"
                 android:text="@string/first_picture_is_the_title_picture"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_15"
+                android:textSize="@dimen/text_size_normal"
                 app:layout_constraintStart_toStartOf="@+id/add_phot"
                 app:layout_constraintTop_toBottomOf="@+id/add_phot" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/add_photo"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="16dp"
+                android:layout_width="@dimen/image_size_small"
+                android:layout_height="@dimen/image_size_small"
+                android:layout_marginStart="@dimen/margin_medium"
                 app:layout_constraintBottom_toBottomOf="@+id/add_photo_desc"
                 app:layout_constraintStart_toEndOf="@+id/add_photo_desc"
                 app:layout_constraintTop_toTopOf="@+id/add_photo_desc"
@@ -289,9 +299,9 @@
 
             <ImageSwitcher
                 android:id="@+id/image"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="16dp"
+                android:layout_width="@dimen/image_very_large"
+                android:layout_height="@dimen/image_very_large"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/post_ad"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -301,9 +311,9 @@
 
             <androidx.constraintlayout.utils.widget.ImageFilterView
                 android:id="@+id/remove_image"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="8dp"
+                android:layout_width="@dimen/margin_large"
+                android:layout_height="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_very_small"
                 android:scaleType="fitXY"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/image"
@@ -312,15 +322,15 @@
                 app:srcCompat="@drawable/ic_close"
                 tools:visibility="visible" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/previous"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="4dp"
+                android:layout_width="@dimen/image_size_big"
+                android:layout_height="@dimen/image_size_big"
+                android:layout_marginStart="@dimen/margin_very_small"
+                android:layout_marginEnd="@dimen/margin_very_small"
                 android:src="@drawable/ic_left"
                 android:text="@string/previous"
-                android:textSize="@dimen/text_size_12"
+                android:textSize="@dimen/text_size_normal"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/image"
                 app:layout_constraintEnd_toStartOf="@+id/image"
@@ -328,15 +338,15 @@
                 app:layout_constraintTop_toTopOf="@+id/image"
                 tools:visibility="visible" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/next"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="8dp"
+                android:layout_width="@dimen/image_size_big"
+                android:layout_height="@dimen/image_size_big"
+                android:layout_marginStart="@dimen/margin_very_small"
+                android:layout_marginEnd="@dimen/margin_very_small"
                 android:src="@drawable/ic_right"
                 android:text="@string/next"
-                android:textSize="@dimen/text_size_12"
+                android:textSize="@dimen/text_size_normal"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/image"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -348,12 +358,12 @@
                 android:id="@+id/post_ad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="@dimen/margin_large"
                 android:background="@color/pink"
                 android:text="@string/post_ad"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_20"
+                android:textSize="@dimen/text_size_large"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image" />
@@ -362,10 +372,10 @@
                 android:id="@+id/appCompatTextView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:text="@string/notice_on_posting_ad"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_15"
+                android:textSize="@dimen/text_size_normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/post_ad" />
@@ -373,14 +383,14 @@
             <com.github.ybq.android.spinkit.SpinKitView
                 android:id="@+id/progress_bar"
                 style="@style/SpinKitView.Large.ThreeBounce"
-                android:layout_width="@dimen/margin_50"
-                android:layout_height="@dimen/margin_50"
-                android:layout_margin="8dp"
+                android:layout_width="@dimen/progress_bar_height"
+                android:layout_height="@dimen/progress_bar_height"
+                android:layout_margin="@dimen/margin_very_small"
                 android:visibility="gone"
                 app:SpinKit_Color="@color/pink"
+                app:layout_constraintBottom_toTopOf="@+id/post_ad"
                 app:layout_constraintEnd_toEndOf="@+id/post_ad"
-                app:layout_constraintStart_toStartOf="@+id/post_ad"
-                app:layout_constraintBottom_toTopOf="@+id/post_ad" />
+                app:layout_constraintStart_toStartOf="@+id/post_ad" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

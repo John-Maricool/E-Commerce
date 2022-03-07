@@ -5,15 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var auth: FirebaseAuth
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,8 +39,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 findNavController().navigate(action)
             }
             followers.setOnClickListener {
-               // val action = ProfileFragmentDirections.actionProfileFragmentToFollowersFragment()
-                //findNavController().navigate(action)
+                val action = ProfileFragmentDirections.actionProfileFragmentToFollowersFragment(auth.currentUser?.uid!!)
+                findNavController().navigate(action)
             }
             myAdverts.setOnClickListener {
                 val action = ProfileFragmentDirections.actionProfileFragmentToAdvertsFragment()

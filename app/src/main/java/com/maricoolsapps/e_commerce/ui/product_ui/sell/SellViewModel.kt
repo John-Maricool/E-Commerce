@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseAuth
 import com.maricoolsapps.e_commerce.data.db.CloudQueries
+import com.maricoolsapps.e_commerce.data.db.ProfileChanges
 import com.maricoolsapps.e_commerce.data.db.StorageChanges
 import com.maricoolsapps.e_commerce.data.model.Product
 import com.maricoolsapps.e_commerce.data.repositories.DefaultRepository
@@ -19,10 +20,10 @@ class SellViewModel
     val cloud: CloudQueries,
     val storage: StorageChanges,
     val defaultRepo: DefaultRepository,
-    val auth: FirebaseAuth
+    val auth: ProfileChanges
 ) : ViewModel() {
 
-    val userId = auth.currentUser?.uid.toString()
+    val userId = auth.getUserUid()
     private val _result = MutableLiveData<List<String>?>()
     val result: LiveData<List<String>?> get() = _result
 

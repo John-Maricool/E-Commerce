@@ -72,7 +72,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite), OnItemClickListen
     }
 
     override fun onItemClick(t: Any, p: Any?) {
-        val action = FavoriteFragmentDirections.actionFavoriteFragmentToProductDetailFragment(t as String, p as String)
+        val action = FavoriteFragmentDirections.goToProductDetails(t as String, p as String)
         findNavController().navigate(action)
     }
 }

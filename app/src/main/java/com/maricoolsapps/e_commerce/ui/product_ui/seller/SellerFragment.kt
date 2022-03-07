@@ -36,7 +36,6 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
 
     @Inject
     lateinit var adapter: ProductListAdapter
-
     lateinit var userNo: String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,8 +69,11 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
         adapter.setOnItemClickListener(this)
         binding.spinnerCategory.onItemSelectedListener = this
         binding.followers.setOnClickListener {
-            val action =
-                SellerFragmentDirections.actionSellerFragmentToFollowersFragment(args.ownerId)
+            val action = SellerFragmentDirections.actionSellerFragmentToFollowersFragment(args.ownerId)
+            findNavController().navigate(action)
+        }
+        binding.following.setOnClickListener {
+            val action = SellerFragmentDirections.actionSellerFragmentToFollowersFragment(args.ownerId)
             findNavController().navigate(action)
         }
     }
@@ -82,7 +84,7 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
                 model.unfollowUser(userToUnFollow = args.ownerId)
                 sellerUnfollowed()
             } else {
-                val user = Follow(model.userId.toString())
+                val user = Follow(model.userId)
                 val userToFollow = Follow(args.ownerId)
                 model.followUser(user, userToFollow)
                 sellerFollowed()
@@ -105,8 +107,8 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
     private fun sellerUnfollowed() {
         isFollowed = false
         binding.follow.background =
-            ResourcesCompat.getDrawable(resources, R.drawable.blue_border, null)
-        binding.follow.setTextColor(resources.getColor(R.color.blue, null))
+            ResourcesCompat.getDrawable(resources, R.drawable.pink_border, null)
+        binding.follow.setTextColor(resources.getColor(R.color.pink2, null))
         binding.follow.text = resources.getString(R.string.follow)
     }
 
@@ -123,11 +125,18 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
                     }
                     name.text = seller.name
                     binding.toolbar.title = seller.name
-                    location.text = seller.businessLocation
                     image.setResourceCenterCrop(seller.image.toString())
-                    followers.text = it.followers.toString()
-                    following.text = it.following.toString()
                 }
+            }
+        }
+        model.followers.observe(viewLifecycleOwner){
+            if (it != null){
+                binding.followers.text = it.toString()
+            }
+        }
+        model.following.observe(viewLifecycleOwner){
+            if (it != null){
+                binding.following.text = it.toString()
             }
         }
     }
@@ -149,10 +158,9 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
         model.defaultRepo.resultError.observe(viewLifecycleOwner) {
             binding.progressBar.displaySnack(it)
         }
-
         model.channelCreated.observe(viewLifecycleOwner) {
             if (it != null){
-        val action = SellerFragmentDirections.actionSellerFragmentToChatFragment(it)
+        val action = SellerFragmentDirections.goToChat(it)
                 findNavController().navigate(action)
     }
 }
@@ -193,7 +201,7 @@ override fun onNothingSelected(parent: AdapterView<*>?) {
 }
 
 override fun onItemClick(t: Any, p: Any?) {
-    val action = SellerFragmentDirections.actionSellerFragmentToProductDetailFragment(
+    val action = SellerFragmentDirections.goToProductDetails(
         t as String,
         p as String
     )

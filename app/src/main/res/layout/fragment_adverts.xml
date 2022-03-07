@@ -18,11 +18,11 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:textColor="@color/black"
-        android:textSize="@dimen/text_size_15"
+        android:textSize="@dimen/text_size_normal"
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/margin_large"
         android:text="@string/select_the_brand"
         app:layout_constraintStart_toStartOf="@+id/brands"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -31,10 +31,10 @@
         android:id="@+id/brands"
         style="@style/ThemeOverlay.AppCompat.Light"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
+        android:layout_height="@dimen/filter_size"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_large"
         android:background="@drawable/border_black"
         android:backgroundTintMode="src_in"
         android:entries="@array/brands"
@@ -50,7 +50,7 @@
         android:id="@+id/recycler_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/margin_very_small"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,13 +58,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/brands"
         app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/recycler_single_item" />
+        tools:listitem="@layout/adverts_single_item" />
 
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/progress_bar"
         style="@style/SpinKitView.Large.Circle"
-        android:layout_width="@dimen/margin_30"
-        android:layout_height="@dimen/margin_30"
+        android:layout_width="@dimen/progress_bar_height"
+        android:layout_height="@dimen/progress_bar_height"
         android:visibility="gone"
         app:SpinKit_Color="@color/pink2"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:text="@string/check_your_internet_connection"
         android:visibility="gone"
-        android:textSize="@dimen/text_size_20"
+        android:textSize="@dimen/text_size_large"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +89,7 @@
         android:id="@+id/retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/margin_very_small"
         android:visibility="gone"
         android:background="@drawable/pink"
         android:text="@string/retry"
@@ -98,18 +98,17 @@
         app:layout_constraintStart_toStartOf="@+id/text_error"
         app:layout_constraintTop_toBottomOf="@+id/text_error" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/no_results"
         android:src="@drawable/no_result"
         android:text="@string/check_your_internet_connection"
         android:visibility="gone"
-        android:textSize="@dimen/text_size_20"
+        android:textSize="@dimen/text_size_large"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
-        android:contentDescription="No result"/>
+        app:layout_constraintTop_toTopOf="@+id/toolbar"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

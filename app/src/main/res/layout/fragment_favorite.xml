@@ -19,7 +19,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="0dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/margin_medium"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/recycler_single_item"
@@ -41,9 +41,9 @@
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/progress_bar"
         style="@style/SpinKitView.Large.Circle"
-        android:layout_width="@dimen/margin_20"
-        android:layout_height="@dimen/margin_20"
-        android:layout_marginTop="16dp"
+        android:layout_width="@dimen/progress_bar_width"
+        android:layout_height="@dimen/progress_bar_height"
+        android:layout_marginTop="@dimen/margin_medium"
         android:visibility="gone"
         app:SpinKit_Color="@color/pink2"
         app:layout_constraintEnd_toEndOf="parent"

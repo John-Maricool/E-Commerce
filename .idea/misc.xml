@@ -45,6 +45,7 @@
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/yellow.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/activity_ecommerce.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/adverts_single_item.xml" value="0.22" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/blue_view.xml" value="0.22395833333333334" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/chat_fragment.xml" value="0.18" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/chat_list_fragment.xml" value="0.19" />
@@ -52,12 +53,14 @@
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/chat_main_single_item.xml" value="0.16" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/chat_main_single_item_left.xml" value="0.18" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/feedback_list_item.xml" value="0.16" />
-        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/followers_single_item.xml" value="0.13848684210526316" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/filtered_list_fragment.xml" value="0.25" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/followers_single_item.xml" value="0.21" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_adverts.xml" value="0.15" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_buy_product.xml" value="0.13993055555555556" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_change_email_and_password.xml" value="0.14144736842105263" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_complete_registration.xml" value="0.14144736842105263" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_contact_details.xml" value="0.15" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_edit_product.xml" value="0.1838392475416845" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_favorite.xml" value="0.16" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_feedback_list.xml" value="0.12" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_feedbact.xml" value="0.1" />
@@ -69,14 +72,16 @@
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_picture.xml" value="0.14144736842105263" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_product_detail.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_profile.xml" value="0.14" />
-        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_register.xml" value="0.15" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_register.xml" value="0.2" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_report.xml" value="0.14144736842105263" />
-        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_sell.xml" value="0.15" />
-        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_seller.xml" value="0.15" />
-        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/oracle.xml" value="0.22395833333333334" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_sell.xml" value="0.14" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/fragment_seller.xml" value="0.22" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/oracle.xml" value="0.16" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/progress_bar_layout.xml" value="0.1838392475416845" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/recycler_single_item.xml" value="0.18" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/slider_product_image.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/smaller_blue_view.xml" value="0.22395833333333334" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/menu/adverts_menu.xml" value="0.15477293790546803" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/menu/bottom_nav.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/menu/favorites.xml" value="0.13848684210526316" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/menu/favorites_added.xml" value="0.14144736842105263" />

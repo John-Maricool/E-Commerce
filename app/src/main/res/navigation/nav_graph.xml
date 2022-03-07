@@ -13,12 +13,20 @@
         <action
             android:id="@+id/action_profileFragment_to_feedbackFragment"
             app:destination="@id/feedbackFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_followersFragment"
+            app:destination="@id/followersFragment"
+            app:launchSingleTop="true" />
     </fragment>
     <fragment
         android:id="@+id/advertsFragment"
         android:name="com.maricoolsapps.e_commerce.ui.product_ui.adverts.AdvertsFragment"
         android:label="fragment_adverts"
-        tools:layout="@layout/fragment_adverts" />
+        tools:layout="@layout/fragment_adverts" >
+        <action
+            android:id="@+id/action_advertsFragment_to_editProductFragment"
+            app:destination="@id/editProductFragment" />
+    </fragment>
     <action
         android:id="@+id/action_productDetailFragment_to_pictureFragment"
         app:destination="@id/pictureFragment" />
@@ -41,11 +49,7 @@
         android:id="@+id/favoriteFragment"
         android:name="com.maricoolsapps.e_commerce.ui.product_ui.favorites.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" >
-        <action
-            android:id="@+id/action_favoriteFragment_to_productDetailFragment"
-            app:destination="@id/productDetailFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.maricoolsapps.e_commerce.ui.product_ui.main_screen.MainFragment"
@@ -59,7 +63,13 @@
         android:id="@+id/sellFragment"
         android:name="com.maricoolsapps.e_commerce.ui.product_ui.sell.SellFragment"
         android:label="fragment_sell"
-        tools:layout="@layout/fragment_sell" />
+        tools:layout="@layout/fragment_sell" >
+        <action
+            android:id="@+id/action_sellFragment_to_advertsFragment"
+            app:destination="@id/advertsFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true" />
+    </fragment>
     <action
         android:id="@+id/action_profileFragment_to_feedbackFragment"
         app:destination="@id/feedbackFragment" />
@@ -70,11 +80,7 @@
         android:id="@+id/contactDetailsFragment"
         android:name="com.maricoolsapps.e_commerce.ui.product_ui.contact_details.ContactDetailsFragment"
         android:label="fragment_contact_details"
-        tools:layout="@layout/fragment_contact_details">
-        <action
-            android:id="@+id/action_contactDetailsFragment_to_changeEmailAndPassword"
-            app:destination="@id/changeEmailAndPassword" />
-    </fragment>
+        tools:layout="@layout/fragment_contact_details"/>
     <fragment
         android:id="@+id/changeEmailAndPassword"
         android:name="com.maricoolsapps.e_commerce.ui.product_ui.change_email.ChangeEmailFragment"
@@ -101,12 +107,6 @@
             android:name="ownerId"
             android:defaultValue="Admin"
             app:argType="string" />
-        <action
-            android:id="@+id/action_sellerFragment_to_productDetailFragment"
-            app:destination="@id/productDetailFragment" />
-        <action
-            android:id="@+id/action_sellerFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
         <action
             android:id="@+id/action_sellerFragment_to_followersFragment"
             app:destination="@id/followersFragment" />
@@ -152,9 +152,6 @@
         <action
             android:id="@+id/action_productDetailFragment_to_feedbackListFragment"
             app:destination="@id/feedbackListFragment" />
-        <action
-            android:id="@+id/action_productDetailFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
     </fragment>
     <action
         android:id="@+id/action_sellerFragment_to_productDetailFragment"
@@ -162,6 +159,11 @@
     <action
         android:id="@+id/go_to_productDetails"
         app:destination="@+id/productDetailFragment"/>
+    <action
+        android:id="@+id/go_to_chat"
+        app:popUpToInclusive="true"
+        app:popUpTo="@id/chatListFragment"
+        app:destination="@+id/chatFragment"/>
     <action
         android:id="@+id/action_productDetailFragment_to_sellerFragment"
         app:destination="@id/sellerFragment" />
@@ -199,11 +201,7 @@
         android:id="@+id/chatListFragment"
         android:name="com.maricoolsapps.e_commerce.ui.product_ui.chat.ChatListFragment"
         android:label="chat_list_fragment"
-        tools:layout="@layout/chat_list_fragment" >
-        <action
-            android:id="@+id/action_chatListFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
-    </fragment>
+        tools:layout="@layout/chat_list_fragment" />
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.maricoolsapps.e_commerce.ui.product_ui.chat.ChatFragment"
@@ -221,5 +219,26 @@
         <argument
             android:name="ownerId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_followersFragment_to_sellerFragment"
+            app:destination="@id/sellerFragment"
+            app:launchSingleTop="true" />
     </fragment>
+    <fragment
+        android:id="@+id/editProductFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.product_ui.edit_product.EditProductFragment"
+        android:label="fragment_edit_product"
+        tools:layout="@layout/fragment_edit_product" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="brand"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/filteredListFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.product_ui.filter.FilteredListFragment"
+        android:label="filtered_list_fragment"
+        tools:layout="@layout/filtered_list_fragment" />
 </navigation>

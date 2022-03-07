@@ -20,9 +20,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_20"
+        android:layout_margin="@dimen/margin_medium"
         android:layout_marginBottom="50dp"
-        app:cardCornerRadius="@dimen/margin_10"
+        app:cardCornerRadius="@dimen/margin_very_small"
         android:id="@+id/card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,16 +31,16 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp">
+            android:layout_marginBottom="@dimen/margin_large">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="How was your experience?"
+                android:layout_margin="@dimen/margin_large"
+                android:text="@string/how_was_your_experience"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_30"
+                android:textSize="@dimen/text_size_large"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -69,42 +69,42 @@
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="@dimen/margin_large"
                     android:textColor="@drawable/radio_flat_text_selector"
                     android:button="@color/white"
                     android:drawableTop="@drawable/happy"
                     android:text="@string/happy"
-                    android:textSize="@dimen/text_size_20" />
+                    android:textSize="@dimen/text_size_large" />
 
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="@dimen/margin_large"
                     android:button="@color/white"
                     android:textColor="@drawable/radio_flat_text_selector"
                     android:drawableTop="@drawable/neutral"
                     android:text="@string/neutral"
-                    android:textSize="@dimen/text_size_20" />
+                    android:textSize="@dimen/text_size_large" />
 
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@drawable/radio_flat_text_selector"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="@dimen/margin_very_small"
                     android:button="@color/white"
                     android:drawableTop="@drawable/sad"
                     android:text="@string/sad"
-                    android:textSize="@dimen/text_size_20" />
+                    android:textSize="@dimen/text_size_large" />
 
             </RadioGroup>
 
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="@dimen/margin_20"
-                android:layout_marginTop="34dp"
-                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_height="@dimen/spinner_height"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
                 android:entries="@array/how_it_was"
                 android:gravity="bottom"
                 android:spinnerMode="dialog"
@@ -116,11 +116,10 @@
                 android:id="@+id/_feedback"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginBottom="@dimen/margin_large"
                 app:boxBackgroundColor="@color/white"
                 app:boxBackgroundMode="outline"
-                app:boxStrokeWidth="2dp"
                 app:errorTextColor="@color/pink2"
                 app:layout_constraintEnd_toEndOf="@+id/spinner"
                 app:layout_constraintStart_toStartOf="@+id/spinner"
@@ -141,7 +140,7 @@
         android:id="@+id/send"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="@dimen/margin_large"
         android:background="@drawable/pink"
         android:text="@string/send_feedback"
         android:textColor="@color/white"
@@ -150,14 +149,14 @@
         app:layout_constraintTop_toBottomOf="@id/card" />
 
     <com.github.ybq.android.spinkit.SpinKitView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/progress_bar_height"
+        android:layout_height="@dimen/progress_bar_height"
         app:SpinKit_Color="@color/pink2"
         android:id="@+id/progress_bar"
         app:SpinKit_Style="ChasingDots"
         app:layout_constraintTop_toBottomOf="@id/send"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_large"
         android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

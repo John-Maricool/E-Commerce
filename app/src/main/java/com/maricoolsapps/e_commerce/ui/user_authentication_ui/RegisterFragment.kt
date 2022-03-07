@@ -137,37 +137,13 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     }
 
     private fun hideLoginDetails() {
-        binding.apply {
-            userImage.toggleVisibility(true)
-            camera.toggleVisibility(true)
-            usernameField.toggleVisibility(true)
-            finish.toggleVisibility(true)
-            location.toggleVisibility(true)
-            number.toggleVisibility(true)
-            regions.toggleVisibility(true)
-
-            emailField.toggleVisibility(false)
-            passwordField.toggleVisibility(false)
-            reenterPasswordField.toggleVisibility(false)
-            next.toggleVisibility(false)
-        }
+        binding.secondHalf.toggleVisibility(true)
+        binding.firstHalf.toggleVisibility(false)
     }
 
     private fun showLoginDetails() {
-        binding.apply {
-            userImage.toggleVisibility(false)
-            camera.toggleVisibility(false)
-            usernameField.toggleVisibility(false)
-            finish.toggleVisibility(false)
-            location.toggleVisibility(false)
-            number.toggleVisibility(false)
-            regions.toggleVisibility(false)
-
-            emailField.toggleVisibility(true)
-            passwordField.toggleVisibility(true)
-            reenterPasswordField.toggleVisibility(true)
-            next.toggleVisibility(true)
-        }
+        binding.secondHalf.toggleVisibility(false)
+        binding.firstHalf.toggleVisibility(true)
     }
 
     override fun onDestroyView() {

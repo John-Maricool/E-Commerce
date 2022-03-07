@@ -22,11 +22,12 @@ import javax.inject.Inject
 
 class ChatListAdapter
 @Inject constructor(
-    @ApplicationContext var context: Context
+    @ApplicationContext var context: Context, val auth: FirebaseAuth,
 ) : RecyclerView.Adapter<ChatListAdapter.RecyclerViewHolder>() {
 
     private var chats: List<ChatList> = listOf()
     lateinit var listener: OnItemClickListener<ChatChannel>
+    private val userId = auth.currentUser?.uid
 
     inner class RecyclerViewHolder(var binding: ChatListSingleItemBinding) :
         RecyclerView.ViewHolder(binding.root){
@@ -57,6 +58,9 @@ class ChatListAdapter
             userName.text = chat.user.name
             if (chat.lastMessages.type == MessageType.TEXT) {
                 lastMessage.text = chat.lastMessages.text
+            }
+            if (chat.lastMessages.senderId != userId && !chat.lastMessages.seen){
+                lastMessage.setTextColor(context.resources.getColor(R.color.greem, null))
             }
             lastMessageTime.text = chat.lastMessages.time.toTimeAgo()
         }

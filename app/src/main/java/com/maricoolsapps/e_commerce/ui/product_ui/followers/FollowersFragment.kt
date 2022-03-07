@@ -4,31 +4,37 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.maricoolsapps.e_commerce.R
+import com.maricoolsapps.e_commerce.data.adapters.FollowersListAdapter
+import com.maricoolsapps.e_commerce.data.interfaces.OnItemClickListener
+import com.maricoolsapps.e_commerce.data.model.CarBuyerOrSeller
 import com.maricoolsapps.e_commerce.databinding.FragmentFollowersBinding
+import com.maricoolsapps.e_commerce.utils.Status
+import com.maricoolsapps.e_commerce.utils.displaySnack
+import com.maricoolsapps.e_commerce.utils.toggleVisibility
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class FollowersFragment : Fragment(R.layout.fragment_followers){
-    //,
-    //OnItemClickListener<CarBuyerOrSeller>, TabLayout.OnTabSelectedListener {
+class FollowersFragment : Fragment(R.layout.fragment_followers),
+    OnItemClickListener<CarBuyerOrSeller>, TabLayout.OnTabSelectedListener {
     private var _binding: FragmentFollowersBinding? = null
     private val binding get() = _binding!!
     private val model: FollowersViewModel by viewModels()
     private val args: FollowersFragmentArgs by navArgs()
 
-   /* @Inject
+    @Inject
     lateinit var adapterFollowers: FollowersListAdapter
-*/
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentFollowersBinding.bind(view)
         binding.recyclerView.apply {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(activity)
         }
 
         initTabs()
@@ -43,58 +49,28 @@ class FollowersFragment : Fragment(R.layout.fragment_followers){
         binding.tabs.addTab(twoTab)
     }
 
-    /*override fun onStart() {
+    override fun onStart() {
         super.onStart()
-        if (args.id == null) {
-            followersListeners(model.user)
-        } else {
-            followersListeners(args.id!!)
-        }
+        model.getFollowers(args.ownerId)
+        observeLiveData()
         binding.tabs.addOnTabSelectedListener(this)
         adapterFollowers.setOnItemClickListener(this)
     }
 
-    private fun followersListeners(id: String) {
-        binding.textError.visibility = View.GONE
-        binding.progressBar.visibility = View.VISIBLE
-        model.getFollowers(id).observe(viewLifecycleOwner) {
-            when (it.status) {
-                Status.SUCCESS -> {
-                    binding.progressBar.visibility = View.GONE
-                    Log.d("dff", it.data.toString())
-                    Log.d("dff", it.data?.size.toString())
-                    adapterFollowers.getUsers(it.data!!)
-                    binding.recyclerView.adapter = adapterFollowers
-                }
-                Status.ERROR -> {
-                    binding.textError.visibility = View.VISIBLE
-                    binding.progressBar.visibility = View.GONE
-                    binding.textError.text = it.message
-                }
-                Status.LOADING -> TODO()
+    private fun observeLiveData() {
+        model.result.observe(viewLifecycleOwner) {
+            if (it != null) {
+                adapterFollowers.getUsers(it)
+                binding.textError.toggleVisibility(false)
+                binding.recyclerView.adapter = adapterFollowers
             }
         }
-    }
-
-    private fun followingListeners(id: String) {
-        binding.textError.visibility = View.GONE
-        binding.progressBar.visibility = View.VISIBLE
-        model.getFollowing(id).observe(viewLifecycleOwner) {
-            when (it.status) {
-                Status.SUCCESS -> {
-                    Log.d("dff", it.data.toString())
-                    Log.d("dff", it.data?.size.toString())
-                    binding.progressBar.visibility = View.GONE
-                    adapterFollowers.getUsers(it.data!!)
-                    binding.recyclerView.adapter = adapterFollowers
-                }
-                Status.ERROR -> {
-                    binding.textError.visibility = View.VISIBLE
-                    binding.progressBar.visibility = View.GONE
-                    binding.textError.text = it.message
-                }
-                Status.LOADING -> TODO()
-            }
+        model.defaultRepo.dataLoading.observe(viewLifecycleOwner) {
+            binding.progressBar.toggleVisibility(it)
+        }
+        model.defaultRepo.resultError.observe(viewLifecycleOwner) {
+            binding.textError.text = it
+            binding.textError.toggleVisibility(true)
         }
     }
 
@@ -111,28 +87,25 @@ class FollowersFragment : Fragment(R.layout.fragment_followers){
 
     override fun onTabSelected(tab: TabLayout.Tab?) {
         val value = tab?.text.toString()
-        if (args.id == null) {
-            if (value == "Followers") {
-                followersListeners(model.user)
-            } else {
-                followingListeners(model.user)
-            }
+        if (value == "Followers") {
+            model.getFollowers(args.ownerId)
         } else {
-            if (value == "Followers") {
-                followersListeners(args.id!!)
-            } else {
-                followingListeners(args.id!!)
-            }
+            model.getFollowing(args.ownerId)
         }
     }
 
     override fun onTabUnselected(tab: TabLayout.Tab?) {
-
+        adapterFollowers.getUsers(listOf())
     }
 
     override fun onTabReselected(tab: TabLayout.Tab?) {
-
-    }*/
+        val value = tab?.text.toString()
+        if (value == "Followers") {
+            model.getFollowers(args.ownerId)
+        } else {
+            model.getFollowing(args.ownerId)
+        }
+    }
 }
 
 

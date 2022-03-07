@@ -19,15 +19,15 @@ import javax.inject.Inject
 @HiltViewModel
 class AdvertsViewModel
 @Inject constructor(
-    val auth: FirebaseAuth,
+    val auth: ProfileChanges,
     val cloudQueries: CloudQueries,
     val defaultRepo: DefaultRepository
 ) : ViewModel() {
 
-    val user = auth.currentUser!!.uid
+    val user = auth.getUserUid()
 
-    private val _result = MutableLiveData<List<ProductModel>>()
-    val result: LiveData<List<ProductModel>> get() = _result
+    private val _result = MutableLiveData<List<ProductModel>?>()
+    val result: LiveData<List<ProductModel>?> get() = _result
 
 
     fun getCarsFromSeller(brand: String){
@@ -36,7 +36,16 @@ class AdvertsViewModel
                 defaultRepo.onResult(it)
                 when(it.status){
                     Status.SUCCESS -> {_result.postValue(it.data)}
+                    else -> {_result.postValue(null)}
                 }
+            }
+        }
+    }
+
+    fun deleteProduct(id: String, brand: String){
+        viewModelScope.launch(IO){
+            cloudQueries.removeProduct(user, brand, id){
+                defaultRepo.onResult(it)
             }
         }
     }

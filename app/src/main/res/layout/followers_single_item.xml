@@ -3,11 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="3dp"
+    android:layout_margin="@dimen/margin_very_small"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card"
-    android:background="@color/grey"
-    app:cardCornerRadius="@dimen/margin_12"
+    app:cardCornerRadius="@dimen/margin_medium"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,10 +15,11 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="@dimen/button_height"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_very_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -28,36 +28,42 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:gravity="start"
+            android:textColor="@color/black"
             android:maxLines="1"
-            android:textSize="@dimen/text_size_15"
+            android:textSize="@dimen/text_size_normal"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/image"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/image"
             tools:ignore="RtlHardcoded"
             tools:text="USername" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/email"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_very_small"
             android:gravity="start"
-            android:maxLines="1"
-            android:textSize="@dimen/text_size_15"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_normal"
+            app:layout_constraintEnd_toStartOf="@+id/follow_btn"
             app:layout_constraintStart_toStartOf="@+id/name"
             app:layout_constraintTop_toBottomOf="@+id/name"
             tools:ignore="RtlHardcoded"
-            tools:text="ebukaikenwa" />
+            tools:text="ebukaikenwashjsbshsuhssbsj" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/follow_btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_height="35dp"
+            android:textSize="@dimen/text_size_normal"
+            android:layout_marginEnd="@dimen/margin_medium"
             android:background="@drawable/blue_border"
             android:text="@string/follow"
+            android:textAllCaps="false"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

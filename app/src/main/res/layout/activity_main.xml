@@ -28,8 +28,9 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
             style="@style/Widget.App.BottomNavigationView"
+            android:elevation="10dp"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/bottom_nav_size"
             app:itemRippleColor="@color/pink"
             app:itemIconTint="@drawable/bottom_nav"
             app:labelVisibilityMode="selected"

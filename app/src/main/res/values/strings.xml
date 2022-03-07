@@ -57,7 +57,7 @@
     <string name="supported_formats">Supported formats are .jpg, .gif, and .png. Each picture must not exceed 5Mb</string>
     <string name="post_ad">Post Ad</string>
     <string name="notice_on_posting_ad">By clicking on Post Ad, you accept the Terms of use. Your email, phone number and name will be gotten from your profile details</string>
-    <string name="enter_amount_in">Enter amount in $ *</string>
+    <string name="enter_amount_in">Enter price</string>
     <string name="previous">PREVIOUS</string>
     <string name="see_seller">See Seller</string>
     <string name="download">Download</string>
@@ -100,6 +100,15 @@
     <string name="negative">Negative</string>
     <string name="messages">Messages</string>
     <string name="select_the_brand">Select the brand</string>
+    <string name="how_was_your_experience">How was your experience?</string>
+    <string name="delete_product">Delete Product</string>
+    <string name="edit_product">Edit Product</string>
+    <string name="product_details">Product Details</string>
+    <string name="update">Update</string>
+    <string name="price_ngn">Price NGN</string>
+    <string name="min_500000">Min 500000</string>
+    <string name="show_adverts">SHOW ADVERTS</string>
+    <string name="max_500000000">Max 5000000</string>
     <string-array name="sorts">
         <item>Newest</item>
         <item>Cheapest First</item>
@@ -161,7 +170,8 @@
     <string-array name="car_state">
         <item>Car State *</item>
         <item>Available</item>
-        <item>Aunction</item>
+        <item>Auction</item>
+        <item>Sold</item>
     </string-array>
 
     <string-array name="car_condition">

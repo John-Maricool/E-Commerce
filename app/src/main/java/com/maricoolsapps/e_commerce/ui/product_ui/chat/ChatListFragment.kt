@@ -55,7 +55,7 @@ class ChatListFragment : Fragment(R.layout.chat_list_fragment), OnItemClickListe
         }
         model.click.observe(viewLifecycleOwner) {
             if (it != null) {
-                val action = ChatListFragmentDirections.actionChatListFragmentToChatFragment(it)
+                val action = ChatListFragmentDirections.goToChat(it)
                 findNavController().navigate(action)
             }
         }

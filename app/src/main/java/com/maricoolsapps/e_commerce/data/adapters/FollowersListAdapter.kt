@@ -1,6 +1,7 @@
 package com.maricoolsapps.e_commerce.data.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,16 +12,16 @@ import com.maricoolsapps.e_commerce.data.interfaces.OnItemClickListener
 import com.maricoolsapps.e_commerce.data.model.CarBuyerOrSeller
 import com.maricoolsapps.e_commerce.data.repositories.FollowersStatus
 import com.maricoolsapps.e_commerce.utils.Status
+import com.maricoolsapps.e_commerce.utils.setResourceCenterCrop
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-/*
-class FollowersListAdapter
-@Inject constructor(@ApplicationContext val context: Context, val status: FollowersStatus):
-    RecyclerView.Adapter<FollowersListAdapter.RecyclerViewHolder>() {
 
+class FollowersListAdapter
+@Inject constructor(@ApplicationContext val context: Context, val status: FollowersStatus) :
+    RecyclerView.Adapter<FollowersListAdapter.RecyclerViewHolder>() {
 
     private var user: List<CarBuyerOrSeller> = listOf()
 
@@ -41,22 +42,32 @@ class FollowersListAdapter
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         val person = user[position]
-
-        status.scope.launch(Main) {
-            when(status.isUserFollowed(person.id).status){
-                Status.SUCCESS -> {holder.changeBtnToFollowed()}
-                Status.ERROR -> {holder.changeBtnToDefault()}
-                Status.LOADING -> TODO()
+        status.isUserFollowed(person.id) {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    Log.d("djknaj", it.data.toString())
+                    holder.changeBtnToFollowed()
+                    /*holder.binding.apply {
+                        followBtn.setTextColor(
+                            context.resources.getColor(
+                                R.color.white,
+                                null
+                            )
+                        )
+                        followBtn.text = "Followed"
+                        followBtn.background =
+                            context.resources.getDrawable(R.drawable.blue_solid, null)
+                    }*/
+                }
+                else -> {
+                    holder.changeBtnToDefault()
+                }
             }
         }
         holder.binding.apply {
             name.text = person.name
             email.text = person.email
-            Glide.with(context)
-                .load(person.image)
-                .circleCrop()
-                .fitCenter()
-                .into(image)
+            image.setResourceCenterCrop(person.image!!)
         }
     }
 
@@ -72,44 +83,54 @@ class FollowersListAdapter
     inner class RecyclerViewHolder(var binding: FollowersSingleItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
-            val person = user[absoluteAdapterPosition]
             binding.followBtn.setOnClickListener {
-                if (binding.followBtn.text == "Followed"){
-                    status.scope.launch(Main) {
-                        when(status.unfollowUser(person.id).status){
-                            Status.SUCCESS -> {changeBtnToDefault()}
-                            Status.ERROR -> {}
-                            Status.LOADING -> TODO()
+                if (bindingAdapterPosition != RecyclerView.NO_POSITION) {
+                    val person = user[bindingAdapterPosition]
+                    if (binding.followBtn.text == "Followed") {
+                        status.unfollowUser(person.id) {
+                            when (it.status) {
+                                Status.SUCCESS -> {
+                                    changeBtnToDefault()
+                                }
+                                else -> {
+                                }
+                            }
                         }
-                    }
-                }else{
-                    status.scope.launch(Main) {
-                        when(status.followUser(person.id).status){
-                            Status.SUCCESS -> {changeBtnToFollowed()}
-                            Status.ERROR -> {}
-                            Status.LOADING -> TODO()
+                    } else {
+                        status.followUser(person.id) {
+                            when (it.status) {
+                                Status.SUCCESS -> {
+                                    changeBtnToFollowed()
+                                }
+                                else -> {
+                                }
+                            }
                         }
                     }
                 }
             }
             binding.card.setOnClickListener {
-                listener.onItemClick(person.id, null)
+                if (bindingAdapterPosition != RecyclerView.NO_POSITION) {
+                    val person = user[bindingAdapterPosition]
+                    listener.onItemClick(person.id, null)
+                }
             }
         }
 
-        fun changeBtnToFollowed(){
+         fun changeBtnToFollowed() {
             binding.followBtn.setTextColor(context.resources.getColor(R.color.white, null))
             binding.followBtn.text = "Followed"
-            binding.followBtn.background = context.resources.getDrawable(R.drawable.blue_solid, null)
+            binding.followBtn.background =
+                context.resources.getDrawable(R.drawable.blue_solid, null)
         }
 
-        fun changeBtnToDefault(){
+         fun changeBtnToDefault() {
             binding.followBtn.setTextColor(context.resources.getColor(R.color.blue, null))
             binding.followBtn.text = "Follow"
-            binding.followBtn.background = context.resources.getDrawable(R.drawable.blue_border, null)
+            binding.followBtn.background =
+                context.resources.getDrawable(R.drawable.blue_border, null)
         }
-
     }
 
 
-}*/
+}

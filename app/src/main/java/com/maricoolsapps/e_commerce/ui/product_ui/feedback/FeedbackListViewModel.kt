@@ -15,8 +15,8 @@ import javax.inject.Inject
 class FeedbackListViewModel
 @Inject constructor(val defaultRepo: DefaultRepository, val cloud: CloudQueries) : ViewModel() {
 
-    private var _done = MutableLiveData<List<FeedbackWithUser>>()
-    val done: LiveData<List<FeedbackWithUser>> get() = _done
+    private var _done = MutableLiveData<List<FeedbackWithUser>?>()
+    val done: LiveData<List<FeedbackWithUser>?> get() = _done
 
     fun getFeedbackWithUser(brand: String, id: String){
         viewModelScope.launch {

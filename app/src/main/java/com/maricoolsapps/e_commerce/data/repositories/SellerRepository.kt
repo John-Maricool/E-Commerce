@@ -1,5 +1,7 @@
 package com.maricoolsapps.e_commerce.data.repositories
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.maricoolsapps.e_commerce.data.db.CloudQueries
 import com.maricoolsapps.e_commerce.data.model.CarSellerProfile
 import com.maricoolsapps.e_commerce.utils.Resource
@@ -9,14 +11,13 @@ import javax.inject.Inject
 class SellerRepository
 @Inject constructor(val cloud: CloudQueries) {
 
-
     suspend fun sellerProfile(
         userId: String,
         userToFollow: String,
         b: (Resource<CarSellerProfile>) -> Unit
     ) {
         b.invoke(Resource.loading())
-        val sellerProfile = CarSellerProfile(null, 0, 0, null)
+        val sellerProfile = CarSellerProfile(null, null)
         try {
             cloud.getSeller(userToFollow) {
                 when (it.status) {
@@ -24,20 +25,8 @@ class SellerRepository
                     else -> sellerProfile.seller = null
                 }
             }
-            cloud.getNumberOfFollowers(userToFollow) {
-                when (it.status) {
-                    Status.SUCCESS -> sellerProfile.followers = it.data
-                    else -> sellerProfile.followers = 0
-                }
-            }
-            cloud.getNumberOfFollowing(userToFollow) {
-                when (it.status) {
-                    Status.SUCCESS -> sellerProfile.following = it.data
-                    else -> sellerProfile.following = 0
-                }
-            }
             cloud.isUserFollowed(userId, userToFollow) {
-                when (it.status) {
+                when(it.status) {
                     Status.SUCCESS -> sellerProfile.isFollowing = it.data
                     else -> sellerProfile.isFollowing = false
                 }
@@ -47,6 +36,5 @@ class SellerRepository
             b.invoke(Resource.error(e.toString(), null))
         }
     }
-
 
 }

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="@dimen/margin_5"
+    android:layout_margin="@dimen/margin_very_small"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -12,9 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:id="@+id/constraint"
-        android:layout_margin="@dimen/margin_5"
+        android:layout_margin="@dimen/margin_very_small"
         android:background="@drawable/chat_left"
-        android:padding="@dimen/margin_5">
+        android:padding="@dimen/margin_very_small">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text"
@@ -22,17 +22,17 @@
             android:layout_height="wrap_content"
             android:gravity="start"
             android:inputType="textMultiLine"
-            android:maxWidth="200dp"
+            android:maxWidth="@dimen/chat_max_width"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_15"
+            android:textSize="@dimen/text_size_normal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text=" sijbds  sysbdbhsd shbshd s shdbs s hshs sdhbsi jsd whats up wirh you ui that ama nam u just dey whhine me ab sdj" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="@dimen/chat_img_size"
+            android:layout_height="@dimen/chat_img_size"
             android:adjustViewBounds="true"
             android:gravity="start"
             android:scaleType="fitCenter"
@@ -44,10 +44,10 @@
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_5"
+            android:layout_marginStart="@dimen/margin_very_small"
             android:gravity="start"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_15"
+            android:textSize="@dimen/text_size_normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text"
             app:layout_constraintTop_toBottomOf="@+id/text"
@@ -55,13 +55,13 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/message_state"
-            android:layout_width="10dp"
-            android:layout_height="7dp"
-            android:layout_marginStart="@dimen/margin_5"
-            android:layout_marginTop="@dimen/margin_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_very_small"
+            android:layout_marginTop="@dimen/margin_very_small"
             android:gravity="start"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_12"
+            android:textSize="@dimen/text_size_normal"
             android:textStyle="italic"
             app:layout_constraintStart_toEndOf="@+id/time"
             app:layout_constraintTop_toTopOf="@+id/time"

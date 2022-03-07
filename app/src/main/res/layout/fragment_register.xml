@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,10 +10,10 @@
       android:id="@+id/create_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="32dp"
+      android:layout_marginTop="@dimen/margin_large"
       android:text="@string/create_new_account"
       android:textColor="@color/black"
-      android:textSize="@dimen/size_20"
+      android:textSize="@dimen/text_size_large"
       android:textStyle="normal|bold"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.497"
@@ -24,7 +23,7 @@
   <View
       android:id="@+id/view"
       android:layout_width="wrap_content"
-      android:layout_height="50dp"
+      android:layout_height="@dimen/spinner_height"
       android:background="@drawable/blue"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
@@ -32,8 +31,8 @@
 
   <androidx.appcompat.widget.AppCompatImageView
       android:id="@+id/user_image"
-      android:layout_width="100dp"
-      android:layout_height="100dp"
+      android:layout_width="@dimen/image_normal_size"
+      android:layout_height="@dimen/image_normal_size"
       android:layout_marginTop="40dp"
       android:src="@drawable/ic_account"
       app:layout_constraintEnd_toEndOf="parent"
@@ -42,9 +41,9 @@
       app:layout_constraintTop_toBottomOf="@+id/create_text" />
 
   <androidx.appcompat.widget.AppCompatImageView
-      android:layout_width="30dp"
       android:id="@+id/camera"
-      android:layout_height="30dp"
+      android:layout_width="@dimen/camera_size"
+      android:layout_height="@dimen/camera_size"
       android:src="@drawable/ic_photo_camera"
       app:layout_constraintBottom_toBottomOf="@+id/user_image"
       app:layout_constraintEnd_toEndOf="@+id/user_image" />
@@ -52,13 +51,12 @@
   <com.google.android.material.textfield.TextInputLayout
       android:id="@+id/username_field"
       android:layout_width="0dp"
-      app:errorTextColor="@color/pink2"
-      app:boxStrokeWidth="2dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/margin_medium"
+      android:layout_marginEnd="@dimen/margin_medium"
       app:boxBackgroundColor="@color/white"
       app:boxBackgroundMode="outline"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="16dp"
+      app:errorTextColor="@color/pink2"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/user_image">
@@ -75,12 +73,11 @@
       android:id="@+id/_number"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="16dp"
+      android:layout_marginStart="@dimen/margin_medium"
+      android:layout_marginTop="@dimen/margin_very_small"
+      android:layout_marginEnd="@dimen/margin_medium"
       app:boxBackgroundColor="@color/white"
       app:boxBackgroundMode="outline"
-      app:boxStrokeWidth="2dp"
       app:errorTextColor="@color/pink2"
       app:layout_constraintEnd_toEndOf="@+id/username_field"
       app:layout_constraintStart_toStartOf="@+id/username_field"
@@ -98,13 +95,12 @@
       android:id="@+id/_location"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:layout_marginBottom="@dimen/margin_50"
+      android:layout_marginStart="@dimen/margin_medium"
+      android:layout_marginTop="@dimen/margin_very_small"
+      android:layout_marginEnd="@dimen/margin_medium"
+      android:layout_marginBottom="@dimen/margin_large"
       app:boxBackgroundColor="@color/white"
       app:boxBackgroundMode="outline"
-      app:boxStrokeWidth="2dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="16dp"
       app:errorTextColor="@color/pink2"
       app:layout_constraintEnd_toEndOf="@+id/_number"
       app:layout_constraintStart_toStartOf="@+id/_number"
@@ -122,10 +118,10 @@
       android:id="@+id/regions"
       style="@style/ThemeOverlay.AppCompat.Light"
       android:layout_width="match_parent"
-      android:layout_height="50dp"
-      android:layout_marginTop="@dimen/margin_20"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="16dp"
+      android:layout_height="@dimen/spinner_height"
+      android:layout_marginStart="@dimen/margin_medium"
+      android:layout_marginTop="@dimen/margin_large"
+      android:layout_marginEnd="@dimen/margin_medium"
       android:background="@drawable/border_black"
       android:backgroundTintMode="src_in"
       android:entries="@array/car_town"
@@ -140,26 +136,25 @@
 
   <com.google.android.material.textfield.TextInputLayout
       android:id="@+id/email_field"
-      android:visibility="gone"
-      app:errorTextColor="@color/pink2"
-      app:boxStrokeWidth="2dp"
-      app:boxBackgroundColor="@color/white"
-      app:boxBackgroundMode="filled"
-      tools:visibility="gone"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:layout_marginTop="@dimen/margin_50"
-      android:layout_marginEnd="16dp"
+      android:layout_marginStart="@dimen/margin_medium"
+      android:layout_marginTop="@dimen/margin_large"
+      android:layout_marginEnd="@dimen/margin_medium"
+      android:visibility="gone"
+      app:boxBackgroundColor="@color/white"
+      app:boxBackgroundMode="filled"
+      app:errorTextColor="@color/pink2"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/create_text">
+      app:layout_constraintTop_toBottomOf="@+id/create_text"
+      tools:visibility="gone">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_20"
+        android:layout_margin="@dimen/margin_large"
         android:hint="@string/email_hint"
         android:inputType="textEmailAddress" />
   </com.google.android.material.textfield.TextInputLayout>
@@ -167,27 +162,26 @@
 
   <com.google.android.material.textfield.TextInputLayout
       android:id="@+id/password_field"
-      android:visibility="gone"
-      tools:visibility="gone"
-      app:errorTextColor="@color/pink2"
-      app:boxStrokeWidth="2dp"
-      app:boxBackgroundColor="@color/white"
-      app:boxBackgroundMode="filled"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="16dp"
+      android:layout_marginStart="@dimen/margin_medium"
+      android:layout_marginEnd="@dimen/margin_medium"
+      android:visibility="gone"
+      app:boxBackgroundColor="@color/white"
+      app:boxBackgroundMode="filled"
+      app:errorTextColor="@color/pink2"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/email_field"
       app:passwordToggleEnabled="true"
-      app:passwordToggleTint="@color/black">
+      app:passwordToggleTint="@color/black"
+      tools:visibility="gone">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_20"
+        android:layout_margin="@dimen/margin_large"
         android:hint="@string/Enter_password"
         android:inputType="textPassword"
         app:passwordToggleEnabled="true"
@@ -198,76 +192,75 @@
   <com.google.android.material.textfield.TextInputLayout
       android:id="@+id/reenter_password_field"
       android:layout_width="0dp"
-      app:errorTextColor="@color/pink2"
-      app:boxStrokeWidth="2dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/margin_medium"
+      android:layout_marginEnd="@dimen/margin_medium"
+      android:visibility="gone"
       app:boxBackgroundColor="@color/white"
       app:boxBackgroundMode="filled"
-      android:visibility="gone"
-      tools:visibility="gone"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="16dp"
+      app:errorTextColor="@color/pink2"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/password_field"
       app:passwordToggleEnabled="true"
-      app:passwordToggleTint="@color/black">
+      app:passwordToggleTint="@color/black"
+      tools:visibility="gone">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/reenter_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_20"
+        android:layout_margin="@dimen/margin_large"
         android:hint="@string/reenter_password"
         android:inputType="textPassword" />
   </com.google.android.material.textfield.TextInputLayout>
 
   <androidx.appcompat.widget.AppCompatImageView
       android:id="@+id/next"
-      android:layout_width="84dp"
-      android:visibility="gone"
-      tools:visibility="gone"
-      android:layout_height="57dp"
-      android:layout_marginTop="16dp"
+      android:layout_width="@dimen/image_size_small"
+      android:layout_height="@dimen/image_size_small"
+      android:layout_marginTop="@dimen/margin_medium"
       android:contentDescription="@string/next"
       android:src="@drawable/ic_next"
+      android:visibility="gone"
       app:layout_constraintEnd_toEndOf="@+id/reenter_password_field"
-      app:layout_constraintTop_toBottomOf="@+id/reenter_password_field" />
+      app:layout_constraintTop_toBottomOf="@+id/reenter_password_field"
+      tools:visibility="gone" />
 
   <androidx.appcompat.widget.AppCompatButton
       android:id="@+id/finish"
-      android:layout_width="84dp"
-      android:layout_height="57dp"
-      android:layout_marginTop="16dp"
-      android:layout_marginEnd="32dp"
+      android:layout_width="@dimen/button_width"
+      android:layout_height="@dimen/button_height"
+      android:layout_marginTop="@dimen/margin_medium"
+      android:layout_marginEnd="@dimen/margin_large"
       android:background="@drawable/pink"
       android:text="@string/finish"
       android:textColor="@color/white"
-      android:textSize="@dimen/text_size_20"
+      android:textSize="@dimen/text_size_large"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/regions" />
 
   <com.github.ybq.android.spinkit.SpinKitView
-  android:id="@+id/progress_bar"
-  style="@style/SpinKitView.Large.Circle"
-  android:layout_width="@dimen/margin_20"
-  android:layout_height="@dimen/margin_20"
-  android:layout_marginTop="16dp"
-  android:visibility="gone"
-  app:SpinKit_Color="@color/pink2"
-  app:layout_constraintEnd_toEndOf="parent"
-  app:layout_constraintHorizontal_bias="0.53"
-  app:layout_constraintStart_toStartOf="parent"
-  app:layout_constraintTop_toBottomOf="@+id/finish" />
+      android:id="@+id/progress_bar"
+      style="@style/SpinKitView.Large.Circle"
+      android:layout_width="@dimen/margin_large"
+      android:layout_height="@dimen/margin_large"
+      android:layout_marginTop="@dimen/margin_medium"
+      android:visibility="gone"
+      app:SpinKit_Color="@color/pink2"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.53"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/finish" />
 
   <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/already_have_an_account"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="64dp"
+      android:layout_marginStart="@dimen/margin_large"
       android:text="@string/already_have_an_account"
       android:textColor="@color/white"
-      android:textSize="@dimen/text_size_15"
+      android:textSize="@dimen/text_size_normal"
       app:layout_constraintBottom_toBottomOf="@+id/view"
       app:layout_constraintStart_toStartOf="@id/view"
       app:layout_constraintTop_toTopOf="@+id/view" />
@@ -276,11 +269,24 @@
       android:id="@+id/log_in"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="8dp"
+      android:layout_marginStart="@dimen/margin_very_small"
       android:text="@string/log_in"
       android:textColor="@color/white"
-      android:textSize="@dimen/text_size_15"
+      android:textSize="@dimen/text_size_normal"
       android:textStyle="bold"
       app:layout_constraintBottom_toBottomOf="@+id/already_have_an_account"
       app:layout_constraintStart_toEndOf="@+id/already_have_an_account" />
+
+  <androidx.constraintlayout.widget.Group
+      android:id="@+id/first_half"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:visibility="gone"
+      app:constraint_referenced_ids="email_field,next,password_field,reenter_password_field" />
+
+  <androidx.constraintlayout.widget.Group
+      android:id="@+id/second_half"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:constraint_referenced_ids="regions,username_field,user_image,_location,camera,_number,finish" />
 </androidx.constraintlayout.widget.ConstraintLayout>

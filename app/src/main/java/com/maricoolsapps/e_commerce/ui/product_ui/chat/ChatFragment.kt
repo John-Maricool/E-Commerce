@@ -65,14 +65,13 @@ class ChatFragment : Fragment(R.layout.chat_fragment) {
         observeLiveData()
         clickListeners()
 
-         activity?.onBackPressedDispatcher?.addCallback(
+      /*   activity?.onBackPressedDispatcher?.addCallback(
              viewLifecycleOwner,
              object : OnBackPressedCallback(true) {
                  override fun handleOnBackPressed() {
                     findNavController().popBackStack(R.id.chatListFragment, true)
-                    // findNavController().popBackStack(R.id.chatFragment, true)
                  }
-             })
+             })*/
     }
 
     private fun toolBarInit() {

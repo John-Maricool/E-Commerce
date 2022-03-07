@@ -88,7 +88,7 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
         }
         model.channelCreated.observe(viewLifecycleOwner){
             if (it != null){
-              val action = ProductDetailFragmentDirections.actionProductDetailFragmentToChatFragment(it)
+              val action = ProductDetailFragmentDirections.goToChat(it)
                 findNavController().navigate(action)
             }
         }

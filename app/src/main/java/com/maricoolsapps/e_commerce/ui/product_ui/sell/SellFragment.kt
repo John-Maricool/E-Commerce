@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.maricoolsapps.e_commerce.databinding.FragmentSellBinding
 import com.maricoolsapps.e_commerce.data.model.Product
 import com.maricoolsapps.e_commerce.utils.*
+import java.util.*
 
 @AndroidEntryPoint
 class SellFragment : Fragment(R.layout.fragment_sell), AdapterView.OnItemSelectedListener {
@@ -68,6 +69,7 @@ class SellFragment : Fragment(R.layout.fragment_sell), AdapterView.OnItemSelecte
 
         _binding = FragmentSellBinding.bind(view)
 
+        binding.currencyOne.text = "₦"
         binding.image.setFactory {
             ImageView(activity)
         }

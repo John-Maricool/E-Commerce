@@ -4,6 +4,7 @@ import com.maricoolsapps.e_commerce.data.source.FirebaseFirestoreSource
 import com.maricoolsapps.e_commerce.data.model.*
 import android.content.Context
 import android.provider.ContactsContract
+import android.util.Log
 import com.google.firebase.firestore.core.OnlineState
 import com.maricoolsapps.e_commerce.utils.*
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -88,21 +89,33 @@ class CloudQueries
         }
     }
 
-    suspend fun getNumberOfFollowers(userIdOrName: String, b: (Resource<Int>) -> Unit) {
+    fun getNumberOfFollowers(userIdOrName: String, b: (Resource<Int>) -> Unit) {
         b.invoke(Resource.loading())
         try {
-            val result = source.getFollowersId(userIdOrName)?.documents?.size
-            b.invoke(Resource.success(result))
+            source.getFollowersIdSnap(userIdOrName).addSnapshotListener { value, error ->
+                if (error != null) {
+                    b.invoke(Resource.error(Constants.check_internet, null))
+                } else {
+                    val result = value?.documents?.size
+                    b.invoke(Resource.success(result))
+                }
+            }
         } catch (e: Exception) {
             b.invoke(Resource.error(Constants.check_internet, null))
         }
     }
 
-    suspend fun getNumberOfFollowing(userIdOrName: String, b: (Resource<Int>) -> Unit) {
+    fun getNumberOfFollowing(userIdOrName: String, b: (Resource<Int>) -> Unit) {
         b.invoke(Resource.loading())
         try {
-            val result = source.getFollowingId(userIdOrName)?.documents?.size
-            b.invoke(Resource.success(result))
+            source.getFollowingIdSnap(userIdOrName).addSnapshotListener { value, error ->
+                if (error != null) {
+                    b.invoke(Resource.error(Constants.check_internet, null))
+                } else {
+                    val result = value?.documents?.size
+                    b.invoke(Resource.success(result))
+                }
+            }
         } catch (e: Exception) {
             b.invoke(Resource.error(Constants.check_internet, null))
         }
@@ -120,21 +133,25 @@ class CloudQueries
         }
     }
 
-    /* suspend fun removeProduct(
-         name: String,
-         brand: String,
-         id: List<String>,
-         b: (Resource<String>) -> Unit
-     ) {
-         b.invoke(Resource.loading())
-         try {
-             source.removeUserProducts(name, brand, id)
-             source.removeProducts(brand, id)
-             b.invoke(Resource.success(Constants.successful))
-         } catch (e: Exception) {
-             b.invoke(Resource.error(e.message.toString(), null))
-         }
-     }*/
+    suspend fun removeProduct(
+        name: String,
+        brand: String,
+        id: String,
+        b: (Resource<String>) -> Unit
+    ) {
+        if (!context.checkForInternet()) {
+            b.invoke(Resource.error(Constants.check_internet, null))
+        } else {
+            b.invoke(Resource.loading())
+            try {
+                source.removeUserProducts(name, brand, id)
+                source.removeProducts(brand, id)
+                b.invoke(Resource.success(Constants.successful))
+            } catch (e: Exception) {
+                b.invoke(Resource.error(e.message.toString(), null))
+            }
+        }
+    }
 
     suspend fun getFollowers(userIdOrName: String, b: (Resource<List<CarBuyerOrSeller>>) -> Unit) {
         val followers = mutableListOf<CarBuyerOrSeller>()
@@ -300,6 +317,37 @@ class CloudQueries
         }
     }
 
+    suspend fun getFilteredCars(
+        brand: String,
+        type: String,
+        location: String,
+        condition: String,
+        lowestPrice: Long,
+        highestPrice: Long,
+        b: (Resource<List<ProductModel>>) -> Unit
+    ) {
+        if (!context.checkForInternet()) {
+            b.invoke(Resource.error(Constants.check_internet, null))
+        } else {
+            b.invoke(Resource.loading())
+            try {
+                val value =
+                    source.filteredCar(brand, type, location, condition, lowestPrice, highestPrice)
+                if (value != null && !value.isEmpty) {
+                    val cars =
+                        MapperImpl.mapAllToCache(value.toObjects(Product::class.java))
+                    Log.d("people", cars.toString())
+                    b.invoke(Resource.success(cars))
+                } else {
+                    b.invoke(Resource.error(Constants.no_data, null))
+                }
+            } catch (e: Exception) {
+                Log.d("people", e.toString())
+                b.invoke(Resource.error(e.toString(), null))
+            }
+        }
+    }
+
     suspend fun createOrGetChatChannel(
         userId: String,
         userToChat: String,
@@ -378,13 +426,17 @@ class CloudQueries
         }
     }
 
-    suspend fun tagAllMessagesSeen(userID: String, channel: ChatChannel, b: (Resource<String>) -> Unit) {
+    suspend fun tagAllMessagesSeen(
+        userID: String,
+        channel: ChatChannel,
+        b: (Resource<String>) -> Unit
+    ) {
         b.invoke(Resource.loading())
         try {
             val docs = source.tagAllMessagesSeen(channel)
             docs?.documents?.forEach {
                 if (!it["senderId"]?.equals(userID)!!)
-                it.reference.update("seen", true)
+                    it.reference.update("seen", true)
             }
             b.invoke(Resource.success(Constants.successful))
         } catch (e: Exception) {
@@ -392,7 +444,21 @@ class CloudQueries
         }
     }
 
-    suspend fun changeUserStatus(userId: String, status: UserStatus){
-            source.changeUserStatus(userId, status)
+    suspend fun changeUserStatus(userId: String, status: UserStatus) {
+        source.changeUserStatus(userId, status)
+    }
+
+    suspend fun updateCar(car: Product, b: (Resource<String>) -> Unit) {
+        if (!context.checkForInternet()) {
+            b.invoke(Resource.error(Constants.check_internet, null))
+        } else {
+            b.invoke(Resource.loading())
+            try {
+                source.updateCar(car)
+                b.invoke(Resource.success(Constants.successful))
+            } catch (e: Exception) {
+                b.invoke(Resource.error(e.toString(), null))
+            }
+        }
     }
 }

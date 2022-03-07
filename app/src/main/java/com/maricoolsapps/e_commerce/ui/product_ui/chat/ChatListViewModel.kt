@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.maricoolsapps.e_commerce.data.db.CloudQueries
+import com.maricoolsapps.e_commerce.data.db.ProfileChanges
 import com.maricoolsapps.e_commerce.data.model.ChatChannel
 import com.maricoolsapps.e_commerce.data.model.ChatList
 import com.maricoolsapps.e_commerce.data.repositories.DefaultRepository
@@ -17,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ChatListViewModel
 @Inject constructor(
-    val auth: FirebaseAuth,
+    val auth: ProfileChanges,
     val defaultRepo: DefaultRepository,
     val cloud: CloudQueries
 ) : ViewModel() {
@@ -28,7 +29,7 @@ class ChatListViewModel
     private val _click = MutableLiveData<ChatChannel?>()
     val click: LiveData<ChatChannel?> get() = _click
 
-    val userId = auth.currentUser?.uid.toString()
+    val userId = auth.getUserUid()
 
     init {
         viewModelScope.launch {
