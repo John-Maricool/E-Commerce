@@ -1,8 +1,10 @@
 package com.maricoolsapps.e_commerce.ui.user_authentication_ui
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.maricoolsapps.e_commerce.R
@@ -18,16 +20,15 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
     @Inject
     lateinit var auth: FirebaseAuth
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?){
-        super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentFirstBinding.bind(view)
-
-        binding.signIn.setOnClickListener {
-            findNavController().navigate(R.id.loginFragment)
-        }
-        binding.register.setOnClickListener {
-            findNavController().navigate(R.id.registerFragment)
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.first = this
+        return binding.root
     }
 
     override fun onStart() {
@@ -35,6 +36,13 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
         if(auth.currentUser != null){
             findNavController().navigate(R.id.mainFragment)
         }
+    }
+
+    fun navigateToLogin(){
+        findNavController().navigate(R.id.loginFragment)
+    }
+     fun navigateToRegister(){
+        findNavController().navigate(R.id.registerFragment)
     }
     override fun onDestroyView() {
         super.onDestroyView()

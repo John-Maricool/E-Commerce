@@ -9,7 +9,6 @@ import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.databinding.RecyclerSingleItemBinding
 import com.maricoolsapps.e_commerce.data.interfaces.OnItemClickListener
 import com.maricoolsapps.e_commerce.data.model.ProductModel
-import com.maricoolsapps.e_commerce.data.repositories.ProductDetailRepo
 import com.maricoolsapps.e_commerce.room_db.FavoriteProductEntity
 import com.maricoolsapps.e_commerce.utils.setResource
 import com.maricoolsapps.e_commerce.utils.setResourceCenterCrop
@@ -41,11 +40,11 @@ class ProductListAdapter
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
 
         val product = products[position]
-        if (repo.isCarAddedToFav(product.id)) {
+       /* if (repo.isCarAddedToFav(product.id)) {
             holder.binding.fav.setBackgroundResource(R.drawable.ic_favorite)
         } else {
             holder.binding.fav.setBackgroundResource(R.drawable.ic_favorite_border)
-        }
+        }*/
 
         holder.binding.apply {
             productImage.setResource(product.photo)
@@ -86,13 +85,13 @@ class ProductListAdapter
             binding.fav.setOnClickListener {
                 val product = products[bindingAdapterPosition]
                 val favProduct = FavoriteProductEntity(product.brand, product.id)
-                if (repo.isCarAddedToFav(product.id)) {
+                /*if (repo.isCarAddedToFav(product.id)) {
                     it.setBackgroundResource(R.drawable.ic_favorite_border)
                     repo.deleteCar(product.id)
                 } else {
                     it.setBackgroundResource(R.drawable.ic_favorite)
                     repo.insertCarToDb(favProduct)
-                }
+                }*/
             }
         }
     }

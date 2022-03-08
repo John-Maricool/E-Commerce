@@ -21,22 +21,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentLoginBinding.bind(view)
-        navigateClicks()
+
+        binding.lifecycleOwner = this.viewLifecycleOwner
+        binding.viewModel = model
+        binding.fragment = this
         observeLiveData()
     }
 
-    private fun navigateClicks() {
-        binding.signIn.setOnClickListener {
-            userLogin()
-        }
-
-        binding.registerHere.setOnClickListener {
-            findNavController().navigate(R.id.registerFragment)
-        }
-
-        binding.forgotPassword.setOnClickListener {
-            forgotPassword()
-        }
+     fun navigateToRegister() {
+        findNavController().navigate(R.id.registerFragment)
     }
 
     private fun observeLiveData() {
@@ -53,35 +46,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 }
             }
         }
-    }
-
-    private fun userLogin() {
-        val userEmail: String = binding.email.text.toString().trim()
-        val userPassword: String = binding.password.text.toString().trim()
-        if (!validateEmail(userEmail)) {
-            binding.email.requestFocus()
-            binding.email.displaySnack("Error, Please check your Email Address")
-            return
-        }
-
-        if (!validatePassword(userPassword)){
-            binding.password.requestFocus()
-            binding.password.displaySnack("Error, Please check your password")
-            return
-        }
-
-        val user = User(userEmail, userPassword)
-        model.loginUser(user)
-    }
-
-    private fun forgotPassword() {
-        val userEmail = binding.email.text.toString().trim()
-        if (!validateEmail(userEmail)) {
-            binding.email.requestFocus()
-            binding.email.displaySnack("Error, Please check your Email Address")
-            return
-        }
-        model.retrievePassword(userEmail)
     }
 
     override fun onDestroyView() {

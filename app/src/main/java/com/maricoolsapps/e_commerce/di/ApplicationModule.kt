@@ -6,8 +6,6 @@ import androidx.room.Room
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import com.maricoolsapps.e_commerce.room_db.ProductDao
-import com.maricoolsapps.e_commerce.room_db.ProductDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,6 +38,7 @@ class ApplicationModule {
         return FirebaseFirestore.getInstance()
     }
 
+/*
     @Provides
     @Singleton
     fun provideCarDb(@ApplicationContext context: Context): ProductDatabase =
@@ -56,6 +55,7 @@ class ApplicationModule {
     fun provideDao(productDatabase: ProductDatabase): ProductDao{
         return productDatabase.productDao()
     }
+*/
 
     @Provides
     @Singleton

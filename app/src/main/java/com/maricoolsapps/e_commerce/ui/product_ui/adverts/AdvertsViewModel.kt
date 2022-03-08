@@ -1,5 +1,6 @@
 package com.maricoolsapps.e_commerce.ui.product_ui.adverts
 
+import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,6 +27,7 @@ class AdvertsViewModel
 
     val user = auth.getUserUid()
 
+    @Bindable
     private val _result = MutableLiveData<List<ProductModel>?>()
     val result: LiveData<List<ProductModel>?> get() = _result
 

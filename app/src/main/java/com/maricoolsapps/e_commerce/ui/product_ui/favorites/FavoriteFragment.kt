@@ -22,7 +22,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite), OnItemClickListen
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
 
-    private val model: FavoriteViewModel by viewModels()
+    //private val model: FavoriteViewModel by viewModels()
 
     @Inject
     lateinit var adapter: ProductListAdapter
@@ -32,9 +32,9 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite), OnItemClickListen
         _binding = FragmentFavoriteBinding.bind(view)
         toolbarInit()
         initAdapter()
-        observeLiveData()
+        //observeLiveData()
     }
-
+/*
     private fun observeLiveData() {
         model.result.observe(viewLifecycleOwner) {
             if (it != null && it.isNotEmpty()) {
@@ -51,7 +51,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite), OnItemClickListen
             binding.error.toggleVisibility(true)
             binding.error.displaySnack(it)
         }
-    }
+    }*/
 
     private fun toolbarInit() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)

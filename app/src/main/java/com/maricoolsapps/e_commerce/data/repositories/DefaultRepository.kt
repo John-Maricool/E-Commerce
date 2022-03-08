@@ -6,17 +6,17 @@ import com.maricoolsapps.e_commerce.utils.Resource
 import com.maricoolsapps.e_commerce.utils.Status
 import javax.inject.Inject
 
- class DefaultRepository
-    @Inject constructor() {
+class DefaultRepository
+@Inject constructor() {
 
     private val _dataLoading = MutableLiveData<Boolean>()
     val dataLoading: LiveData<Boolean> get() = _dataLoading
 
-    private val _resultData = MutableLiveData<String>()
+    val _resultData = MutableLiveData<String>()
     val resultError: LiveData<String> get() = _resultData
 
-     fun <T> onResult(b: Resource<T>){
-        when(b.status){
+    fun <T> onResult(b: Resource<T>) {
+        when (b.status) {
             Status.SUCCESS -> {
                 _dataLoading.postValue(false)
             }

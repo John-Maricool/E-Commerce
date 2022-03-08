@@ -12,6 +12,7 @@ import com.maricoolsapps.e_commerce.utils.checkForInternet
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.lang.Exception
 import javax.inject.Inject
+/*
 
 class FavRepository
 @Inject constructor(val cloud: FirebaseFirestoreSource, val dao: ProductDao, @ApplicationContext val context: Context) {
@@ -38,4 +39,4 @@ class FavRepository
             b.invoke(Resource.error(Constants.check_internet, null))
         }
     }
-}
+}*/

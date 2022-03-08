@@ -8,10 +8,10 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ProductDetailRepo
-@Inject constructor(val dao: ProductDao, val scope: CoroutineScope){
+//class ProductDetailRepo
+//@Inject constructor(val dao: ProductDao, val scope: CoroutineScope){
 
-     fun insertCarToDb(productEntity: FavoriteProductEntity){
+/*     fun insertCarToDb(productEntity: FavoriteProductEntity){
          scope.launch (IO){
              dao.addCar(productEntity)
          }
@@ -25,5 +25,5 @@ class ProductDetailRepo
 
      fun isCarAddedToFav(id: String): Boolean {
         return dao.checkIfAdded(id)
-    }
-}
+    }*/
+//}

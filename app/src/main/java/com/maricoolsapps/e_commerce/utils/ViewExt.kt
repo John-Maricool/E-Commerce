@@ -6,7 +6,11 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import android.content.Context
+import android.net.Uri
+import android.widget.Spinner
 import androidx.appcompat.app.AlertDialog
+import androidx.databinding.BindingAdapter
+import androidx.databinding.InverseBindingAdapter
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.maricoolsapps.e_commerce.R
@@ -37,23 +41,8 @@ fun View.displaySnack(text: String) {
         .show()
 }
 
-fun ImageView.setResourceCenterCrop(data: String) {
-    Glide.with(this.context)
-        .load(data)
-        .circleCrop()
-        .placeholder(R.drawable.ic_account_circle)
-        .into(this)
-}
 
-fun ImageView.setResource(data: String) {
-    Glide.with(this.context)
-        .load(data)
-        .centerCrop()
-        .placeholder(R.drawable.car)
-        .into(this)
-}
-
-fun Activity.showToast(msg: String){
+fun Activity.showToast(msg: String) {
     Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
 }
 

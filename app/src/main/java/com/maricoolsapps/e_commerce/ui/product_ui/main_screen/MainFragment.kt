@@ -22,8 +22,8 @@ import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedListener,
-    OnItemClickListener<ProductModel> {
+class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedListener{
+    //, OnItemClickListener<ProductModel> {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
@@ -38,10 +38,11 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
 
         val nav = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
         nav?.visibility = View.VISIBLE
-        getAllCarBrands()
-        binding.tabLayout.addOnTabSelectedListener(this)
+       // getAllCarBrands()
         binding.recyclerView.setHasFixedSize(true)
         handleBackPress()
+        val status = UserStatus(true, Date().time)
+        model.toggleUserOnline(status)
     }
 
     private fun handleBackPress() {
@@ -56,50 +57,51 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
     }
 
     override fun onPause() {
+        binding.tabLayout.addOnTabSelectedListener(this)
         val status = UserStatus(false, Date().time)
         model.toggleUserOnline(status)
         super.onPause()
     }
 
-
     override fun onStart() {
         super.onStart()
-        adapter.setOnItemClickListener(this)
-        binding.retry.setOnClickListener {
+        //adapter.setOnItemClickListener(this)
+        /*binding.retry.setOnClickListener {
             getCarsFromBrand(binding.tabLayout[binding.tabLayout.selectedTabPosition].toString())
         }
-        binding.filter.setOnClickListener {
-            findNavController().navigate(R.id.filteredListFragment)
-        }
+*/
         observeLiveData()
-        val status = UserStatus(true, Date().time)
-        model.toggleUserOnline(status)
+    }
+
+    fun navigateToFilterFragment(){
+        findNavController().navigate(R.id.filteredListFragment)
     }
 
     private fun observeLiveData() {
-        model.result.observe(viewLifecycleOwner) {
+      /*  model.result.observe(viewLifecycleOwner) {
             if (it != null) {
                 adapter.getProducts(it)
                 binding.recyclerView.adapter = adapter
             }
-        }
-        model.defaultRepo.dataLoading.observe(viewLifecycleOwner) {
+        }*/
+       /* model.defaultRepo.dataLoading.observe(viewLifecycleOwner) {
             binding.progressBar.toggleVisibility(it)
-        }
+        }*/
         model.defaultRepo.resultError.observe(viewLifecycleOwner){
             if (it != Constants.no_data) {
                 binding.retry.toggleVisibility(true)
             }
+
             binding.checkInternet.toggleVisibility(true)
             binding.checkInternet.text = it
         }
     }
 
-    private fun getAllCarBrands() {
+    /*private fun getAllCarBrands() {
         model.apply {
             binding.tabLayout.getAllCarBrands()
         }
-    }
+    }*/
 
     private fun getCarsFromBrand(brand: String){
         binding.retry.toggleVisibility(false)
@@ -118,14 +120,14 @@ class MainFragment : Fragment(R.layout.fragment_main), TabLayout.OnTabSelectedLi
     override fun onTabReselected(tab: TabLayout.Tab?) {
         getCarsFromBrand(tab?.text.toString())
     }
-
+/*
     override fun onItemClick(t: Any, p: Any?) {
         val action = MainFragmentDirections.actionMainFragmentToProductDetailFragment(
             t as String,
             p as String
         )
         findNavController().navigate(action)
-    }
+    }*/
 
     override fun onDestroyView() {
         super.onDestroyView()

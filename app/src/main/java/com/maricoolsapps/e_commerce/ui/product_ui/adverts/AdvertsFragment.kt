@@ -1,6 +1,5 @@
 package com.maricoolsapps.e_commerce.ui.product_ui.adverts
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
@@ -14,7 +13,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.data.adapters.AdvertsListAdapter
-import com.maricoolsapps.e_commerce.data.adapters.ProductListAdapter
 import com.maricoolsapps.e_commerce.data.interfaces.OptionsMenuClickListener
 import com.maricoolsapps.e_commerce.databinding.FragmentAdvertsBinding
 import com.maricoolsapps.e_commerce.utils.showAlertDialog

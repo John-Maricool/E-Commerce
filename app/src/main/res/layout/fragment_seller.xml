@@ -1,194 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.product_ui.seller.SellerFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/grey"
-        android:gravity="center"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        tools:context=".ui.product_ui.seller.SellerFragment">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey"
+            android:gravity="center"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="@dimen/image_size_big"
-        android:layout_height="@dimen/image_size_big"
-        android:layout_marginStart="@dimen/margin_large"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:contentDescription="@string/user_image"
-        android:src="@drawable/car"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="@dimen/image_size_big"
+            android:layout_height="@dimen/image_size_big"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:contentDescription="@string/user_image"
+            android:src="@drawable/car"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_large"
-        android:textStyle="normal"
-        app:layout_constraintStart_toEndOf="@+id/image"
-        app:layout_constraintTop_toTopOf="@+id/image"
-        tools:text="Ikenwa John Ebuka" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="normal"
+            app:layout_constraintStart_toEndOf="@+id/image"
+            app:layout_constraintTop_toTopOf="@+id/image"
+            tools:text="Ikenwa John Ebuka" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/call"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/blue_solid"
-        android:drawableStart="@drawable/ic_call"
-        android:drawablePadding="@dimen/margin_medium"
-        android:padding="@dimen/margin_very_small"
-        android:text="@string/call"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_normal"
-        app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/call"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/blue_solid"
+            android:drawableStart="@drawable/ic_call"
+            android:drawablePadding="@dimen/margin_medium"
+            android:padding="@dimen/margin_very_small"
+            android:text="@string/call"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_normal"
+            app:layout_constraintStart_toStartOf="@+id/name"
+            app:layout_constraintTop_toBottomOf="@+id/name" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:background="@drawable/blue_border"
-        android:drawableStart="@drawable/ic_message"
-        android:drawablePadding="@dimen/margin_medium"
-        android:gravity="center"
-        android:padding="@dimen/margin_very_small"
-        android:text="@string/message"
-        android:textAllCaps="false"
-        android:textColor="@color/blue"
-        android:textSize="@dimen/text_size_normal"
-        app:layout_constraintStart_toEndOf="@+id/call"
-        app:layout_constraintTop_toTopOf="@+id/call" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/blue_border"
+            android:drawableStart="@drawable/ic_message"
+            android:drawablePadding="@dimen/margin_medium"
+            android:gravity="center"
+            android:padding="@dimen/margin_very_small"
+            android:text="@string/message"
+            android:textAllCaps="false"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/text_size_normal"
+            app:layout_constraintStart_toEndOf="@+id/call"
+            app:layout_constraintTop_toTopOf="@+id/call" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/follow"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/pink_border"
-        android:text="@string/follow"
-        android:textAllCaps="false"
-        android:textColor="@color/pink2"
-        android:textSize="@dimen/text_size_normal"
-        app:layout_constraintEnd_toEndOf="@+id/image"
-        app:layout_constraintHorizontal_bias="0.566"
-        app:layout_constraintStart_toStartOf="@+id/image"
-        app:layout_constraintTop_toBottomOf="@+id/image" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/follow"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/pink_border"
+            android:text="@string/follow"
+            android:textAllCaps="false"
+            android:textColor="@color/pink2"
+            android:textSize="@dimen/text_size_normal"
+            app:layout_constraintEnd_toEndOf="@+id/image"
+            app:layout_constraintHorizontal_bias="0.566"
+            app:layout_constraintStart_toStartOf="@+id/image"
+            app:layout_constraintTop_toBottomOf="@+id/image" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/followers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_large"
-        android:layout_marginTop="32dp"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_normal"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/follow"
-        app:layout_constraintTop_toBottomOf="@+id/call"
-        tools:text="22" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/followers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="32dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_normal"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/follow"
+            app:layout_constraintTop_toBottomOf="@+id/call"
+            tools:text="22" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/following"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/image_normal_size"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_normal"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/followers"
-        app:layout_constraintTop_toTopOf="@+id/followers"
-        tools:text="22" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/following"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/image_normal_size"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_normal"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/followers"
+            app:layout_constraintTop_toTopOf="@+id/followers"
+            tools:text="22" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/_followers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/followers"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_normal"
-        app:layout_constraintEnd_toEndOf="@+id/followers"
-        app:layout_constraintStart_toStartOf="@+id/followers"
-        app:layout_constraintTop_toBottomOf="@+id/followers" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/_followers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/followers"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_normal"
+            app:layout_constraintEnd_toEndOf="@+id/followers"
+            app:layout_constraintStart_toStartOf="@+id/followers"
+            app:layout_constraintTop_toBottomOf="@+id/followers" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/_following"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/following"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_normal"
-        app:layout_constraintEnd_toEndOf="@+id/following"
-        app:layout_constraintStart_toStartOf="@+id/following"
-        app:layout_constraintTop_toBottomOf="@+id/following" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/_following"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/following"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_normal"
+            app:layout_constraintEnd_toEndOf="@+id/following"
+            app:layout_constraintStart_toStartOf="@+id/following"
+            app:layout_constraintTop_toBottomOf="@+id/following" />
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner_category"
-        android:layout_width="@dimen/spinner_width"
-        android:layout_height="@dimen/spinner_height"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:layout_marginStart="16dp"
-        android:spinnerMode="dialog"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/_followers" />
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner_category"
+            android:layout_width="@dimen/spinner_width"
+            android:layout_height="@dimen/spinner_height"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginStart="16dp"
+            android:spinnerMode="dialog"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/_followers" />
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/sort_by"
-        android:layout_width="@dimen/spinner_width"
-        android:layout_height="@dimen/spinner_height"
-        android:layout_marginEnd="@dimen/margin_large"
-        android:entries="@array/sorts"
-        android:spinnerMode="dialog"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner_category"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/spinner_category" />
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/sort_by"
+            android:layout_width="@dimen/spinner_width"
+            android:layout_height="@dimen/spinner_height"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:entries="@array/sorts"
+            android:spinnerMode="dialog"
+            app:layout_constraintBottom_toBottomOf="@+id/spinner_category"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/spinner_category" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/error"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_category"
-        app:srcCompat="@drawable/no_result" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/error"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_category"
+            app:srcCompat="@drawable/no_result" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_large"
-        android:background="@color/recycler_view_background"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_category"
-        tools:listitem="@layout/recycler_single_item" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_large"
+            android:background="@color/recycler_view_background"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_category"
+            tools:listitem="@layout/recycler_single_item" />
 
-    <com.github.ybq.android.spinkit.SpinKitView
-        android:id="@+id/progress_bar"
-        android:layout_width="@dimen/progress_bar_height"
-        android:layout_height="@dimen/progress_bar_height"
-        android:visibility="gone"
-        app:SpinKit_Color="@color/pink2"
-        app:SpinKit_Style="MultiplePulseRing"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progress_bar"
+            android:layout_width="@dimen/progress_bar_height"
+            android:layout_height="@dimen/progress_bar_height"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/pink2"
+            app:SpinKit_Style="MultiplePulseRing"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
