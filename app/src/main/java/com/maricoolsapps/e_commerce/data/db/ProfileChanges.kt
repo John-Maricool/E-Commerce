@@ -21,6 +21,10 @@ class ProfileChanges
         return source.auth.currentUser?.uid!!
     }
 
+    fun getUserName(): String? {
+        return source.auth.currentUser?.displayName
+    }
+
     fun getEmail(): String{
         return source.auth.currentUser?.email!!
     }

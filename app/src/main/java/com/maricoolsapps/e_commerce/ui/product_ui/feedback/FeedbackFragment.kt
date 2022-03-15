@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.data.model.Feedback
 import com.maricoolsapps.e_commerce.databinding.FragmentFeedbactBinding
+import com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity
 import com.maricoolsapps.e_commerce.utils.displaySnack
 import com.maricoolsapps.e_commerce.utils.showToast
 import com.maricoolsapps.e_commerce.utils.toggleVisibility
@@ -42,10 +43,10 @@ class FeedbackFragment : Fragment(R.layout.fragment_feedbact) {
             }
         }
         model.defaultRepo.resultError.observe(viewLifecycleOwner){
-            binding.progressBar.displaySnack(it)
+            (activity as MainActivity).progressBar.displaySnack(it)
         }
         model.defaultRepo.dataLoading.observe(viewLifecycleOwner){
-            binding.progressBar.toggleVisibility(it)
+            (activity as MainActivity).progressBar.toggleVisibility(it)
         }
     }
 
@@ -67,10 +68,9 @@ class FeedbackFragment : Fragment(R.layout.fragment_feedbact) {
     }
 
     private fun toolbarInit() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        binding.toolbar.title = resources.getString(R.string.write_feedback)
-        val actionBar = (activity as AppCompatActivity).supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).apply {
+            toolbar.title = resources.getString(R.string.write_feedback)
+        }
     }
 
     override fun onDestroy() {

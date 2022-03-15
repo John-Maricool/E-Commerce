@@ -1,6 +1,7 @@
 package com.maricoolsapps.e_commerce.ui.product_ui.filter
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.AdapterView
@@ -37,10 +38,10 @@ class FilteredListFragment : Fragment(R.layout.filtered_list_fragment),
 
     private fun observeLiveData() {
         model.defaultRepo.resultError.observe(viewLifecycleOwner){
-            binding.progressBar.displaySnack(it)
+            (activity as MainActivity).progressBar.displaySnack(it)
         }
         model.defaultRepo.dataLoading.observe(viewLifecycleOwner){
-            binding.progressBar.toggleVisibility(it)
+            (activity as MainActivity).progressBar.toggleVisibility(it)
         }
         model.result.observe(viewLifecycleOwner){
             if (it != null) {
@@ -66,19 +67,19 @@ class FilteredListFragment : Fragment(R.layout.filtered_list_fragment),
                     minPrice.isEmpty() ||
                     maxPrice.isEmpty()
                 ) {
-                    binding.progressBar.displaySnack("Entries is not Complete")
+                    (activity as MainActivity).progressBar.displaySnack("Entries is not Complete")
                     return@setOnClickListener
                 }
             binding.myGroup.toggleVisibility(false)
-            model.showAdverts(brand, type, location, condition, minPrice.toLong(), maxPrice.toLong())
+            model.showAdverts(brand, type, location = location, condition, minPrice.toLong(), maxPrice.toLong())
         }
     }
 
     private fun initToolBar() {
-        (activity as MainActivity).setSupportActionBar(binding.toolbar)
-        val actionBar = (activity as MainActivity).supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.toolbar.title = "Filter"
+        (activity as MainActivity).apply{
+            toolbar.title = "Filter"
+            toolbar.setBackgroundColor(resources.getColor(R.color.grey, null))
+        }
     }
 
     override fun onDestroy() {

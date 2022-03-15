@@ -1,12 +1,15 @@
 package com.maricoolsapps.e_commerce.ui.product_ui.picture
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.MotionEvent
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.ImageView
 import androidx.navigation.fragment.navArgs
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.databinding.FragmentPictureBinding
+import com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity
 import com.maricoolsapps.e_commerce.utils.setResource
 import com.maricoolsapps.e_commerce.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,28 +29,29 @@ class PictureFragment : Fragment(R.layout.fragment_picture) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentPictureBinding.bind(view)
+        position = args.position
         binding.image.setFactory {
             ImageView(activity)
         }
-        (binding.image.currentView as ImageView).setResource(args.pictures[position])
+        (binding.image.currentView as ImageView).setResource(args.pictures[args.position])
     }
 
     override fun onStart() {
         super.onStart()
         binding.next.setOnClickListener {
-            if (position != args.pictures.size -1){
+            if (position != args.pictures.size - 1) {
                 position++
                 (binding.image.currentView as ImageView).setResource(args.pictures[position])
-            }else{
+            } else {
                 activity?.showToast("Last Image")
             }
         }
 
         binding.prev.setOnClickListener {
-            if (position > 0){
+            if (position > 0) {
                 position--
                 (binding.image.currentView as ImageView).setResource(args.pictures[position])
-            }else{
+            } else {
                 activity?.showToast("First Image")
             }
         }
@@ -55,8 +59,11 @@ class PictureFragment : Fragment(R.layout.fragment_picture) {
         binding.download.setOnClickListener {
         }
     }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
+
+
 }

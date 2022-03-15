@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.data.adapters.FeedbackListAdapter
 import com.maricoolsapps.e_commerce.databinding.FragmentFeedbackListBinding
+import com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity
 import com.maricoolsapps.e_commerce.utils.displaySnack
 import com.maricoolsapps.e_commerce.utils.toggleVisibility
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,10 +58,10 @@ class FeedbackListFragment : Fragment(R.layout.fragment_feedback_list) {
             }
         }
         model.defaultRepo.dataLoading.observe(viewLifecycleOwner) {
-            binding.progressBar.toggleVisibility(it)
+            (activity as MainActivity).progressBar.toggleVisibility(it)
         }
         model.defaultRepo.resultError.observe(viewLifecycleOwner) {
-            binding.progressBar.displaySnack(it)
+            (activity as MainActivity).progressBar.displaySnack(it)
         }
         binding.leaveFeedback.setOnClickListener {
             val action =
@@ -73,10 +74,7 @@ class FeedbackListFragment : Fragment(R.layout.fragment_feedback_list) {
     }
 
     private fun toolbarInit() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         binding.toolbar.title = "Feedback for ${args.brand} car"
-        val actionBar = (activity as AppCompatActivity).supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onDestroy() {

@@ -11,6 +11,7 @@ import com.maricoolsapps.e_commerce.data.adapters.ProductListAdapter
 import com.maricoolsapps.e_commerce.data.interfaces.OnItemClickListener
 import com.maricoolsapps.e_commerce.data.model.ProductModel
 import com.maricoolsapps.e_commerce.databinding.FragmentFavoriteBinding
+import com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity
 import com.maricoolsapps.e_commerce.utils.displaySnack
 import com.maricoolsapps.e_commerce.utils.toggleVisibility
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,7 +46,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite), OnItemClickListen
             }
         }
         model.defaultRepo.dataLoading.observe(viewLifecycleOwner){
-            binding.progressBar.toggleVisibility(it)
+            (activity as MainActivity).progressBar.toggleVisibility(it)
         }
         model.defaultRepo.resultError.observe(viewLifecycleOwner){
             binding.error.toggleVisibility(true)
@@ -54,10 +55,15 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite), OnItemClickListen
     }
 
     private fun toolbarInit() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        binding.toolbar.title = resources.getString(R.string.favorites)
-        val actionBar = (activity as AppCompatActivity).supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).toolbar.apply {
+            title = "Favorites"
+            setBackgroundColor(
+                resources.getColor(
+                    R.color.grey,
+                    null
+                )
+            )
+        }
     }
 
     private fun initAdapter() {

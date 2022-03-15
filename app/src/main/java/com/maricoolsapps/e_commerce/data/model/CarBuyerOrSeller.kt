@@ -8,7 +8,8 @@ data class CarBuyerOrSeller
     val email: String,
     val phoneNumber: String,
     val state: String,
-    val businessLocation: String?
+    val businessLocation: String?,
+    val registrationTokens: String
 ){
-    constructor(): this("", null,"", "", "", "", "")
+    constructor(): this("", null,"", "", "", "", "", "")
 }

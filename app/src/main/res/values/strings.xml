@@ -109,6 +109,9 @@
     <string name="min_500000">Min 500000</string>
     <string name="show_adverts">SHOW ADVERTS</string>
     <string name="max_500000000">Max 5000000</string>
+    <string name="log_out">Log out</string>
+    <string name="default_notification_channel_id">NOTIFICATION_CHANNEL_ID</string>
+    <string name="view">Details</string>
     <string-array name="sorts">
         <item>Newest</item>
         <item>Cheapest First</item>

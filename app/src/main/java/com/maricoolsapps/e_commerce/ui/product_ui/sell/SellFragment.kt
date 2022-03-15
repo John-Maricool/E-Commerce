@@ -17,6 +17,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.maricoolsapps.e_commerce.databinding.FragmentSellBinding
 import com.maricoolsapps.e_commerce.data.model.Product
+import com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity
 import com.maricoolsapps.e_commerce.utils.*
 import java.util.*
 
@@ -117,7 +118,7 @@ class SellFragment : Fragment(R.layout.fragment_sell), AdapterView.OnItemSelecte
 
     private fun getAllItems() {
         if (imagesUri.size < 3) {
-            binding.progressBar.displaySnack("Minimum of 3 photos is required")
+            (activity as MainActivity).progressBar.displaySnack("Minimum of 3 photos is required")
             return
         }
 
@@ -134,7 +135,7 @@ class SellFragment : Fragment(R.layout.fragment_sell), AdapterView.OnItemSelecte
             binding.desc.text.toString().trim().isEmpty() ||
             binding.desc.text.toString().trim().length < 20
         ) {
-            binding.progressBar.displaySnack("Entries is not Complete")
+            (activity as MainActivity).progressBar.displaySnack("Entries is not Complete")
             return
         }
         sendItems()
@@ -164,6 +165,7 @@ class SellFragment : Fragment(R.layout.fragment_sell), AdapterView.OnItemSelecte
                     desc,
                     state,
                     viewModel.userId,
+                    Date().time,
                     address,
                     yearOfManufacturing,
                     region,
@@ -181,14 +183,14 @@ class SellFragment : Fragment(R.layout.fragment_sell), AdapterView.OnItemSelecte
         viewModel.addResult.observe(viewLifecycleOwner) {
             if (it != null) {
                 activity?.showToast("Successful")
-                findNavController().navigate(R.id.advertsFragment)
+                findNavController().popBackStack(R.id.advertsFragment, true)
             }
         }
-        viewModel.defaultRepo.dataLoading.observe(viewLifecycleOwner){
-            binding.progressBar.toggleVisibility(it)
+        viewModel.defaultRepo.dataLoading.observe(viewLifecycleOwner) {
+            (activity as MainActivity).progressBar.toggleVisibility(it)
         }
-        viewModel.defaultRepo.resultError.observe(viewLifecycleOwner){
-            binding.progressBar.displaySnack(it)
+        viewModel.defaultRepo.resultError.observe(viewLifecycleOwner) {
+            (activity as MainActivity).progressBar.displaySnack(it)
         }
     }
 
@@ -208,10 +210,10 @@ class SellFragment : Fragment(R.layout.fragment_sell), AdapterView.OnItemSelecte
     }
 
     private fun toolbarInit() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        binding.toolbar.title = "Sell Car"
-        val actionBar = (activity as AppCompatActivity).supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).apply {
+            toolbar.title = "Sell Car"
+            toolbar.setBackgroundColor(resources.getColor(R.color.grey, null))
+        }
     }
 
     override fun onDestroyView() {
@@ -225,7 +227,7 @@ class SellFragment : Fragment(R.layout.fragment_sell), AdapterView.OnItemSelecte
                 "Lexus" -> binding.models.adapter = activity?.getLexusAdapter()
                 "Acura" -> binding.models.adapter = activity?.getAcuraAdapter()
                 "Toyota" -> binding.models.adapter = activity?.getToyotaAdapter()
-                "Honda" ->binding.models.adapter = activity?.getHondaAdapter()
+                "Honda" -> binding.models.adapter = activity?.getHondaAdapter()
                 "Ford" -> binding.models.adapter = activity?.getFordAdapter()
                 "Mercedes-Benz" -> binding.models.adapter = activity?.getBenzAdapter()
                 "BMW" -> binding.models.adapter = activity?.getBMWAdapter()

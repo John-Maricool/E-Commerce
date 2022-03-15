@@ -6,17 +6,7 @@
     android:layout_width="match_parent"
     android:background="@color/grey"
     android:layout_height="match_parent"
-    tools:context=".ui.product_ui.chat.ChatListFragment">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:elevation="10dp"
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".ui.product_ui.chat_list.ChatListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -26,19 +16,7 @@
         tools:listitem="@layout/chat_list_single_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-    <com.github.ybq.android.spinkit.SpinKitView
-        android:layout_width="@dimen/progress_bar_height"
-        android:layout_height="@dimen/progress_bar_height"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/progress_bar"
-        app:SpinKit_Color="@color/pink2"
-        app:SpinKit_Style="ThreeBounce"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="@dimen/margin_large"

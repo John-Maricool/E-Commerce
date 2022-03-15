@@ -147,16 +147,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/leave_feedback" />
-
-    <com.github.ybq.android.spinkit.SpinKitView
-        android:id="@+id/progress_bar"
-        android:layout_width="@dimen/progress_bar_width"
-        android:layout_height="@dimen/progress_bar_width"
-        app:SpinKit_Color="@color/pink2"
-        app:SpinKit_Style="ThreeBounce"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

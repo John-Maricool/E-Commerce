@@ -7,6 +7,7 @@ import com.maricoolsapps.e_commerce.data.interfaces.OptionsMenuClickListener
 import com.maricoolsapps.e_commerce.data.model.ProductModel
 import com.maricoolsapps.e_commerce.databinding.AdvertsSingleItemBinding
 import com.maricoolsapps.e_commerce.utils.setResource
+import java.text.NumberFormat
 import javax.inject.Inject
 
 
@@ -38,7 +39,7 @@ class AdvertsListAdapter
             productImage.setResource(product.photo)
             nameOfCar.text = "${product.brand} ${product.type}"
             descOfCar.text = product.description
-            priceOfCar.text = "$${product.price}"
+            priceOfCar.text = "₦${NumberFormat.getIntegerInstance().format(product.price)}"
         }
     }
 

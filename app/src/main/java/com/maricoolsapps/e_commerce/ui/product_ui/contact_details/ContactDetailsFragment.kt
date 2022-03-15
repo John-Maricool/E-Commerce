@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.data.model.CarBuyerOrSeller
 import com.maricoolsapps.e_commerce.databinding.FragmentContactDetailsBinding
+import com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity
 import com.maricoolsapps.e_commerce.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -81,10 +82,10 @@ class ContactDetailsFragment : Fragment(R.layout.fragment_contact_details) {
             }
         }
         model.defaultRepo.dataLoading.observe(viewLifecycleOwner){
-            binding.progressBar.toggleVisibility(it)
+            (activity as MainActivity).progressBar.toggleVisibility(it)
         }
         model.defaultRepo.resultError.observe(viewLifecycleOwner){
-            binding.progressBar.displaySnack(it)
+            (activity as MainActivity).progressBar.displaySnack(it)
         }
     }
 
@@ -98,19 +99,17 @@ class ContactDetailsFragment : Fragment(R.layout.fragment_contact_details) {
         if (location.isEmpty() || name.isEmpty() || !validateEmail(email) ||
             number.isEmpty() || binding.regions.selectedItemPosition == 0
         ) {
-            binding.progressBar.displaySnack("Complete your Entries")
+            (activity as MainActivity).progressBar.displaySnack("Complete your Entries")
         } else {
             val user =
-                CarBuyerOrSeller(model.userID, imageUri, name, email, number, region, location)
+                CarBuyerOrSeller(model.userID, imageUri, name, email, number, region, location, "")
             model.changeProfile(user)
         }
     }
 
     private fun toolbarInit() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        val actionBar = (activity as AppCompatActivity).supportActionBar
-        binding.toolbar.title = "Edit Contact Details"
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).toolbar.title = "Edit Contact Details"
+        (activity as MainActivity).toolbar.setBackgroundColor(resources.getColor(R.color.white, null))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

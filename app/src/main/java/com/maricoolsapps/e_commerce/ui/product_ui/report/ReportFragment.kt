@@ -9,6 +9,7 @@ import androidx.navigation.fragment.navArgs
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.data.model.Report
 import com.maricoolsapps.e_commerce.databinding.FragmentReportBinding
+import com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity
 import com.maricoolsapps.e_commerce.utils.displaySnack
 import com.maricoolsapps.e_commerce.utils.setResource
 import com.maricoolsapps.e_commerce.utils.showToast
@@ -32,24 +33,26 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
         toolbarInit()
         observeLiveData()
     }
+
     private fun toolbarInit() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        binding.toolbar.title = "Report"
-        val actionBar = (activity as AppCompatActivity).supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).apply {
+            toolbar.title = "Report"
+            toolbar.setBackgroundColor(resources.getColor(R.color.red, null))
+        }
     }
 
     private fun observeLiveData() {
-        model.result.observe(viewLifecycleOwner){
-            if (it != null){
+        model.result.observe(viewLifecycleOwner) {
+            if (it != null) {
                 activity?.showToast(it)
             }
         }
-        model.defaultRepo.dataLoading.observe(viewLifecycleOwner){
-            binding.progressBar.toggleVisibility(it)
+        model.defaultRepo.dataLoading.observe(viewLifecycleOwner) {
+            (activity as MainActivity).progressBar.toggleVisibility(it)
+
         }
-        model.defaultRepo.resultError.observe(viewLifecycleOwner){
-            binding.progressBar.displaySnack(it)
+        model.defaultRepo.resultError.observe(viewLifecycleOwner) {
+            (activity as MainActivity).progressBar.displaySnack(it)
         }
     }
 
@@ -62,11 +65,11 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
 
     private fun buttonClickListener() {
 
-        binding.report.setOnClickListener{
+        binding.report.setOnClickListener {
             val desc = binding.issue.text.toString().trim()
             val shortDesc = binding.spinner.selectedItem as String
-            if (desc.isEmpty() || desc.length < 20 || binding.spinner.selectedItemPosition  == 0){
-                binding.progressBar.displaySnack("Error in your entries, your description must be greater than 20 letters")
+            if (desc.isEmpty() || desc.length < 20 || binding.spinner.selectedItemPosition == 0) {
+                (activity as MainActivity).progressBar.displaySnack("Error in your entries, your description must be greater than 20 letters")
                 return@setOnClickListener
             }
             val report = Report(model.userId.toString(), shortDesc, desc)

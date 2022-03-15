@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_feedbackFragment"
-            app:destination="@id/feedbackFragment" />
+            app:destination="@id/feedbackFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_profileFragment_to_followersFragment"
             app:destination="@id/followersFragment"
@@ -25,7 +29,11 @@
         tools:layout="@layout/fragment_adverts" >
         <action
             android:id="@+id/action_advertsFragment_to_editProductFragment"
-            app:destination="@id/editProductFragment" />
+            app:destination="@id/editProductFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <action
         android:id="@+id/action_productDetailFragment_to_pictureFragment"
@@ -57,7 +65,11 @@
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_productDetailFragment"
-            app:destination="@id/productDetailFragment" />
+            app:destination="@id/productDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/sellFragment"
@@ -67,7 +79,11 @@
         <action
             android:id="@+id/action_sellFragment_to_advertsFragment"
             app:destination="@id/advertsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
             app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
             app:popUpToInclusive="true" />
     </fragment>
     <action
@@ -76,6 +92,9 @@
     <action
         android:id="@+id/action_contactDetailsFragment_to_changeEmailAndPassword"
         app:destination="@id/changeEmailAndPassword" />
+    <action
+        android:id="@+id/go_to_pic"
+        app:destination="@id/pictureFragment" />
     <fragment
         android:id="@+id/contactDetailsFragment"
         android:name="com.maricoolsapps.e_commerce.ui.product_ui.contact_details.ContactDetailsFragment"
@@ -109,7 +128,11 @@
             app:argType="string" />
         <action
             android:id="@+id/action_sellerFragment_to_followersFragment"
-            app:destination="@id/followersFragment" />
+            app:destination="@id/followersFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <action
         android:id="@+id/action_profileFragment_to_contactDetailsFragment"
@@ -122,6 +145,10 @@
         <argument
             android:name="pictures"
             app:argType="string[]" />
+        <argument
+            android:name="position"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <action
         android:id="@+id/action_mainFragment_to_productDetailFragment"
@@ -133,13 +160,18 @@
         tools:layout="@layout/fragment_product_detail">
         <action
             android:id="@+id/action_productDetailFragment_to_sellerFragment"
-            app:destination="@id/sellerFragment" />
+            app:destination="@id/sellerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_productDetailFragment_to_reportFragment"
-            app:destination="@id/reportFragment" />
-        <action
-            android:id="@+id/action_productDetailFragment_to_pictureFragment"
-            app:destination="@id/pictureFragment" />
+            app:destination="@id/reportFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
         <argument
             android:name="id"
             app:argType="string" />
@@ -148,7 +180,11 @@
             app:argType="string" />
         <action
             android:id="@+id/action_productDetailFragment_to_feedbackFragment"
-            app:destination="@id/feedbackFragment" />
+            app:destination="@id/feedbackFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_productDetailFragment_to_feedbackListFragment"
             app:destination="@id/feedbackListFragment" />
@@ -195,11 +231,15 @@
             app:argType="string" />
         <action
             android:id="@+id/action_feedbackListFragment_to_feedbackFragment"
-            app:destination="@id/feedbackFragment" />
+            app:destination="@id/feedbackFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/chatListFragment"
-        android:name="com.maricoolsapps.e_commerce.ui.product_ui.chat.ChatListFragment"
+        android:name="com.maricoolsapps.e_commerce.ui.product_ui.chat_list.ChatListFragment"
         android:label="chat_list_fragment"
         tools:layout="@layout/chat_list_fragment" />
     <fragment
@@ -210,6 +250,9 @@
         <argument
             android:name="chatChannel"
             app:argType="com.maricoolsapps.e_commerce.data.model.ChatChannel" />
+        <action
+            android:id="@+id/action_chatFragment_to_sellerFragment"
+            app:destination="@id/sellerFragment" />
     </fragment>
     <fragment
         android:id="@+id/followersFragment"
@@ -222,7 +265,11 @@
         <action
             android:id="@+id/action_followersFragment_to_sellerFragment"
             app:destination="@id/sellerFragment"
-            app:launchSingleTop="true" />
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/editProductFragment"

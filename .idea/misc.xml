@@ -27,12 +27,14 @@
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_call.xml" value="0.118" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_feedback.xml" value="0.109" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_feedback_yellow.xml" value="0.1065" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_home.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_left.xml" value="0.16006944444444443" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_message.xml" value="0.15164473684210528" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_message_grey.xml" value="0.116" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_next.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_photo_camera.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_right.xml" value="0.1501628664495114" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_sell.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_send.xml" value="0.126" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_star_rate.xml" value="0.21050228310502284" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/light_blue_solid.xml" value="0.118" />
@@ -47,6 +49,7 @@
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/adverts_single_item.xml" value="0.22" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/blue_view.xml" value="0.22395833333333334" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/bottom_nav_badge.xml" value="0.1838392475416845" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/chat_fragment.xml" value="0.18" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/chat_list_fragment.xml" value="0.19" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/chat_list_single_item.xml" value="0.1838392475416845" />
@@ -82,6 +85,7 @@
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/slider_product_image.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/layout/smaller_blue_view.xml" value="0.22395833333333334" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/menu/adverts_menu.xml" value="0.15477293790546803" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/menu/badge_meun.xml" value="0.1838392475416845" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/menu/bottom_nav.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/menu/favorites.xml" value="0.13848684210526316" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/menu/favorites_added.xml" value="0.14144736842105263" />
@@ -90,7 +94,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15_PREVIEW" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

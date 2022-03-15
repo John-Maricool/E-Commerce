@@ -1,7 +1,5 @@
 package com.maricoolsapps.e_commerce.data.repositories
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.maricoolsapps.e_commerce.data.db.CloudQueries
 import com.maricoolsapps.e_commerce.data.model.CarSellerProfile
 import com.maricoolsapps.e_commerce.utils.Resource

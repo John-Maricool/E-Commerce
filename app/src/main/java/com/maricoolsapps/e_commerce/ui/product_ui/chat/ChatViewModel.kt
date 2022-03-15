@@ -1,6 +1,7 @@
 package com.maricoolsapps.e_commerce.ui.product_ui.chat
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.provider.MediaStore
 import androidx.core.content.ContextCompat.startActivity
@@ -11,12 +12,10 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.maricoolsapps.e_commerce.data.db.CloudQueries
 import com.maricoolsapps.e_commerce.data.db.ProfileChanges
-import com.maricoolsapps.e_commerce.data.model.CarBuyerOrSeller
-import com.maricoolsapps.e_commerce.data.model.ChatChannel
-import com.maricoolsapps.e_commerce.data.model.Messages
-import com.maricoolsapps.e_commerce.data.model.UserStatus
+import com.maricoolsapps.e_commerce.data.model.*
 import com.maricoolsapps.e_commerce.data.repositories.ChatRepository
 import com.maricoolsapps.e_commerce.data.repositories.DefaultRepository
+import com.maricoolsapps.e_commerce.utils.SharedPrefs.USER_NAME
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -29,10 +28,12 @@ class ChatViewModel
     val auth: ProfileChanges,
     val defaultRepo: DefaultRepository,
     val cloud: CloudQueries,
+    prefs: SharedPreferences,
     val repo: ChatRepository
 ) : ViewModel() {
 
     val userID = auth.getUserUid()
+    val userName = prefs.getString(USER_NAME, "John Dow")
 
     private val _status = MutableLiveData<UserStatus?>()
     val status: LiveData<UserStatus?> get() = _status
@@ -57,7 +58,6 @@ class ChatViewModel
             defaultRepo.onResult(it)
             _messages.postValue(it.data)
         }
-
         cloud.getUserOnlineStatus(channel.personChatting) {
             defaultRepo.onResult(it)
             _status.value = it.data
@@ -77,9 +77,12 @@ class ChatViewModel
         return intent
     }
 
-    fun sendMessage(channel: ChatChannel, message: Messages) {
+    fun sendMessage(channel: ChatChannel, message: Messages, notification: SendNotification) {
         viewModelScope.launch (IO){
             repo.sendMessage(channel, message) {
+                defaultRepo.onResult(it)
+            }
+            repo.sendNotification(notification){
                 defaultRepo.onResult(it)
             }
         }

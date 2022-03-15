@@ -17,6 +17,7 @@ import com.maricoolsapps.e_commerce.data.adapters.AdvertsListAdapter
 import com.maricoolsapps.e_commerce.data.adapters.ProductListAdapter
 import com.maricoolsapps.e_commerce.data.interfaces.OptionsMenuClickListener
 import com.maricoolsapps.e_commerce.databinding.FragmentAdvertsBinding
+import com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity
 import com.maricoolsapps.e_commerce.utils.showAlertDialog
 import com.maricoolsapps.e_commerce.utils.toggleVisibility
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,10 +50,15 @@ class AdvertsFragment : Fragment(R.layout.fragment_adverts), AdapterView.OnItemS
     }
 
     private fun toolbarInit() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        val actionBar = (activity as AppCompatActivity).supportActionBar
-        binding.toolbar.title = "Adverts"
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).toolbar.apply {
+            title = "Adverts"
+                setBackgroundColor(
+                resources.getColor(
+                    R.color.grey,
+                    null
+                )
+            )
+        }
         binding.brands.onItemSelectedListener = this
     }
 
@@ -85,7 +91,7 @@ class AdvertsFragment : Fragment(R.layout.fragment_adverts), AdapterView.OnItemS
         }
 
         model.defaultRepo.dataLoading.observe(viewLifecycleOwner) {
-            binding.progressBar.toggleVisibility(it)
+            (activity as MainActivity).progressBar.toggleVisibility(it)
         }
         model.defaultRepo.resultError.observe(viewLifecycleOwner) {
             binding.textError.toggleVisibility(true)

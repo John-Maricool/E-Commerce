@@ -18,4 +18,9 @@ object Constants {
     val successful = "Successful"
     val error = "Error"
     val check_internet = "Check your internet connection"
+
+
+    const val NOTIFICATION_CHANNEL_ID = "My notification channel id"
+    val name = "test_notification"
+    val descriptionText = "test_notification_description"
 }

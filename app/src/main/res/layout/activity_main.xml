@@ -6,6 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.user_authentication_ui.MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:visibility="gone"
+        android:elevation="10dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/second_nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -13,24 +25,17 @@
         android:layout_height="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph"/>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
             style="@style/Widget.App.BottomNavigationView"
-            android:elevation="10dp"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/bottom_nav_size"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             app:itemRippleColor="@color/pink"
             app:itemIconTint="@drawable/bottom_nav"
             app:labelVisibilityMode="selected"
@@ -41,5 +46,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom_nav" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+ <!--   <me.ibrahimsn.lib.SmoothBottomBar
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:duration="400"
+        app:indicatorColor="@color/pink2"
+        app:iconTint="@color/pink2"
+        app:iconTintActive="@color/white"
+        app:backgroundColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav"/>-->
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/progress_bar"
+        android:layout_width="@dimen/progress_bar_width"
+        android:layout_height="@dimen/progress_bar_height"
+        android:visibility="gone"
+        app:SpinKit_Color="@color/pink2"
+        app:SpinKit_Style="ThreeBounce"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

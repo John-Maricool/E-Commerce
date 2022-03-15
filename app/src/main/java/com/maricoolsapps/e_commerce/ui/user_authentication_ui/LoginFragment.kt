@@ -41,10 +41,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun observeLiveData() {
         model.defaultRepo.dataLoading.observe(viewLifecycleOwner) {
-            binding.progressBar.toggleVisibility(it)
+            (activity as MainActivity).progressBar.toggleVisibility(it)
         }
         model.defaultRepo.resultError.observe(viewLifecycleOwner){
-            binding.progressBar.displaySnack(it)
+            (activity as MainActivity).progressBar.displaySnack(it)
         }
         model.done.observe(viewLifecycleOwner){
             when(it){

@@ -9,16 +9,6 @@
     android:background="@color/grey"
     tools:context=".ui.product_ui.sell.SellFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:elevation="10dp"
-        android:layout_height="wrap_content"
-        android:background="@color/grey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -26,7 +16,7 @@
         android:layout_margin="@dimen/margin_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/par"
@@ -196,7 +186,6 @@
                     android:hint="@string/enter_amount_in"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
-
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/_location"
@@ -379,18 +368,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/post_ad" />
-
-            <com.github.ybq.android.spinkit.SpinKitView
-                android:id="@+id/progress_bar"
-                style="@style/SpinKitView.Large.ThreeBounce"
-                android:layout_width="@dimen/progress_bar_height"
-                android:layout_height="@dimen/progress_bar_height"
-                android:layout_margin="@dimen/margin_very_small"
-                android:visibility="gone"
-                app:SpinKit_Color="@color/pink"
-                app:layout_constraintBottom_toTopOf="@+id/post_ad"
-                app:layout_constraintEnd_toEndOf="@+id/post_ad"
-                app:layout_constraintStart_toStartOf="@+id/post_ad" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

@@ -8,15 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.product_ui.feedback.FeedbackFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +17,7 @@
         android:id="@+id/card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -148,15 +139,4 @@
         app:layout_constraintStart_toStartOf="@+id/card"
         app:layout_constraintTop_toBottomOf="@id/card" />
 
-    <com.github.ybq.android.spinkit.SpinKitView
-        android:layout_width="@dimen/progress_bar_height"
-        android:layout_height="@dimen/progress_bar_height"
-        app:SpinKit_Color="@color/pink2"
-        android:id="@+id/progress_bar"
-        app:SpinKit_Style="ChasingDots"
-        app:layout_constraintTop_toBottomOf="@id/send"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/margin_large"
-        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

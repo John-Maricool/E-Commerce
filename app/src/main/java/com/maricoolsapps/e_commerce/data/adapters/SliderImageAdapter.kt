@@ -1,6 +1,7 @@
 package com.maricoolsapps.e_commerce.data.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
@@ -12,8 +13,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 class SliderImageAdapter
-    @Inject constructor(@ApplicationContext val context: Context)
-    : SliderViewAdapter<SliderImageAdapter.SliderViewHolder>() {
+@Inject constructor(@ApplicationContext val context: Context):
+    SliderViewAdapter<SliderImageAdapter.SliderViewHolder>() {
 
     private var images: List<String> = listOf()
     private lateinit var listener: OnItemClickListener<List<String>>
@@ -27,7 +28,8 @@ class SliderImageAdapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?): SliderViewHolder {
-        val binding = SliderProductImageBinding.inflate(LayoutInflater.from(parent?.context), parent, false)
+        val binding =
+            SliderProductImageBinding.inflate(LayoutInflater.from(parent?.context), parent, false)
         return SliderViewHolder(binding)
     }
 
@@ -40,18 +42,26 @@ class SliderImageAdapter
                 .centerCrop()
                 .into(viewHolder.binding.productImage)
         }
+
+        viewHolder?.binding?.productImage?.setOnClickListener {
+            Log.d("images", position.toString())
+            listener.onItemClick(images, position)
+        }
     }
 
-    fun getProductsImage(mImages: List<String>){
+    fun getProductsImage(mImages: List<String>) {
         images = mImages
         notifyDataSetChanged()
     }
 
-    inner class SliderViewHolder(var binding: SliderProductImageBinding): SliderViewAdapter.ViewHolder(binding.root){
-            init{
-                binding.productImage.setOnClickListener {
-                    listener.onItemClick(images, null)
-                }
+    inner class SliderViewHolder(var binding: SliderProductImageBinding) :
+        SliderViewAdapter.ViewHolder(binding.root) {
+        init {
+            binding.productImage.setOnClickListener {
+                val position = getItemPosition(images)
+                Log.d("images", position.toString())
+                listener.onItemClick(images, position)
             }
         }
+    }
 }

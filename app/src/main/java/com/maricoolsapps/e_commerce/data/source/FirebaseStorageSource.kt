@@ -16,5 +16,4 @@ class FirebaseStorageSource
     suspend fun putFileInStorage(uri: Uri, id: String): UploadTask.TaskSnapshot? {
         return storage.getReference("${id}.jpg").putFile(uri).await()
     }
-
 }

@@ -1,10 +1,16 @@
 package com.maricoolsapps.e_commerce.data.source
 
+import android.database.CharArrayBuffer
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.*
 import com.maricoolsapps.e_commerce.data.model.*
 import com.maricoolsapps.e_commerce.utils.Constants
+import com.maricoolsapps.e_commerce.utils.Resource
 import kotlinx.coroutines.tasks.await
+import java.util.*
 import javax.inject.Inject
 
 class FirebaseFirestoreSource
@@ -16,7 +22,8 @@ class FirebaseFirestoreSource
 
     suspend fun getCarsFromBrand(brand: String): QuerySnapshot? {
         return carCollection.document(brand)
-            .collection(Constants.models).get(Source.SERVER).await()
+            .collection(Constants.models).orderBy("time")
+            .get(Source.SERVER).await()
     }
 
     suspend fun getCarsIdFromSeller(seller: String, brand: String): QuerySnapshot? {
@@ -51,6 +58,18 @@ class FirebaseFirestoreSource
     }
 
     suspend fun changeProfile(id: String, person: CarBuyerOrSeller): Void? {
+        return sellerCollection
+            .document(id).update(
+                "name", person.name,
+                "email", person.email,
+                "phoneNumber", person.phoneNumber,
+                "state", person.state,
+                "businessLocation", person.businessLocation,
+                "image", person.image
+            ).await()
+    }
+
+    suspend fun changeProfileNew(id: String, person: CarBuyerOrSeller): Void? {
         return sellerCollection
             .document(id).set(person).await()
     }
@@ -172,7 +191,6 @@ class FirebaseFirestoreSource
             .collection(Constants.status).document(Constants.status).set(status).await()
     }
 
-
     suspend fun getLastMessages(channelId: String): DocumentSnapshot? {
         return chatChannel
             .document(channelId)
@@ -189,32 +207,63 @@ class FirebaseFirestoreSource
     ): QuerySnapshot? {
 
         return carCollection.document(brand).collection(Constants.models)
-            .whereEqualTo("type", type)
-            .whereEqualTo("condition", condition)
+            .whereEqualTo("type", type).whereEqualTo("condition", condition)
             .whereEqualTo("location", location)
-            .whereGreaterThanOrEqualTo("price", lowestPrice)
-            .whereLessThanOrEqualTo("price", highestPrice).get().await()
+            //.whereGreaterThan("price", lowestPrice)
+            .get().await()
     }
 
-fun getMessagesId(chatChannel: ChatChannel): Query {
-    return this.chatChannel.document(chatChannel.channelId)
-        .collection(Constants.messages).orderBy("time")
-}
+    fun getMessagesId(chatChannel: ChatChannel): Query {
+        return this.chatChannel.document(chatChannel.channelId)
+            .collection(Constants.messages).orderBy("time")
+    }
 
-suspend fun sendMessage(chatChannel: ChatChannel, messages: Messages) {
-    this.chatChannel.document(chatChannel.channelId)
-        .collection(Constants.messages).add(messages).await()
-    this.chatChannel.document(chatChannel.channelId)
-        .collection(Constants.messages).document(Constants.lastMessage).set(messages).await()
-}
+    suspend fun sendMessage(chatChannel: ChatChannel, messages: Messages) {
+        this.chatChannel.document(chatChannel.channelId)
+            .collection(Constants.messages).add(messages).await()
+        this.chatChannel.document(chatChannel.channelId)
+            .collection(Constants.messages).document(Constants.lastMessage).set(messages).await()
+    }
 
-suspend fun tagAllMessagesSeen(chatChannel: ChatChannel): QuerySnapshot? {
-    return this.chatChannel.document(chatChannel.channelId)
-        .collection(Constants.messages).get().await()
-}
+    fun tagAllMessagesSeen(chatChannel: ChatChannel): CollectionReference {
+        return this.chatChannel.document(chatChannel.channelId)
+            .collection(Constants.messages)
+    }
 
-suspend fun updateCar(car: Product): Void? {
-    return carCollection.document(car.brand)
-        .collection(Constants.models).document(car.id).set(car).await()
-}
+    suspend fun updateCar(car: Product): Void? {
+        return carCollection.document(car.brand)
+            .collection(Constants.models).document(car.id).set(car).await()
+    }
+
+    fun addTokenToFirebase(userId: String, token: String) {
+        sellerCollection.document(userId).update("registrationTokens", token)
+    }
+
+    fun checkIfUserHasNewMessages(userId: String): LiveData<Int> {
+        val state = MutableLiveData<Int>()
+        var count = 0
+        sellerCollection.document(userId).collection(Constants.chats).get()
+            .addOnSuccessListener { value ->
+                val chats = value.toObjects(ChatChannel::class.java)
+                run lit@{
+                    chats.forEach {
+                        chatChannel.document(it.channelId).collection(Constants.messages)
+                            .document(Constants.lastMessage)
+                            .addSnapshotListener { value, error ->
+                                val message = value?.toObject(Messages::class.java)
+                                if (!message?.seen!! && message.receiverId == userId) {
+                                    count++
+                                    return@addSnapshotListener
+                                } else {
+                                    count = 0
+                                }
+                            }
+
+                    }
+                }
+                state.postValue(count)
+            }
+        return state
+    }
+
 }

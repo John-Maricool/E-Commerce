@@ -17,5 +17,4 @@ interface ProductDao {
 
     @Query("select exists(select * from FavoriteProductEntity where id =:carId)")
      fun checkIfAdded(carId: String): Boolean
-
 }

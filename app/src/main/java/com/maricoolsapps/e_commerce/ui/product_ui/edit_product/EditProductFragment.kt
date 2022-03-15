@@ -26,10 +26,11 @@ class EditProductFragment : Fragment(R.layout.fragment_edit_product) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentEditProductBinding.bind(view)
 
-        (activity as MainActivity).setSupportActionBar(binding.toolbar)
-        val actionBar = (activity as MainActivity).supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.toolbar.title = "Edit Car"
+        (activity as MainActivity).toolbar.apply {
+            title = "Edit Car"
+            setBackgroundColor(resources.getColor(R.color.grey, null))
+        }
+
         model.getProduct(args.id, args.brand)
         observeLiveData()
         buttonClickListeners()
@@ -76,10 +77,10 @@ class EditProductFragment : Fragment(R.layout.fragment_edit_product) {
             }
         }
         model.defaultRepo.resultError.observe(viewLifecycleOwner) {
-            binding.progressBar.displaySnack(it)
+            (activity as MainActivity).progressBar.displaySnack(it)
         }
         model.defaultRepo.dataLoading.observe(viewLifecycleOwner) {
-            binding.progressBar.toggleVisibility(it)
+            (activity as MainActivity).progressBar.toggleVisibility(it)
         }
         model.updated.observe(viewLifecycleOwner) {
             if (it != null) {

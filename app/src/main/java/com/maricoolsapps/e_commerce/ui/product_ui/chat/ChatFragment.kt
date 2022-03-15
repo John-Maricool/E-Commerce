@@ -9,14 +9,14 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.collection.arraySetOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.data.adapters.ChatMessagesAdapter
-import com.maricoolsapps.e_commerce.data.model.MessageType
-import com.maricoolsapps.e_commerce.data.model.Messages
+import com.maricoolsapps.e_commerce.data.model.*
 import com.maricoolsapps.e_commerce.databinding.ChatFragmentBinding
 import com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity
 import com.maricoolsapps.e_commerce.utils.displaySnack
@@ -33,6 +33,7 @@ class ChatFragment : Fragment(R.layout.chat_fragment) {
     private var _binding: ChatFragmentBinding? = null
     private val binding get() = _binding!!
     private val model: ChatViewModel by viewModels()
+    private lateinit var seller: CarBuyerOrSeller
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     private val args: ChatFragmentArgs by navArgs()
     lateinit var userno: String
@@ -47,8 +48,24 @@ class ChatFragment : Fragment(R.layout.chat_fragment) {
                 if (result.resultCode == Activity.RESULT_OK) {
                     val imageUri = result.data?.data.toString()
                     val message =
-                        Messages(imageUri, Date().time, model.userID, false, MessageType.IMG)
-                    model.sendMessage(args.chatChannel, message)
+                        Messages(
+                            imageUri, Date().time, model.userID,
+                            args.chatChannel.personChatting, model.userName.toString(),
+                            false, MessageType.IMG
+                        )
+                    val to = seller.registrationTokens
+                    val data = Data(
+                        senderId = model.userID,
+                        chat_channel_id = args.chatChannel.channelId,
+                        personChatting = args.chatChannel.personChatting,
+                        messageType = MessageType.IMG
+                    )
+                    val notification = NotificationDetails(
+                        title = "New message from ${model.userName}",
+                        body = "New Image sent to you"
+                    )
+                    val notify = SendNotification(to, data, notification)
+                    model.sendMessage(args.chatChannel, message, notify)
                 }
             }
     }
@@ -58,20 +75,18 @@ class ChatFragment : Fragment(R.layout.chat_fragment) {
         _binding = ChatFragmentBinding.bind(view)
         toolBarInit()
         model.fillViews(args.chatChannel)
-        val bot = (activity as MainActivity).findViewById<BottomNavigationView>(R.id.bottom_nav)
-        bot.toggleVisibility(false)
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = adapter
         observeLiveData()
         clickListeners()
 
-      /*   activity?.onBackPressedDispatcher?.addCallback(
-             viewLifecycleOwner,
-             object : OnBackPressedCallback(true) {
-                 override fun handleOnBackPressed() {
-                    findNavController().popBackStack(R.id.chatListFragment, true)
-                 }
-             })*/
+         requireActivity().onBackPressedDispatcher.addCallback(
+               viewLifecycleOwner,
+               object : OnBackPressedCallback(true) {
+                   override fun handleOnBackPressed() {
+                      findNavController().popBackStack()
+                   }
+               })
     }
 
     private fun toolBarInit() {
@@ -83,15 +98,35 @@ class ChatFragment : Fragment(R.layout.chat_fragment) {
     private fun clickListeners() {
         binding.sendMessage.setOnClickListener {
             val messageText = binding.editText.text.toString().trim()
-            if (messageText.isEmpty()) {
+            if (messageText.isEmpty() || !this::seller.isInitialized) {
                 return@setOnClickListener
             } else {
                 val message =
-                    Messages(messageText, Date().time, model.userID, false, MessageType.TEXT)
-                model.sendMessage(args.chatChannel, message)
+                    Messages(
+                        messageText,
+                        Date().time,
+                        model.userID,
+                        args.chatChannel.personChatting,
+                        model.userName.toString(),
+                        false,
+                        MessageType.TEXT
+                    )
+                val to = seller.registrationTokens
+                val data = Data(
+                    senderId = model.userID,
+                    chat_channel_id = args.chatChannel.channelId,
+                    personChatting = args.chatChannel.personChatting
+                )
+                val notification = NotificationDetails(
+                    title = "New message from ${model.userName}",
+                    body = messageText
+                )
+                val notify = SendNotification(to, data, notification)
+                model.sendMessage(args.chatChannel, message, notify)
                 binding.editText.text?.clear()
             }
         }
+
         binding.call.setOnClickListener {
             if (::userno.isInitialized && userno.isNotEmpty()) {
                 startActivity(model.callChat(userno))
@@ -103,12 +138,18 @@ class ChatFragment : Fragment(R.layout.chat_fragment) {
         binding.openGallery.setOnClickListener {
             resultLauncher.launch(model.goToGallery())
         }
+
+        binding.name.setOnClickListener {
+            val action = ChatFragmentDirections.actionChatFragmentToSellerFragment(args.chatChannel.personChatting)
+            findNavController().navigate(action)
+        }
     }
 
     private fun observeLiveData() {
         model.chat.observe(viewLifecycleOwner) {
             if (it != null) {
                 binding.image.setResourceCenterCrop(it.image!!)
+                seller = it
                 binding.name.text = it.name
                 userno = it.phoneNumber
             }

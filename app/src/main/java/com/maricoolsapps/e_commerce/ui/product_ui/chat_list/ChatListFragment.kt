@@ -1,9 +1,8 @@
-package com.maricoolsapps.e_commerce.ui.product_ui.chat
+package com.maricoolsapps.e_commerce.ui.product_ui.chat_list
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.maricoolsapps.e_commerce.R
@@ -11,6 +10,7 @@ import com.maricoolsapps.e_commerce.data.adapters.ChatListAdapter
 import com.maricoolsapps.e_commerce.data.interfaces.OnItemClickListener
 import com.maricoolsapps.e_commerce.data.model.ChatChannel
 import com.maricoolsapps.e_commerce.databinding.ChatListFragmentBinding
+import com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity
 import com.maricoolsapps.e_commerce.utils.displaySnack
 import com.maricoolsapps.e_commerce.utils.toggleVisibility
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,7 +47,7 @@ class ChatListFragment : Fragment(R.layout.chat_list_fragment), OnItemClickListe
             }
         }
         model.defaultRepo.dataLoading.observe(viewLifecycleOwner){
-            binding.progressBar.toggleVisibility(it)
+            (activity as MainActivity).progressBar.toggleVisibility(it)
         }
         model.defaultRepo.resultError.observe(viewLifecycleOwner){
             binding.textError.toggleVisibility(true)
@@ -62,10 +62,8 @@ class ChatListFragment : Fragment(R.layout.chat_list_fragment), OnItemClickListe
     }
 
     private fun toolbarInit() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        val actionBar = (activity as AppCompatActivity).supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = "Messages"
+        (activity as MainActivity).toolbar.title = "Messages"
+        (activity as MainActivity).toolbar.toggleVisibility(true)
     }
 
     override fun onDestroy() {

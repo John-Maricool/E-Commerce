@@ -18,6 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ImageView
         android:layout_width="@dimen/image_size_big"
         android:layout_height="@dimen/image_size_big"
@@ -43,8 +44,8 @@
 
     <ImageView
         android:id="@+id/download"
-        android:layout_width="@dimen/spinner_height"
-        android:layout_height="@dimen/spinner_height"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginEnd="@dimen/margin_large"
         android:layout_marginBottom="@dimen/margin_large"
         android:src="@drawable/ic_baseline_arrow_downward_24"

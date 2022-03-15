@@ -3,8 +3,10 @@ package com.maricoolsapps.e_commerce.data.db
 import com.maricoolsapps.e_commerce.data.source.FirebaseFirestoreSource
 import com.maricoolsapps.e_commerce.data.model.*
 import android.content.Context
+import android.content.SharedPreferences
 import android.provider.ContactsContract
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.google.firebase.firestore.core.OnlineState
 import com.maricoolsapps.e_commerce.utils.*
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -16,7 +18,8 @@ import javax.inject.Inject
 class CloudQueries
 @Inject constructor(
     private val source: FirebaseFirestoreSource,
-    @ApplicationContext val context: Context
+    @ApplicationContext val context: Context,
+    private val prefs: SharedPreferences
 ) {
 
     suspend fun getCarsFromBrand(name: String, b: (Resource<List<ProductModel>>) -> Unit) {
@@ -124,7 +127,33 @@ class CloudQueries
     suspend fun changeProfile(id: String, person: CarBuyerOrSeller, b: (Resource<String>) -> Unit) {
         b.invoke(Resource.loading())
         try {
+            val editor = prefs.edit()
+            editor.putString(SharedPrefs.USER_NAME, person.name)
+            editor.putString(SharedPrefs.USER_EMAIL, person.email)
+            editor.putString(SharedPrefs.USER_PIC, person.image)
+            editor.apply()
             source.changeProfile(id, person)
+            val status = UserStatus(true, Date().time)
+            source.changeUserStatus(id, status)
+            b.invoke(Resource.success(Constants.successful))
+        } catch (e: Exception) {
+            b.invoke(Resource.error(e.message.toString(), null))
+        }
+    }
+
+    suspend fun changeProfileNew(
+        id: String,
+        person: CarBuyerOrSeller,
+        b: (Resource<String>) -> Unit
+    ) {
+        b.invoke(Resource.loading())
+        try {
+            val editor = prefs.edit()
+            editor.putString(SharedPrefs.USER_NAME, person.name)
+            editor.putString(SharedPrefs.USER_EMAIL, person.email)
+            editor.putString(SharedPrefs.USER_PIC, person.image)
+            editor.apply()
+            source.changeProfileNew(id, person)
             val status = UserStatus(true, Date().time)
             source.changeUserStatus(id, status)
             b.invoke(Resource.success(Constants.successful))
@@ -376,13 +405,16 @@ class CloudQueries
                             ?.toObject(CarBuyerOrSeller::class.java)
                         val lastMessages = source.getLastMessages(chatChannel.channelId)
                             ?.toObject(Messages::class.java)
-                        if (user != null && lastMessages != null) {
+                        if (user != null && lastMessages != null){
                             val chatlist =
                                 ChatList(user, lastMessages)
                             users.add(chatlist)
                         } else {
                             val chatList = ChatList(user!!, Messages())
                             users.add(chatList)
+                        }
+                        users.sortByDescending {
+                            it.lastMessages.time
                         }
                     }
                     b.invoke(Resource.success(users))
@@ -426,19 +458,20 @@ class CloudQueries
         }
     }
 
-    suspend fun tagAllMessagesSeen(
+     fun tagAllMessagesSeen(
         userID: String,
         channel: ChatChannel,
         b: (Resource<String>) -> Unit
     ) {
         b.invoke(Resource.loading())
         try {
-            val docs = source.tagAllMessagesSeen(channel)
-            docs?.documents?.forEach {
-                if (!it["senderId"]?.equals(userID)!!)
-                    it.reference.update("seen", true)
+            source.tagAllMessagesSeen(channel).addSnapshotListener { value, _ ->
+                value?.documents?.forEach {
+                    if (!it["senderId"]?.equals(userID)!! && it["seen"]?.equals(false)!!)
+                        it.reference.update("seen", true)
+                }
+                b.invoke(Resource.success(Constants.successful))
             }
-            b.invoke(Resource.success(Constants.successful))
         } catch (e: Exception) {
             b.invoke(Resource.error(e.toString(), null))
         }
@@ -461,4 +494,19 @@ class CloudQueries
             }
         }
     }
+
+    fun addTokenToFirebase(userId: String, token: String, b: (Resource<String>) -> Unit) {
+        b.invoke(Resource.loading())
+        try {
+            source.addTokenToFirebase(userId, token)
+            b.invoke(Resource.success(Constants.successful))
+        } catch (e: Exception) {
+            b.invoke(Resource.error(e.toString(), null))
+        }
+    }
+    fun checkIfUserHasNewMessages(userId: String): LiveData<Int> {
+        return source.checkIfUserHasNewMessages(userId)
+    }
+
+
 }

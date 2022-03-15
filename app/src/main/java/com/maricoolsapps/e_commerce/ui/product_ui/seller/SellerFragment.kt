@@ -18,6 +18,7 @@ import com.maricoolsapps.e_commerce.data.interfaces.OnItemClickListener
 import com.maricoolsapps.e_commerce.data.model.Follow
 import com.maricoolsapps.e_commerce.data.model.ProductModel
 import com.maricoolsapps.e_commerce.databinding.FragmentSellerBinding
+import com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity
 import com.maricoolsapps.e_commerce.utils.displaySnack
 import com.maricoolsapps.e_commerce.utils.setResourceCenterCrop
 import com.maricoolsapps.e_commerce.utils.showToast
@@ -33,6 +34,7 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
     private val args: SellerFragmentArgs by navArgs()
     private val model: SellerViewModel by viewModels()
     lateinit var carBrands: Array<String>
+    lateinit var sellerImg: String
 
     @Inject
     lateinit var adapter: ProductListAdapter
@@ -62,6 +64,13 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
         binding.message.setOnClickListener {
             model.createChatChannel(userToChat = args.ownerId)
         }
+
+        binding.image.setOnClickListener {
+            if (this::sellerImg.isInitialized) {
+                val action = SellerFragmentDirections.goToPic(arrayOf(sellerImg), 0)
+                findNavController().navigate(action)
+            }
+        }
     }
 
     override fun onStart() {
@@ -69,11 +78,14 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
         adapter.setOnItemClickListener(this)
         binding.spinnerCategory.onItemSelectedListener = this
         binding.followers.setOnClickListener {
-            val action = SellerFragmentDirections.actionSellerFragmentToFollowersFragment(args.ownerId)
+            val action =
+                SellerFragmentDirections.actionSellerFragmentToFollowersFragment(args.ownerId)
             findNavController().navigate(action)
         }
+
         binding.following.setOnClickListener {
-            val action = SellerFragmentDirections.actionSellerFragmentToFollowersFragment(args.ownerId)
+            val action =
+                SellerFragmentDirections.actionSellerFragmentToFollowersFragment(args.ownerId)
             findNavController().navigate(action)
         }
     }
@@ -117,6 +129,7 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
             if (it != null) {
                 val seller = it.seller
                 userNo = seller!!.phoneNumber
+                sellerImg = seller.image!!
                 binding.apply {
                     if (it.isFollowing == true) {
                         sellerFollowed()
@@ -124,18 +137,18 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
                         sellerUnfollowed()
                     }
                     name.text = seller.name
-                    binding.toolbar.title = seller.name
+                    (activity as MainActivity).toolbar.title = seller.name
                     image.setResourceCenterCrop(seller.image.toString())
                 }
             }
         }
-        model.followers.observe(viewLifecycleOwner){
-            if (it != null){
+        model.followers.observe(viewLifecycleOwner) {
+            if (it != null) {
                 binding.followers.text = it.toString()
             }
         }
-        model.following.observe(viewLifecycleOwner){
-            if (it != null){
+        model.following.observe(viewLifecycleOwner) {
+            if (it != null) {
                 binding.following.text = it.toString()
             }
         }
@@ -153,59 +166,59 @@ class SellerFragment : Fragment(R.layout.fragment_seller), OnItemClickListener<P
             }
         }
         model.defaultRepo.dataLoading.observe(viewLifecycleOwner) {
-            binding.progressBar.toggleVisibility(it)
+            (activity as MainActivity).progressBar.toggleVisibility(it)
         }
         model.defaultRepo.resultError.observe(viewLifecycleOwner) {
-            binding.progressBar.displaySnack(it)
+            (activity as MainActivity).progressBar.displaySnack(it)
         }
         model.channelCreated.observe(viewLifecycleOwner) {
-            if (it != null){
-        val action = SellerFragmentDirections.goToChat(it)
+            if (it != null) {
+                val action = SellerFragmentDirections.goToChat(it)
                 findNavController().navigate(action)
+            }
+        }
     }
-}
-}
 
-override fun onDestroyView() {
-    super.onDestroyView()
-    _binding = null
-}
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
-private fun initSpinnerAndAdapter() {
-    carBrands = resources.getStringArray(R.array.brands).drop(1).toTypedArray()
-    val spinnerAdapter = ArrayAdapter(
-        requireActivity(),
-        R.layout.support_simple_spinner_dropdown_item,
-        carBrands
-    )
+    private fun initSpinnerAndAdapter() {
+        carBrands = resources.getStringArray(R.array.brands).drop(1).toTypedArray()
+        val spinnerAdapter = ArrayAdapter(
+            requireActivity(),
+            R.layout.support_simple_spinner_dropdown_item,
+            carBrands
+        )
 
-    binding.spinnerCategory.adapter = spinnerAdapter
-    binding.recyclerView.setHasFixedSize(true)
-    binding.recyclerView.adapter = adapter
+        binding.spinnerCategory.adapter = spinnerAdapter
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.adapter = adapter
 
-}
+    }
 
-override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-    val value = parent?.getItemAtPosition(position).toString()
-    model.getCarsFromSeller(args.ownerId, value)
-}
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val value = parent?.getItemAtPosition(position).toString()
+        model.getCarsFromSeller(args.ownerId, value)
+    }
 
-private fun toolbarInit() {
-    (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-    val actionBar = (activity as AppCompatActivity).supportActionBar
-    actionBar?.setDisplayHomeAsUpEnabled(true)
-}
+    private fun toolbarInit() {
+        (activity as MainActivity).apply {
+            toolbar.setBackgroundColor(resources.getColor(R.color.grey, null))
+        }
+    }
 
-override fun onNothingSelected(parent: AdapterView<*>?) {
-    TODO("Not yet implemented")
-}
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        TODO("Not yet implemented")
+    }
 
-override fun onItemClick(t: Any, p: Any?) {
-    val action = SellerFragmentDirections.goToProductDetails(
-        t as String,
-        p as String
-    )
-    findNavController().navigate(action)
-}
+    override fun onItemClick(t: Any, p: Any?) {
+        val action = SellerFragmentDirections.goToProductDetails(
+            t as String,
+            p as String
+        )
+        findNavController().navigate(action)
+    }
 
 }

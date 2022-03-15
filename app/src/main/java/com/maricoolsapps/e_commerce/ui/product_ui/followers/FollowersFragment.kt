@@ -13,6 +13,7 @@ import com.maricoolsapps.e_commerce.data.adapters.FollowersListAdapter
 import com.maricoolsapps.e_commerce.data.interfaces.OnItemClickListener
 import com.maricoolsapps.e_commerce.data.model.CarBuyerOrSeller
 import com.maricoolsapps.e_commerce.databinding.FragmentFollowersBinding
+import com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity
 import com.maricoolsapps.e_commerce.utils.Status
 import com.maricoolsapps.e_commerce.utils.displaySnack
 import com.maricoolsapps.e_commerce.utils.toggleVisibility
@@ -66,7 +67,8 @@ class FollowersFragment : Fragment(R.layout.fragment_followers),
             }
         }
         model.defaultRepo.dataLoading.observe(viewLifecycleOwner) {
-            binding.progressBar.toggleVisibility(it)
+            (activity as MainActivity).progressBar.toggleVisibility(it)
+
         }
         model.defaultRepo.resultError.observe(viewLifecycleOwner) {
             binding.textError.text = it

@@ -1,19 +1,22 @@
 package com.maricoolsapps.e_commerce.data.repositories
 
-import android.net.Uri
 import androidx.core.net.toUri
 import android.content.Context
-import com.maricoolsapps.e_commerce.data.db.CloudQueries
-import com.maricoolsapps.e_commerce.data.db.StorageChanges
+import android.util.Log
 import com.maricoolsapps.e_commerce.data.model.ChatChannel
 import com.maricoolsapps.e_commerce.data.model.MessageType
 import com.maricoolsapps.e_commerce.data.model.Messages
+import com.maricoolsapps.e_commerce.data.model.SendNotification
 import com.maricoolsapps.e_commerce.data.source.FirebaseFirestoreSource
 import com.maricoolsapps.e_commerce.data.source.FirebaseStorageSource
+import com.maricoolsapps.e_commerce.service.RetrofitApiCalls
 import com.maricoolsapps.e_commerce.utils.Constants
 import com.maricoolsapps.e_commerce.utils.Resource
 import com.maricoolsapps.e_commerce.utils.convertImageToByteArray
 import dagger.hilt.android.qualifiers.ApplicationContext
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -21,7 +24,7 @@ class ChatRepository
 @Inject constructor(
     val storageSource: FirebaseStorageSource,
     val cloudSource: FirebaseFirestoreSource,
-    @ApplicationContext val context: Context
+    val api: RetrofitApiCalls,
 ) {
 
     suspend fun sendMessage(
@@ -33,8 +36,10 @@ class ChatRepository
         try {
             if (message.type == MessageType.IMG) {
                 storageSource.putFileInStorage(message.text.toUri(), message.text)
-                    message.text = context.convertImageToByteArray(message.text.toUri()).toString()
-                    cloudSource.sendMessage(chatChannel, message)
+                val uri = storageSource.getDownloadUri(message.text)
+                message.text = uri.toString()
+                // message.text = context.convertImageToByteArray(message.text.toUri()).toString()
+                cloudSource.sendMessage(chatChannel, message)
                 b.invoke(Resource.success(Constants.successful))
             } else {
                 cloudSource.sendMessage(chatChannel, message)
@@ -45,5 +50,24 @@ class ChatRepository
         }
     }
 
+    fun sendNotification(notification: SendNotification, b: (Resource<Boolean>) -> Unit) {
+        b.invoke(Resource.loading())
+        try {
+            val result = api.sendNotification(notification)
+            result.enqueue(object: Callback<SendNotification>{
+                override fun onResponse(call: Call<SendNotification>, response: Response<SendNotification>) {
+                    if(response.isSuccessful){
+                        b.invoke(Resource.success(response.isSuccessful))
+                    }
+                }
+                override fun onFailure(call: Call<SendNotification>, t: Throwable) {
+                    Log.d("sns", t.toString())
+                    b.invoke(Resource.error(t.toString(), null))
+                }
+            })
+        } catch (e: Exception) {
+            b.invoke(Resource.error(e.toString(), null))
+        }
+    }
 
 }

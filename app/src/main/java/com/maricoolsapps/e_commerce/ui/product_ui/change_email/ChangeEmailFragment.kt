@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.data.model.User
 import com.maricoolsapps.e_commerce.databinding.FragmentChangeEmailAndPasswordBinding
+import com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity
 import com.maricoolsapps.e_commerce.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,14 +28,14 @@ class ChangeEmailFragment : Fragment(R.layout.fragment_change_email_and_password
     }
 
     private fun observeLiveData() {
-        model.defaultRepo.dataLoading.observe(viewLifecycleOwner){
-            binding.progressBar.toggleVisibility(it)
+        model.defaultRepo.dataLoading.observe(viewLifecycleOwner) {
+            (activity as MainActivity).progressBar.toggleVisibility(it)
         }
-        model.defaultRepo.resultError.observe(viewLifecycleOwner){
-            binding.progressBar.displaySnack(it)
+        model.defaultRepo.resultError.observe(viewLifecycleOwner) {
+            (activity as MainActivity).progressBar.displaySnack(it)
         }
-        model.result.observe(viewLifecycleOwner){
-            if (it != null){
+        model.result.observe(viewLifecycleOwner) {
+            if (it != null) {
                 activity?.onBackPressed()
                 activity?.showToast("Sucessfully changed email")
             }
@@ -42,10 +43,10 @@ class ChangeEmailFragment : Fragment(R.layout.fragment_change_email_and_password
     }
 
     private fun toolbarInit() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        val actionBar = (activity as AppCompatActivity).supportActionBar
-        binding.toolbar.title = "Change Email"
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).apply {
+            toolbar.title = "Change Email"
+            toolbar.setBackgroundColor(resources.getColor(R.color.white, null))
+        }
     }
 
     private fun getViews() {
@@ -64,9 +65,9 @@ class ChangeEmailFragment : Fragment(R.layout.fragment_change_email_and_password
         }
     }
 
-        override fun onDestroy() {
-            super.onDestroy()
-            _binding = null
-        }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
+
+}

@@ -240,19 +240,6 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/regions" />
 
-  <com.github.ybq.android.spinkit.SpinKitView
-      android:id="@+id/progress_bar"
-      style="@style/SpinKitView.Large.Circle"
-      android:layout_width="@dimen/margin_large"
-      android:layout_height="@dimen/margin_large"
-      android:layout_marginTop="@dimen/margin_medium"
-      android:visibility="gone"
-      app:SpinKit_Color="@color/pink2"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.53"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/finish" />
-
   <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/already_have_an_account"
       android:layout_width="wrap_content"

@@ -79,10 +79,11 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             }
         }
         model.defaultRepo.dataLoading.observe(viewLifecycleOwner) {
-            binding.progressBar.toggleVisibility(it)
+
+            (activity as MainActivity).progressBar.toggleVisibility(it)
         }
         model.defaultRepo.resultError.observe(viewLifecycleOwner) {
-            binding.progressBar.displaySnack(it)
+            (activity as MainActivity).progressBar.displaySnack(it)
         }
     }
 
@@ -117,7 +118,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         if (name.isEmpty() || email.isEmpty() ||
             number.isEmpty() || binding.regions.selectedItemPosition == 0 || intent_data == null
         ) {
-            binding.progressBar.displaySnack("Complete your Entries")
+            (activity as MainActivity).progressBar.displaySnack("Complete your Entries")
         } else {
             model.getUser().observe(viewLifecycleOwner) {
                 if (it != null) {
@@ -128,7 +129,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                         email,
                         number,
                         region,
-                        location
+                        location,
+                        ""
                     )
                     model.completeRegistration(it.uid, user)
                 }

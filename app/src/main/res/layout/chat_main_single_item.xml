@@ -62,7 +62,7 @@
             android:layout_marginEnd="@dimen/margin_medium"
             android:gravity="end"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_normal"
+            android:textSize="12sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="@+id/time"
             app:layout_constraintEnd_toEndOf="@+id/time"

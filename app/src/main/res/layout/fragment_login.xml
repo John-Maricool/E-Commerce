@@ -109,19 +109,6 @@
         app:layout_constraintStart_toStartOf="@+id/password_field"
         app:layout_constraintTop_toBottomOf="@+id/password_field" />
 
-    <com.github.ybq.android.spinkit.SpinKitView
-        android:id="@+id/progress_bar"
-        style="@style/SpinKitView.Large.Circle"
-        android:layout_width="@dimen/progress_bar_width"
-        android:layout_height="@dimen/progress_bar_height"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:visibility="gone"
-        app:SpinKit_Color="@color/pink2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.53"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in" />
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/forgot_password"
         android:layout_width="0dp"

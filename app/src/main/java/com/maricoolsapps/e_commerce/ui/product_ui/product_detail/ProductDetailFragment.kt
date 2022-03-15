@@ -18,9 +18,11 @@ import com.maricoolsapps.e_commerce.data.interfaces.OnItemClickListener
 import com.maricoolsapps.e_commerce.data.model.ChatChannel
 import com.maricoolsapps.e_commerce.data.model.Product
 import com.maricoolsapps.e_commerce.data.model.ProductModel
+import com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity
 import com.maricoolsapps.e_commerce.utils.toggleVisibility
 import com.smarteist.autoimageslider.SliderView
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.NumberFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -47,7 +49,7 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentProductDetailBinding.bind(view)
 
-        val nav = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
+        val nav = (activity as MainActivity).bottomBar
         nav?.visibility = View.GONE
         model.getCarAndFeedback(args.brand, args.id)
         binding.recyelerFeedback.setHasFixedSize(true)
@@ -93,7 +95,7 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
             }
         }
         model.defaultRepo.dataLoading.observe(viewLifecycleOwner) {
-            binding.progressBar.toggleVisibility(it)
+            (activity as MainActivity).progressBar.toggleVisibility(it)
         }
         model.defaultRepo.resultError.observe(viewLifecycleOwner) {
             binding.error.text = it
@@ -138,10 +140,10 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
     }
 
     private fun toolbarInit() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        binding.toolbar.title = args.brand
-        val actionBar = (activity as AppCompatActivity).supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).apply {
+            toolbar.title = args.brand
+            toolbar.setBackgroundColor(resources.getColor(R.color.grey, null))
+        }
     }
 
     override fun onDestroyView() {
@@ -150,8 +152,8 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
     }
 
     override fun onItemClick(t: Any, p: Any?) {
-        val action = ProductDetailFragmentDirections.actionProductDetailFragmentToPictureFragment(
-            theProduct.photos.toTypedArray()
+        val action = ProductDetailFragmentDirections.goToPic(
+            theProduct.photos.toTypedArray(), p as Int
         )
         findNavController().navigate(action)
     }
@@ -207,7 +209,7 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
             prodDesc.text = product.description
             state.text = product.state
             ratingText.text = product.rating
-            productPrice.text = "$${product.price}"
+            productPrice.text = "₦${ NumberFormat.getIntegerInstance().format(product.price)}"
             location.text = product.location
         }
         adapter.getProductsImage(product.photos)

@@ -1,4 +1,4 @@
-package com.maricoolsapps.e_commerce.ui.product_ui.chat
+package com.maricoolsapps.e_commerce.ui.product_ui.chat_list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

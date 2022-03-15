@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.databinding.FragmentProfileBinding
+import com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity
+import com.maricoolsapps.e_commerce.utils.toggleVisibility
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -19,7 +22,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     @Inject
     lateinit var auth: FirebaseAuth
-    
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentProfileBinding.bind(view)
@@ -29,17 +32,21 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private fun buttonClicks() {
         binding.apply {
-        /*    feedback.setOnClickListener {
-                val action = ProfileFragmentDirections.actionProfileFragmentToFeedbackFragment()
-                findNavController().navigate(action)
+            logOut.setOnClickListener {
+                auth.signOut()
+                (activity as MainActivity).bottomBar.toggleVisibility(false)
+                findNavController().navigate(R.id.firstFragment)
+                findNavController().backStack.clear()
             }
-*/
+
             contactDetails.setOnClickListener {
-                val action = ProfileFragmentDirections.actionProfileFragmentToContactDetailsFragment()
+                val action =
+                    ProfileFragmentDirections.actionProfileFragmentToContactDetailsFragment()
                 findNavController().navigate(action)
             }
             followers.setOnClickListener {
-                val action = ProfileFragmentDirections.actionProfileFragmentToFollowersFragment(auth.currentUser?.uid!!)
+                val action =
+                    ProfileFragmentDirections.actionProfileFragmentToFollowersFragment(auth.currentUser?.uid!!)
                 findNavController().navigate(action)
             }
             myAdverts.setOnClickListener {
@@ -50,10 +57,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun toolbarInit() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        val actionBar = (activity as AppCompatActivity).supportActionBar
-        binding.toolbar.title = "Profile"
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).apply {
+            toolbar.title = "Profile"
+            toolbar.setBackgroundColor(resources.getColor(R.color.white, null))
+        }
     }
 
     override fun onDestroy() {

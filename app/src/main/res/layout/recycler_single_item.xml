@@ -6,6 +6,7 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:elevation="5dp"
     android:layout_marginStart="@dimen/margin_very_small"
     android:layout_marginTop="@dimen/margin_very_small"
     android:layout_marginEnd="@dimen/margin_very_small"
@@ -98,11 +99,12 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buy"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
+            android:elevation="5dp"
             android:layout_height="35dp"
             android:layout_marginBottom="@dimen/margin_medium"
             android:background="@drawable/pink"
-            android:text="@string/buy"
+            android:text="@string/view"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_normal"
