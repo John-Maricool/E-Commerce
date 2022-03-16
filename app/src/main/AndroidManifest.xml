@@ -15,6 +15,7 @@
         android:theme="@style/Theme.ECommerce">
         <activity
             android:name="com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

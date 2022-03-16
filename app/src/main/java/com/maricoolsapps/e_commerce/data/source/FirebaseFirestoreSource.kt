@@ -239,29 +239,33 @@ class FirebaseFirestoreSource
         sellerCollection.document(userId).update("registrationTokens", token)
     }
 
-    fun checkIfUserHasNewMessages(userId: String): LiveData<Int> {
-        val state = MutableLiveData<Int>()
-        var count = 0
-        sellerCollection.document(userId).collection(Constants.chats).get()
-            .addOnSuccessListener { value ->
-                val chats = value.toObjects(ChatChannel::class.java)
-                run lit@{
-                    chats.forEach {
-                        chatChannel.document(it.channelId).collection(Constants.messages)
-                            .document(Constants.lastMessage)
-                            .addSnapshotListener { value, error ->
-                                val message = value?.toObject(Messages::class.java)
-                                if (!message?.seen!! && message.receiverId == userId) {
-                                    count++
-                                    return@addSnapshotListener
-                                } else {
-                                    count = 0
+    fun checkIfUserHasNewMessages(userId: String): MutableLiveData<Boolean> {
+        val state = MutableLiveData<Boolean>()
+        sellerCollection.document(userId).collection(Constants.chats)
+            .addSnapshotListener { value, error ->
+                val chats = value?.toObjects(ChatChannel::class.java)
+                chats?.forEach {
+                    chatChannel.document(it.channelId).collection(Constants.messages)
+                        .document(Constants.lastMessage)
+                        .addSnapshotListener { value, error ->
+                            val seen = value?.get("seen")
+                            val receiver = value?.get("receiverId")
+                            if (seen == false && receiver == userId) {
+                                state.value = !(seen as Boolean?)!!
+                                Log.d("testTag", state.value.toString())
+                                Log.d("testTag", seen.toString())
+                                //  values.add(true)
+                            }else{
+                                if (state.value == true){
+                                    state.value = true
+                                }else{
+                                    Log.d("testTag", seen.toString())
+                                    Log.d("testTag", state.value.toString())
+                                    state.value = false
                                 }
                             }
-
-                    }
+                        }
                 }
-                state.postValue(count)
             }
         return state
     }

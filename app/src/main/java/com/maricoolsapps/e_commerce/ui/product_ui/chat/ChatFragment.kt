@@ -84,7 +84,7 @@ class ChatFragment : Fragment(R.layout.chat_fragment) {
                viewLifecycleOwner,
                object : OnBackPressedCallback(true) {
                    override fun handleOnBackPressed() {
-                      findNavController().popBackStack()
+                      findNavController().popBackStack(R.id.chatFragment, true)
                    }
                })
     }

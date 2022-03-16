@@ -43,11 +43,11 @@ class FeedbackListAdapter
             time.text = feedback.feedback.time.toTimeAgo()
             feedbackDesc.text = feedback.feedback.review
             if (feedback.feedback.emoji == "Happy"){
-                feedbackImage.setBackgroundResource(R.drawable.happy)
+                feedbackImage.setBackgroundResource(R.drawable.ic_happy)
             }else if(feedback.feedback.emoji == "Sad"){
-                feedbackImage.setBackgroundResource(R.drawable.sad)
+                feedbackImage.setBackgroundResource(R.drawable.ic_sad)
             }else{
-                feedbackImage.setBackgroundResource(R.drawable.neutral)
+                feedbackImage.setBackgroundResource(R.drawable.ic_neutral)
             }
         }
     }

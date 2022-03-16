@@ -19,6 +19,7 @@
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/chat_right.xml" value="0.126" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/circle.xml" value="0.1155" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/circle_offline.xml" value="0.1155" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/grey.xml" value="0.111" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/grey_border.xml" value="0.126" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_account.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_account_circle.xml" value="0.116" />
@@ -27,13 +28,16 @@
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_call.xml" value="0.118" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_feedback.xml" value="0.109" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_feedback_yellow.xml" value="0.1065" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_happy.xml" value="0.111" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_home.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_left.xml" value="0.16006944444444443" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_message.xml" value="0.15164473684210528" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_message_grey.xml" value="0.116" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_neutral.xml" value="0.111" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_next.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_photo_camera.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_right.xml" value="0.1501628664495114" />
+        <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_sad.xml" value="0.111" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_sell.xml" value="0.1" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_send.xml" value="0.126" />
         <entry key="..\:/Users/JOHN BATISTA/AndroidStudioProjects/ECommerce2/app/src/main/res/drawable/ic_star_rate.xml" value="0.21050228310502284" />

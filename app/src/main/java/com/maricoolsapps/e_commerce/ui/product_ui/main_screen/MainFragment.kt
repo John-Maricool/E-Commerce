@@ -84,7 +84,7 @@ class MainFragment : Fragment(R.layout.fragment_main),
 
     private fun observeLiveData() {
         model.result.observe(viewLifecycleOwner) {
-            if (it != null) {
+            if (it != null && it.isNotEmpty()) {
                 adapter.getProducts(it)
                 binding.recyclerView.adapter = adapter
             }
@@ -94,11 +94,14 @@ class MainFragment : Fragment(R.layout.fragment_main),
         }
 
         model.defaultRepo.resultError.observe(viewLifecycleOwner) {
-            if (it != Constants.no_data) {
+            if (it == Constants.check_internet) {
+                binding.checkInternet.toggleVisibility(true)
+                binding.checkInternet.text = it
                 binding.retry.toggleVisibility(true)
+                binding.noResults.toggleVisibility(false)
+            } else {
+                binding.noResults.toggleVisibility(true)
             }
-            binding.checkInternet.toggleVisibility(true)
-            binding.checkInternet.text = it
         }
     }
 
@@ -111,6 +114,7 @@ class MainFragment : Fragment(R.layout.fragment_main),
     private fun getCarsFromBrand(brand: String) {
         binding.retry.toggleVisibility(false)
         binding.checkInternet.toggleVisibility(false)
+        binding.noResults.toggleVisibility(false)
         model.getCarsFromBrand(brand)
     }
 

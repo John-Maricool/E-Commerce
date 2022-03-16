@@ -63,7 +63,7 @@
                     android:layout_marginEnd="@dimen/margin_large"
                     android:textColor="@drawable/radio_flat_text_selector"
                     android:button="@color/white"
-                    android:drawableTop="@drawable/happy"
+                    android:drawableTop="@drawable/ic_happy"
                     android:text="@string/happy"
                     android:textSize="@dimen/text_size_large" />
 
@@ -73,7 +73,7 @@
                     android:layout_marginEnd="@dimen/margin_large"
                     android:button="@color/white"
                     android:textColor="@drawable/radio_flat_text_selector"
-                    android:drawableTop="@drawable/neutral"
+                    android:drawableTop="@drawable/ic_neutral"
                     android:text="@string/neutral"
                     android:textSize="@dimen/text_size_large" />
 
@@ -83,7 +83,7 @@
                     android:textColor="@drawable/radio_flat_text_selector"
                     android:layout_marginStart="@dimen/margin_very_small"
                     android:button="@color/white"
-                    android:drawableTop="@drawable/sad"
+                    android:drawableTop="@drawable/ic_sad"
                     android:text="@string/sad"
                     android:textSize="@dimen/text_size_large" />
 

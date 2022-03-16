@@ -63,7 +63,7 @@ class ChatListFragment : Fragment(R.layout.chat_list_fragment), OnItemClickListe
 
     private fun toolbarInit() {
         (activity as MainActivity).toolbar.title = "Messages"
-        (activity as MainActivity).toolbar.toggleVisibility(true)
+        (activity as MainActivity).toolbar.setBackgroundColor(resources.getColor(R.color.grey, null))
     }
 
     override fun onDestroy() {

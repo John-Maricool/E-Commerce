@@ -85,7 +85,7 @@ class EditProductFragment : Fragment(R.layout.fragment_edit_product) {
         model.updated.observe(viewLifecycleOwner) {
             if (it != null) {
                 requireActivity().showToast(it)
-                findNavController().navigate(R.id.advertsFragment)
+                findNavController().popBackStack(R.id.editProductFragment, true)
             }
         }
     }

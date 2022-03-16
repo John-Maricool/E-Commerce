@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_very_small"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/card"
-    app:cardCornerRadius="@dimen/margin_medium"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_very_small"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/card"
+        android:background="@drawable/grey"
+        app:cardCornerRadius="@dimen/margin_medium"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
-            android:layout_width="@dimen/button_height"
-            android:layout_height="@dimen/button_height"
+            android:layout_width="@dimen/searchview_height"
+            android:layout_height="@dimen/searchview_height"
             android:layout_marginTop="@dimen/margin_very_small"
             android:layout_marginStart="@dimen/margin_medium"
             android:layout_marginBottom="@dimen/margin_very_small"
@@ -69,5 +67,3 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>

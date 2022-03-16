@@ -1,8 +1,9 @@
 package com.maricoolsapps.e_commerce.utils
 
+import java.text.SimpleDateFormat
 
 
-        val  SECOND_MILLIS = 1000
+val  SECOND_MILLIS = 1000
     val MINUTE_MILLIS = 60 * SECOND_MILLIS
    val  HOUR_MILLIS = 60 * MINUTE_MILLIS
     val DAY_MILLIS = 24 * HOUR_MILLIS
@@ -40,7 +41,10 @@ package com.maricoolsapps.e_commerce.utils
                "yesterday"
            }
            else -> {
-               "${diff / DAY_MILLIS} days ago"
+               val dateFormat =
+                   SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT)
+               dateFormat.format(time)
+               //"${diff / DAY_MILLIS} days ago"
            }
        }
     }

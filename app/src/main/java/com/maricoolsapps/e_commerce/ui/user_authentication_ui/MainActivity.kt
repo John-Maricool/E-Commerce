@@ -14,6 +14,7 @@ import androidx.navigation.ui.NavigationUI
 import com.github.ybq.android.spinkit.SpinKitView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.maricoolsapps.e_commerce.CheckMessage
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.data.db.CloudQueries
 import com.maricoolsapps.e_commerce.data.db.ProfileChanges
@@ -108,12 +109,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
         createNotificationChannel()
+    }
 
-        auth.getAuthState().observe(this) {
+    override fun onStart() {
+        super.onStart()
+        auth.getAuthState().observeForever {
             if (it != null) {
-                source.checkIfUserHasNewMessages(it.uid).observe(this) { res ->
-                    Log.d("testTag", res.toString())
-                    if (res != null && res == 1) {
+                source.checkIfUserHasNewMessages(it.uid).observeForever {  res ->
+                    //   Log.d("testTag", res.toString())
+                    if (res != null && res){
                         bottomBar.getOrCreateBadge(R.id.chatListFragment)
                     } else {
                         bottomBar.removeBadge(R.id.chatListFragment)
@@ -143,4 +147,10 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        auth.getAuthState().removeObservers(this)
+    }
+
 }

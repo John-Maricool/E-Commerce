@@ -5,9 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:outlineSpotShadowColor="@color/grey"
-    app:cardCornerRadius="@dimen/margin_large"
     android:outlineAmbientShadowColor="@color/grey"
     android:background="@drawable/border_chat_look"
+    app:cardElevation="10dp"
     android:layout_margin="@dimen/margin_very_small"
     android:layout_height="wrap_content"
     tools:targetApi="p">
@@ -57,22 +57,23 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/feedback_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginEnd="@dimen/margin_medium"
             android:background="@color/grey"
             app:layout_constraintBottom_toBottomOf="@+id/image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/name"
-            tools:srcCompat="@drawable/happy" />
+            tools:srcCompat="@drawable/ic_happy" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
+            android:textSize="12sp"
             android:textStyle="italic"
-            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_very_small"
             app:layout_constraintEnd_toEndOf="@+id/feedback_desc"
             app:layout_constraintTop_toBottomOf="@+id/feedback_desc"
             tools:text="April 6, 2021" />

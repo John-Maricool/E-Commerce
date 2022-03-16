@@ -19,6 +19,7 @@ import com.maricoolsapps.e_commerce.data.model.ChatChannel
 import com.maricoolsapps.e_commerce.data.model.Product
 import com.maricoolsapps.e_commerce.data.model.ProductModel
 import com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity
+import com.maricoolsapps.e_commerce.utils.showToast
 import com.maricoolsapps.e_commerce.utils.toggleVisibility
 import com.smarteist.autoimageslider.SliderView
 import dagger.hilt.android.AndroidEntryPoint
@@ -169,7 +170,12 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
         binding.postAdLikeThis.setOnClickListener {
             findNavController().navigate(R.id.sellFragment)
         }
+
         binding.leaveFeedback.setOnClickListener {
+            if(model.userId == theProduct.ownerId){
+                requireActivity().showToast(getString(R.string.write_feedback_error))
+                return@setOnClickListener
+            }
             val action =
                 ProductDetailFragmentDirections.actionProductDetailFragmentToFeedbackFragment(
                     theProduct.id,
@@ -177,6 +183,7 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail),
                 )
             findNavController().navigate(action)
         }
+
         binding.viewAll.setOnClickListener {
             val action =
                 ProductDetailFragmentDirections.actionProductDetailFragmentToFeedbackListFragment(

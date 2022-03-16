@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card"
@@ -10,7 +11,7 @@
     android:layout_marginStart="@dimen/margin_very_small"
     android:layout_marginTop="@dimen/margin_very_small"
     android:layout_marginEnd="@dimen/margin_very_small"
-    android:background="@color/white"
+    android:background="@drawable/grey"
     app:cardCornerRadius="@dimen/card_corner_radius">
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -11,18 +11,20 @@ import com.google.android.material.tabs.TabLayout
 import com.maricoolsapps.e_commerce.R
 import com.maricoolsapps.e_commerce.data.adapters.FollowersListAdapter
 import com.maricoolsapps.e_commerce.data.interfaces.OnItemClickListener
+import com.maricoolsapps.e_commerce.data.interfaces.OnViewSelectListener
 import com.maricoolsapps.e_commerce.data.model.CarBuyerOrSeller
 import com.maricoolsapps.e_commerce.databinding.FragmentFollowersBinding
 import com.maricoolsapps.e_commerce.ui.user_authentication_ui.MainActivity
 import com.maricoolsapps.e_commerce.utils.Status
 import com.maricoolsapps.e_commerce.utils.displaySnack
+import com.maricoolsapps.e_commerce.utils.onSelectListener
 import com.maricoolsapps.e_commerce.utils.toggleVisibility
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class FollowersFragment : Fragment(R.layout.fragment_followers),
-    OnItemClickListener<CarBuyerOrSeller>, TabLayout.OnTabSelectedListener {
+    OnItemClickListener<CarBuyerOrSeller>, OnViewSelectListener {
     private var _binding: FragmentFollowersBinding? = null
     private val binding get() = _binding!!
     private val model: FollowersViewModel by viewModels()
@@ -54,7 +56,7 @@ class FollowersFragment : Fragment(R.layout.fragment_followers),
         super.onStart()
         model.getFollowers(args.ownerId)
         observeLiveData()
-        binding.tabs.addOnTabSelectedListener(this)
+        binding.tabs.onSelectListener(this)
         adapterFollowers.setOnItemClickListener(this)
     }
 
@@ -87,8 +89,7 @@ class FollowersFragment : Fragment(R.layout.fragment_followers),
         findNavController().navigate(action)
     }
 
-    override fun onTabSelected(tab: TabLayout.Tab?) {
-        val value = tab?.text.toString()
+    override fun onSelect(value: String) {
         if (value == "Followers") {
             model.getFollowers(args.ownerId)
         } else {
@@ -96,17 +97,8 @@ class FollowersFragment : Fragment(R.layout.fragment_followers),
         }
     }
 
-    override fun onTabUnselected(tab: TabLayout.Tab?) {
+    override fun onNoSelect() {
         adapterFollowers.getUsers(listOf())
-    }
-
-    override fun onTabReselected(tab: TabLayout.Tab?) {
-        val value = tab?.text.toString()
-        if (value == "Followers") {
-            model.getFollowers(args.ownerId)
-        } else {
-            model.getFollowing(args.ownerId)
-        }
     }
 }
 

@@ -10,9 +10,10 @@
     <color name="pink2">#DA0F6E</color>
     <color name="white">#FFFFFF</color>
     <color name="blue">#1A1AEA</color>
+    <color name="yellow">#F2FB05</color>
     <color name="pink">#FB5203</color>
     <color name="grey">#E4E1E1</color>
-    <color name="greem">#5BFC05</color>
+    <color name="greem">#0EFA06</color>
     <color name="red">#FC0505</color>
     <color name="recycler_view_background">#F7F7FB</color>
     <color name="yellow_prod_detail">#F4D502</color>

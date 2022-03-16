@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.provider.ContactsContract
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.core.OnlineState
 import com.maricoolsapps.e_commerce.utils.*
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -504,7 +505,7 @@ class CloudQueries
             b.invoke(Resource.error(e.toString(), null))
         }
     }
-    fun checkIfUserHasNewMessages(userId: String): LiveData<Int> {
+    fun checkIfUserHasNewMessages(userId: String): LiveData<Boolean>{
         return source.checkIfUserHasNewMessages(userId)
     }
 

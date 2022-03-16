@@ -23,7 +23,7 @@
         app:layout_constraintEnd_toStartOf="@+id/neutral"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:srcCompat="@drawable/happy" />
+        app:srcCompat="@drawable/ic_happy" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/positive"
@@ -57,8 +57,8 @@
         android:layout_height="@dimen/img_size_feedback"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:srcCompat="@drawable/neutral" />
+        app:layout_constraintTop_toTopOf="@+id/happy"
+        app:srcCompat="@drawable/ic_neutral" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/normal"
@@ -93,7 +93,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/neutral"
         app:layout_constraintTop_toTopOf="@+id/neutral"
-        app:srcCompat="@drawable/sad" />
+        app:srcCompat="@drawable/ic_sad" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/negative"
@@ -126,12 +126,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_medium"
-        android:background="@color/green_color"
+        android:background="@color/greem"
         android:text="@string/leave_feedback"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_large"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/normal" />
@@ -143,7 +142,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/feedback_list_item"
         android:layout_margin="@dimen/margin_very_small"
-        android:background="@color/grey"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/leave_feedback" />
