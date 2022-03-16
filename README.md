@@ -36,3 +36,5 @@ Basic Knowledge of Android Studio, Kotlin and Firebase
 ### Project
 - Download and open the project in Android Studio
 - Connect your Android phone or use the emulator to start the application
+![Phone Screenshot 1(1)](https://user-images.githubusercontent.com/60844538/158705877-90b26461-461f-4964-89b5-431a0066131f.jpg)
+
