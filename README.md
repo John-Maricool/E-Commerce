@@ -36,7 +36,8 @@ Basic Knowledge of Android Studio, Kotlin and Firebase
 ### Project
 - Download and open the project in Android Studio
 - Connect your Android phone or use the emulator to start the application
-<img src="https://user-images.githubusercontent.com/60844538/158705877-90b26461-461f-4964-89b5-431a0066131f.jpg" width="250">\
+## Screeshots
+<img src="https://user-images.githubusercontent.com/60844538/158705877-90b26461-461f-4964-89b5-431a0066131f.jpg" width="250">
 <img src="https://user-images.githubusercontent.com/60844538/158706823-a9a683c4-4a0e-48d8-9967-4916b087029f.jpg" width="250">
 <img src="https://user-images.githubusercontent.com/60844538/158706868-23073053-93fa-4b56-b423-6d06abeeaedb.jpg" width="250">
 <img src="https://user-images.githubusercontent.com/60844538/158706953-f7a01d80-6374-422a-a709-27bc12e428d5.jpg" width="250">
@@ -48,6 +49,8 @@ Basic Knowledge of Android Studio, Kotlin and Firebase
 <img src="https://user-images.githubusercontent.com/60844538/158707047-ee052d65-97cb-40df-8886-e708aacc481b.jpg" width="250">
 <img src="https://user-images.githubusercontent.com/60844538/158707076-c2942098-2cc0-4843-96d8-98a87768c4ed.jpg" width="250">
 <img src="https://user-images.githubusercontent.com/60844538/158707092-c78657c8-2e06-4c10-a527-d8d682f821b0.jpg" width="250">
+<img src="https://user-images.githubusercontent.com/60844538/158708066-e214d64c-a83b-4cf8-ba7c-b10ec7f219da.jpg" width="250">
+<img src="https://user-images.githubusercontent.com/60844538/158708091-f766aa38-e473-4c34-bc4b-aefcf4512ca5.jpg" width="250">
 
 
 
