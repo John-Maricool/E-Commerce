@@ -18,6 +18,7 @@ Model-View-ViewModel (MVVM)
  - [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
  - [View Binding](https://developer.android.com/topic/libraries/view-binding)
  - [Navigation Components](https://developer.android.com/guide/navigation/navigation-getting-started)
+ - [Room](https://developer.android.com/jetpack/androidx/releases/room)
  ## Features
 #### Start: Login/create account.
 #### Cars: List of cars in the database according to model.
