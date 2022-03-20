@@ -71,6 +71,18 @@ class MainActivity : AppCompatActivity() {
                     toolbar.toggleVisibility(false)
                 }
                 R.id.mainFragment -> {
+                    auth.getAuthState().observeForever {
+                        if (it != null) {
+                            source.checkIfUserHasNewMessages(it.uid).observeForever {  res ->
+                                //   Log.d("testTag", res.toString())
+                                if (res != null && res){
+                                    bottomBar.getOrCreateBadge(R.id.chatListFragment)
+                                } else {
+                                    bottomBar.removeBadge(R.id.chatListFragment)
+                                }
+                            }
+                        }
+                    }
                     bottomBar.toggleVisibility(true)
                     toolbar.toggleVisibility(false)
                 }
@@ -109,22 +121,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         createNotificationChannel()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        auth.getAuthState().observeForever {
-            if (it != null) {
-                source.checkIfUserHasNewMessages(it.uid).observeForever {  res ->
-                    //   Log.d("testTag", res.toString())
-                    if (res != null && res){
-                        bottomBar.getOrCreateBadge(R.id.chatListFragment)
-                    } else {
-                        bottomBar.removeBadge(R.id.chatListFragment)
-                    }
-                }
-            }
-        }
     }
 
     private fun createNotificationChannel() {
