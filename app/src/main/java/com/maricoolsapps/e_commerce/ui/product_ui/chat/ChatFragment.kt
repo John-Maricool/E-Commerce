@@ -68,6 +68,15 @@ class ChatFragment : Fragment(R.layout.chat_fragment) {
                     model.sendMessage(args.chatChannel, message, notify)
                 }
             }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val action = ChatFragmentDirections.actionChatFragmentToChatListFragment()
+                    findNavController().navigate(action)
+                }
+            })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,14 +88,6 @@ class ChatFragment : Fragment(R.layout.chat_fragment) {
         binding.recyclerView.adapter = adapter
         observeLiveData()
         clickListeners()
-
-         requireActivity().onBackPressedDispatcher.addCallback(
-               viewLifecycleOwner,
-               object : OnBackPressedCallback(true) {
-                   override fun handleOnBackPressed() {
-                      findNavController().popBackStack(R.id.chatFragment, true)
-                   }
-               })
     }
 
     private fun toolBarInit() {

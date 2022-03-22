@@ -3,6 +3,7 @@ package com.maricoolsapps.e_commerce.ui.product_ui.chat_list
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.maricoolsapps.e_commerce.R
@@ -25,6 +26,19 @@ class ChatListFragment : Fragment(R.layout.chat_list_fragment), OnItemClickListe
 
     @Inject
     lateinit var adapter: ChatListAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val action = ChatListFragmentDirections.actionChatListFragmentToMainFragment()
+                    findNavController().navigate(action)
+                }
+            })
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,9 +67,10 @@ class ChatListFragment : Fragment(R.layout.chat_list_fragment), OnItemClickListe
             binding.textError.toggleVisibility(true)
             binding.textError.displaySnack(it)
         }
-        model.click.observe(viewLifecycleOwner) {
+
+        model.click.observe(viewLifecycleOwner){
             if (it != null) {
-                val action = ChatListFragmentDirections.goToChat(it)
+                val action = ChatListFragmentDirections.actionChatListFragmentToChatFragment(it)
                 findNavController().navigate(action)
             }
         }

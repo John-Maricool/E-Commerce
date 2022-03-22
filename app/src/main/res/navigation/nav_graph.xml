@@ -197,8 +197,6 @@
         app:destination="@+id/productDetailFragment"/>
     <action
         android:id="@+id/go_to_chat"
-        app:popUpToInclusive="true"
-        app:popUpTo="@id/chatListFragment"
         app:destination="@+id/chatFragment"/>
     <action
         android:id="@+id/action_productDetailFragment_to_sellerFragment"
@@ -241,7 +239,18 @@
         android:id="@+id/chatListFragment"
         android:name="com.maricoolsapps.e_commerce.ui.product_ui.chat_list.ChatListFragment"
         android:label="chat_list_fragment"
-        tools:layout="@layout/chat_list_fragment" />
+        tools:layout="@layout/chat_list_fragment" >
+        <action
+            android:id="@+id/action_chatListFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_chatListFragment_to_chatFragment"
+            app:destination="@id/chatFragment"
+            app:popUpTo="@id/chatFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.maricoolsapps.e_commerce.ui.product_ui.chat.ChatFragment"
@@ -253,6 +262,11 @@
         <action
             android:id="@+id/action_chatFragment_to_sellerFragment"
             app:destination="@id/sellerFragment" />
+        <action
+            android:id="@+id/action_chatFragment_to_chatListFragment"
+            app:destination="@id/chatListFragment"
+            app:popUpTo="@id/chatListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/followersFragment"

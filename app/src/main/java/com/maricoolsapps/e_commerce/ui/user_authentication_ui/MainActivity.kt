@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.mainFragment -> {
                     auth.getAuthState().observeForever {
                         if (it != null) {
-                            source.checkIfUserHasNewMessages(it.uid).observeForever {  res ->
+                            source.checkIfUserHasNewMessages(it.uid).observeForever { res ->
                                 //   Log.d("testTag", res.toString())
                                 if (res != null && res){
                                     bottomBar.getOrCreateBadge(R.id.chatListFragment)
@@ -141,7 +141,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+         onBackPressed()
+        return true
     }
 
     override fun onDestroy() {
