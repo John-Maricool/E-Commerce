@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/mainFragment"
+        android:title="@string/home"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_home" />
+
+    <item android:id="@+id/favoriteFragment"
+        android:title="@string/favorite"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_favorite" />
+
+    <item android:id="@+id/sellFragment"
+        android:title="@string/sell"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_sell" />
+
+    <item android:id="@+id/chatListFragment"
+        app:showAsAction="ifRoom"
+        android:title="@string/messages"
+        android:icon="@drawable/ic_message_grey"/>
+
+    <item android:id="@+id/profileFragment"
+        app:showAsAction="ifRoom"
+        android:title="@string/profile"
+        android:icon="@drawable/ic_account_circle" />
+</menu>

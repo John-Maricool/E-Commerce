@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.product_ui.filter.FilteredListFragment">
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_brands"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/spinner_height"
+        android:layout_margin="@dimen/margin_medium"
+        android:elevation="20dp"
+        android:entries="@array/brands"
+        android:spinnerMode="dropdown"
+        android:splitMotionEvents="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_models"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/spinner_height"
+        android:layout_margin="@dimen/margin_medium"
+        android:elevation="10dp"
+        android:entries="@array/Lexus"
+        android:spinnerMode="dropdown"
+        android:splitMotionEvents="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_brands" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_condition"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/spinner_height"
+        android:layout_margin="@dimen/margin_medium"
+        android:entries="@array/car_condition"
+        android:spinnerMode="dropdown"
+        android:splitMotionEvents="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_models" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_location"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/spinner_height"
+        android:layout_margin="@dimen/margin_medium"
+        android:entries="@array/car_town"
+        android:spinnerMode="dropdown"
+        android:splitMotionEvents="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_condition" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/price_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:text="@string/price_ngn"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_normal"
+        app:layout_constraintStart_toStartOf="@id/spinner_location"
+        app:layout_constraintTop_toBottomOf="@id/spinner_location" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/currency_one"
+        android:layout_width="49dp"
+        android:layout_height="57dp"
+        android:text="₦"
+        android:textColor="@color/white"
+        android:background="@drawable/blue_solid"
+        android:textSize="@dimen/text_size_large"
+        app:layout_constraintBottom_toBottomOf="@+id/min_price_layout"
+        app:layout_constraintEnd_toStartOf="@+id/min_price_layout"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/price_text"
+        app:layout_constraintTop_toTopOf="@+id/min_price_layout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/min_price_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:gravity="center"
+        android:layout_marginEnd="@dimen/margin_medium"
+        app:boxBackgroundColor="@color/white"
+        app:boxBackgroundMode="outline"
+        app:layout_constraintEnd_toStartOf="@+id/currency_two"
+        app:layout_constraintStart_toEndOf="@+id/currency_one"
+        app:layout_constraintTop_toBottomOf="@+id/price_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/price_min"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:inputType="number"
+            android:gravity="center"
+            android:hint="@string/min_500000"
+            android:textSize="@dimen/text_size_normal"
+            app:layout_constraintStart_toStartOf="@+id/price_text"
+            app:layout_constraintTop_toBottomOf="@+id/price_text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/currency_two"
+        android:layout_width="49dp"
+        android:layout_height="57dp"
+        android:textColor="@color/white"
+        android:text="₦"
+        android:background="@drawable/blue_solid"
+        android:textSize="@dimen/text_size_large"
+        app:layout_constraintBottom_toBottomOf="@+id/max_price_layout"
+        app:layout_constraintEnd_toStartOf="@+id/max_price_layout"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/min_price_layout"
+        app:layout_constraintTop_toTopOf="@+id/max_price_layout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/max_price_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="57dp"
+        android:gravity="start"
+        app:boxBackgroundColor="@color/white"
+        app:boxBackgroundMode="outline"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_location"
+        app:layout_constraintStart_toEndOf="@+id/currency_two"
+        app:layout_constraintTop_toTopOf="@+id/min_price_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/price_max"
+            android:layout_width="100dp"
+            android:inputType="number"
+            android:layout_height="wrap_content"
+            android:hint="@string/max_500000000"
+            android:textSize="@dimen/text_size_normal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/show_adverts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_large"
+        android:background="@drawable/blue_solid"
+        android:padding="@dimen/margin_very_small"
+        android:text="@string/show_adverts"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/min_price_layout" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:listitem="@layout/recycler_single_item"
+        tools:visibility="gone" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/my_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="spinner_condition,currency_one,spinner_brands,max_price_layout,spinner_models,price_text,currency_two,min_price_layout,spinner_location,show_adverts" />
+</androidx.constraintlayout.widget.ConstraintLayout>

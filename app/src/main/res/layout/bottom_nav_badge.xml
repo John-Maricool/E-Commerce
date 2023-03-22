@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <TextView
+        android:id="@+id/menuItemBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="12dp"
+        android:background="@color/pink2"
+        android:backgroundTint="@color/pink2"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:duplicateParentState="true"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:includeFontPadding="false"
+        android:minWidth="16dp"
+        android:paddingBottom="1dp"
+        android:paddingEnd="2dp"
+        android:paddingStart="2dp"
+        android:paddingTop="2dp"
+        tools:text="11"
+        />
+</merge>
