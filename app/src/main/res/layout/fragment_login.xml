@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -48,13 +47,13 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_field"
         android:layout_width="0dp"
-        app:errorTextColor="@color/pink2"
-        app:boxBackgroundColor="@color/white"
-        app:boxBackgroundMode="filled"
-        app:endIconTint="@color/pink2"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium"
         android:layout_marginEnd="@dimen/margin_medium"
+        app:boxBackgroundColor="@color/white"
+        app:boxBackgroundMode="filled"
+        app:endIconTint="@color/pink2"
+        app:errorTextColor="@color/pink2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
@@ -76,8 +75,8 @@
         android:layout_marginStart="@dimen/margin_medium"
         android:layout_marginEnd="@dimen/margin_medium"
         app:boxBackgroundColor="@color/white"
-        app:errorTextColor="@color/pink2"
         app:boxBackgroundMode="filled"
+        app:errorTextColor="@color/pink2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_field"
@@ -124,11 +123,14 @@
         android:id="@+id/dont_have_an_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
         android:text="@string/don_t_have_an_account"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_normal"
         app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toStartOf="@+id/register_here"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/view"
         app:layout_constraintStart_toStartOf="@id/view"
         app:layout_constraintTop_toTopOf="@+id/view" />
 
@@ -136,12 +138,14 @@
         android:id="@+id/register_here"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_very_small"
         android:text="@string/register_here"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_normal"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/dont_have_an_account"
-        app:layout_constraintStart_toEndOf="@+id/dont_have_an_account" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/dont_have_an_account"
+        app:layout_constraintTop_toTopOf="@+id/dont_have_an_account" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

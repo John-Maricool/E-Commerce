@@ -244,11 +244,14 @@
       android:id="@+id/already_have_an_account"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="@dimen/margin_large"
       android:text="@string/already_have_an_account"
       android:textColor="@color/white"
       android:textSize="@dimen/text_size_normal"
       app:layout_constraintBottom_toBottomOf="@+id/view"
+      app:layout_constraintEnd_toStartOf="@+id/log_in"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintHorizontal_chainStyle="packed"
+      app:layout_constraintStart_toEndOf="@+id/view"
       app:layout_constraintStart_toStartOf="@id/view"
       app:layout_constraintTop_toTopOf="@+id/view" />
 
@@ -256,13 +259,15 @@
       android:id="@+id/log_in"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="@dimen/margin_very_small"
       android:text="@string/log_in"
       android:textColor="@color/white"
       android:textSize="@dimen/text_size_normal"
       android:textStyle="bold"
       app:layout_constraintBottom_toBottomOf="@+id/already_have_an_account"
-      app:layout_constraintStart_toEndOf="@+id/already_have_an_account" />
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/already_have_an_account"
+      app:layout_constraintTop_toTopOf="@+id/already_have_an_account" />
 
   <androidx.constraintlayout.widget.Group
       android:id="@+id/first_half"
